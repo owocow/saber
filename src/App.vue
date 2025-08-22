@@ -1,21 +1,8 @@
 <script setup lang="ts">
-// See vite.config.ts for details about automatic imports
-const route = useRoute()
-
-useHead({
-  title: () => route.meta.title || 'Vite + Vue Template',
-  meta: [
-    {
-      property: 'og:title',
-      content: () => route.meta.title,
-    },
-    {
-      name: 'twitter:title',
-      content: () => route.meta.title,
-    },
-  ],
-})
+import { elementSettings as ES } from './assets/element.settings'
 </script>
 <template>
-  <router-view />
+  <el-config-provider :link="ES.link" :dialog="ES.dialog">
+    <router-view />
+  </el-config-provider>
 </template>

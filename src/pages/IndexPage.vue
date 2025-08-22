@@ -1,6 +1,11 @@
 <script setup lang="ts">
-// See vite.config.ts for details about automatic imports
+import { ElNotification } from 'element-plus'
+
 const store = useStore()
+const show = ref(false)
+const testing = () => (show.value = true)
+const msg1 = () => ElNotification.error('ddd')
+const val = ref('')
 </script>
 <template>
   <header>
@@ -10,17 +15,20 @@ const store = useStore()
       <a href="https://github.com/Uninen/vite-ts-tailwind-starter">available on GitHub</a>.
     </p>
   </header>
-
+  <el-date-picker v-model="val" type="datetime" placeholder="Select date and time" />
   <main>
     <HelloWorld msg="Hello World Component" />
-
+    <el-button text plain @click="testing">Testing</el-button>
+    <el-button type="primary" @click="testing">Testing</el-button>
+    <el-input v-model="val" />
+    <el-dialog title="Testing Modal" v-model="show" :append-to-body="true"> </el-dialog>
     <h2 class="skew-[3.142rad]">Project setup and usage</h2>
 
     <h4>Install dependencies</h4>
 
     <pre>pnpm i</pre>
 
-    <h4>Run development server</h4>
+    <h4 v-copy="'pnpm dev'">Run development server</h4>
 
     <pre>pnpm dev</pre>
 
@@ -32,13 +40,13 @@ const store = useStore()
 
     <pre>pnpm test-e2e</pre>
 
-    <h4>Build for production</h4>
+    <h4 class="mb-7">Build for production</h4>
 
     <pre>pnpm build</pre>
 
     <h4>Other</h4>
 
-    <p>See <code>package.json</code> for all available commands.</p>
+    <p>See <code>package.json</code> for <el-link>Link desu!all available commands</el-link>.</p>
 
     <h2>Notes and further documentation</h2>
 
