@@ -21,7 +21,7 @@ export default defineConfig({
         'vue-router',
         'pinia',
         {
-          '@/store': ['useStore'],
+          '@/store/modules/app': ['useAppStore'],
           '@unhead/vue': ['useHead'],
         },
       ],

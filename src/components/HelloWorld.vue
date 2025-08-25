@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // useStore and computed are automatically imported. See vite.config.ts for details.
-const store = useStore()
+const store = useAppStore()
 const count = computed(() => store.count)
 defineProps<{
   msg: string

@@ -1,17 +1,18 @@
-import router from '@/router'
+import router from '@/router/index'
 // import { createHead } from '@unhead/vue/client'
-import { createPinia } from 'pinia'
-import { createApp, markRaw } from 'vue'
-import { copyTextToClipboard } from './directives/copy'
+import { setupStore } from './store'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@/assets/styles/index.scss'
-const app = createApp(App)
 
-const pinia = createPinia()
-pinia.use(({ store }) => {
-  store.router = markRaw(router)
-})
-app.directive('copy', copyTextToClipboard)
-app.use(pinia)
-app.use(router)
-app.mount('#app')
+// 应用初始化
+async function initApp() {
+  const app = createApp(App)
+  // 初始化状态管理
+  setupStore(app, router)
+  // 初始化路由
+  app.use(router)
+  app.mount('#app')
+}
+
+void initApp()

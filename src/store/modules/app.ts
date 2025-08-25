@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-export const useStore = defineStore('main', {
+export const useAppStore = defineStore('app', {
   state: () => ({
     debug: import.meta.env.MODE === 'development',
     appMeta: {
@@ -33,12 +33,12 @@ export const useStore = defineStore('main', {
   },
 
   getters: {
-    isReady: (state) => {
+    isReady: state => {
       return state.isInitialized
     },
   },
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useAppStore, import.meta.hot))
 }

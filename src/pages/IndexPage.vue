@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ElNotification } from 'element-plus'
 
-const store = useStore()
+const store = useAppStore()
+console.log(store.router.currentRoute.value.path)
 const show = ref(false)
 const testing = () => (show.value = true)
 const msg1 = () => ElNotification.error('ddd')
@@ -17,7 +18,6 @@ const val = ref('')
   </header>
   <el-date-picker v-model="val" type="datetime" placeholder="Select date and time" />
   <main>
-    <HelloWorld msg="Hello World Component" />
     <el-button text plain @click="testing">Testing</el-button>
     <el-button type="primary" @click="testing">Testing</el-button>
     <el-input v-model="val" />
@@ -28,7 +28,7 @@ const val = ref('')
 
     <pre>pnpm i</pre>
 
-    <h4 v-copy="'pnpm dev'">Run development server</h4>
+    <!-- <h4 v-copy="'pnpm dev'">Run development server</h4> -->
 
     <pre>pnpm dev</pre>
 
