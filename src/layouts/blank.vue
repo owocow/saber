@@ -1,0 +1,1 @@
+<template>layout blank</template>
