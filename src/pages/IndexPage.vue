@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router'
 import { ElNotification } from 'element-plus'
 
 const store = useAppStore()
@@ -6,7 +7,7 @@ console.log(store.router.currentRoute.value.path)
 const show = ref(false)
 const testing = () => (show.value = true)
 const msg1 = () => ElNotification.error('ddd')
-const val = ref('')
+const navi = () => router.push('/dashboard')
 </script>
 <template>
   <header>
@@ -16,11 +17,13 @@ const val = ref('')
       <a href="https://github.com/Uninen/vite-ts-tailwind-starter">available on GitHub</a>.
     </p>
   </header>
-  <el-date-picker v-model="val" type="datetime" placeholder="Select date and time" />
+  <el-config-provider>
+    <el-date-picker type="datetime" placeholder="Select date and time" />
+  </el-config-provider>
   <main>
-    <el-button text plain @click="testing">Testing</el-button>
+    <el-button text plain @click="navi">Testing</el-button>
     <el-button type="primary" @click="testing">Testing</el-button>
-    <el-input v-model="val" />
+    <el-input />
     <el-dialog title="Testing Modal" v-model="show" :append-to-body="true"> </el-dialog>
     <h2 class="skew-[3.142rad]">Project setup and usage</h2>
 
