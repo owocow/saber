@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { asyncRoutes } from './routes'
+import { constantRoutes } from './constants'
 import IndexPage from '@/pages/IndexPage.vue'
 
 const routes = [
@@ -10,6 +11,7 @@ const routes = [
       title: 'Vite + Vue + TypeScript + Tailwind Starter Template',
     },
   },
+  ...constantRoutes,
   ...asyncRoutes,
 ]
 
