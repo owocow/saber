@@ -12,7 +12,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig } from 'vite'
 import PackageJson from './package.json' with { type: 'json' }
 
-
 process.env.VITE_APP_VERSION = PackageJson.version
 if (process.env.NODE_ENV === 'production') {
   process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
@@ -36,10 +35,7 @@ export default defineConfig({
     }),
     Components({
       dts: 'components.d.ts',
-      resolvers: [
-        ElementPlusResolver(),
-        IconsResolver({ prefix: 'i' }),
-      ],
+      resolvers: [ElementPlusResolver(), IconsResolver({ prefix: 'i' })],
     }),
     Icons({
       autoInstall: true, // 自动安装缺失的图标包
@@ -53,5 +49,9 @@ export default defineConfig({
   },
   css: {
     preprocessorMaxWorkers: true,
+  },
+  // 新增服务器配置 - 解决 Network 地址显示问题
+  server: {
+    host: '0.0.0.0', // 监听所有网络接口，允许局域网访问
   },
 })
