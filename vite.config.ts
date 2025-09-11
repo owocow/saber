@@ -35,7 +35,7 @@ export default defineConfig({
     }),
     Components({
       dts: 'components.d.ts',
-      resolvers: [ElementPlusResolver(), IconsResolver({ prefix: 'i' })],
+      resolvers: [ElementPlusResolver({ importStyle: 'sass' }), IconsResolver({ prefix: 'i' })],
     }),
     Icons({
       autoInstall: true, // 自动安装缺失的图标包
@@ -49,6 +49,11 @@ export default defineConfig({
   },
   css: {
     preprocessorMaxWorkers: true,
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/element-theme.scss" as *;`,
+      },
+    },
   },
   // 新增服务器配置 - 解决 Network 地址显示问题
   server: {

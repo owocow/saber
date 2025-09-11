@@ -5,7 +5,7 @@ export const PAGE_LOGIN_NAME = 'PageLogin'
 export const PAGE_TESTING_NAME = 'PageTesting'
 
 // basic page components
-export const PAGE_LOGIN = () => import('@/modules/sys/login.vue')
+export const PAGE_LOGIN = () => import('@/modules/sys/login/login.vue')
 export const PAGE_NOT_FOUND = () => import('@/modules/sys/404.vue')
 export const PAGE_TESTING = () => import('@/modules/sys/testing.vue')
 
@@ -18,6 +18,15 @@ export const loginRoute = {
   path: '/login',
   component: PAGE_LOGIN,
   name: PAGE_LOGIN_NAME,
+  meta: {
+    title: 'Login - 登录',
+  },
+}
+
+export const loginRoute2 = {
+  path: '/login2',
+  component: () => import('@/modules/sys/login/login2.vue'),
+  name: 'TestingLogin2',
   meta: {
     title: 'Login - 登录',
   },
@@ -43,4 +52,4 @@ export const pageTestingRoute = {
   },
 }
 
-export const constantRoutes = [loginRoute, pageNotFoundRoute, pageTestingRoute]
+export const constantRoutes = [loginRoute, pageNotFoundRoute, loginRoute2, pageTestingRoute]

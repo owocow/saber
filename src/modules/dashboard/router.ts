@@ -1,9 +1,11 @@
-import { type RouteRecordRaw } from 'vue-router'
+import type { AppRouteRecordRaw } from '@/router/types'
+import { LAYOUT_DEFAULT } from '@/router/constants'
 
-const routes: RouteRecordRaw[] = [
+const routes: AppRouteRecordRaw[] = [
   {
     path: '/dashboard',
-    component: () => import('./views/index.vue'),
+    name: 'Dashboard',
+    component: LAYOUT_DEFAULT,
     meta: {
       title: 'Dashboard',
     },
