@@ -1,0 +1,57 @@
+@use 'vars';
+$--colors: (
+  'primary': (
+    'base': vars.$primary,
+  ),
+  'success': (
+    'base': vars.$success,
+  ),
+  'warning': (
+    'base': vars.$warning,
+  ),
+  'danger': (
+    'base': vars.$danger,
+  ),
+  'error': (
+    'base': vars.$error,
+  ),
+  'info': (
+    'base': vars.$info,
+  ),
+);
+
+$--text-colors: (
+  'primary': #171c24,
+  'regular': #444c58,
+  'secondary': #8d96a5,
+  'placeholder': #a9b0bb,
+  'disabled': #c5cad2,
+);
+
+$--border-colors: (
+  '': #c5cad2,
+  'light': #d2d4d8,
+  'lighter': #e2e4e8,
+  'extra-light': #f1f2f3,
+  'dark': #c2c4c8,
+  'darker': #d2d4d8,
+);
+
+$--border-radius: (
+  'base': 4px,
+  'small': 2px,
+  'round': 20px,
+  'circle': 100%,
+);
+
+// comment next lines to use default color
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  // do not use same name, it will override.
+  $colors: $--colors,
+  $border-radius: $--border-radius,
+  $border-color: $--border-colors,
+  $text-color: $--text-colors // $button-padding-horizontal: ('default': 50px)
+);
+
+// custom dark variables
+@use './dark.scss';

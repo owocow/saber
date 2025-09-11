@@ -51,7 +51,7 @@ export default defineConfig({
     preprocessorMaxWorkers: true,
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/assets/styles/element-theme.scss" as *;`,
+        additionalData: `@use "@/assets/styles/element/index.scss" as *;`,
       },
     },
   },

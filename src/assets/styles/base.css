@@ -2,11 +2,20 @@
 @import 'tailwindcss/utilities';
 html,
 body {
-  @apply bg-slate-100;
-  min-height: 100%;
   @apply text-slate-800;
+  min-height: 100%;
+}
+html {
+  @apply bg-slate-100;
 }
 
 #nprogress .bar {
-  background: #2563eb;
+  @apply bg-blue-500;
+}
+
+html.dark {
+  background: rgb(16, 26, 46);
+}
+html.dark body {
+  color: rgb(180, 191, 217);
 }

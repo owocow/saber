@@ -1,54 +1,54 @@
-$--colors: (
-  'primary': (
-    'base': #0064fa,
-  ),
-  'success': (
-    'base': #14b8a6,
-  ),
-  'warning': (
-    'base': #f59200,
-  ),
-  'danger': (
-    'base': #f43f5e,
-  ),
-  'error': (
-    'base': #f43f5e,
-  ),
-  'info': (
-    'base': #22d3ee,
-  ),
-);
+// $--colors: (
+//   'primary': (
+//     'base': #0064fa,
+//   ),
+//   'success': (
+//     'base': #14b8a6,
+//   ),
+//   'warning': (
+//     'base': #f59200,
+//   ),
+//   'danger': (
+//     'base': #f43f5e,
+//   ),
+//   'error': (
+//     'base': #f43f5e,
+//   ),
+//   'info': (
+//     'base': #22d3ee,
+//   ),
+// );
 
-$--text-colors: (
-  'primary': #171c24,
-  'regular': #444c58,
-  'secondary': #8d96a5,
-  'placeholder': #a9b0bb,
-  'disabled': #c5cad2,
-);
+// $--text-colors: (
+//   'primary': #171c24,
+//   'regular': #444c58,
+//   'secondary': #8d96a5,
+//   'placeholder': #a9b0bb,
+//   'disabled': #c5cad2,
+// );
 
-$--border-colors: (
-  '': #c5cad2,
-  'light': #d2d4d8,
-  'lighter': #e2e4e8,
-  'extra-light': #f1f2f3,
-  'dark': #c2c4c8,
-  'darker': #d2d4d8,
-);
+// $--border-colors: (
+//   '': #c5cad2,
+//   'light': #d2d4d8,
+//   'lighter': #e2e4e8,
+//   'extra-light': #f1f2f3,
+//   'dark': #c2c4c8,
+//   'darker': #d2d4d8,
+// );
 
-$--border-radius: (
-  'base': 4px,
-  'small': 2px,
-  'round': 20px,
-  'circle': 100%,
-);
+// $--border-radius: (
+//   'base': 4px,
+//   'small': 2px,
+//   'round': 20px,
+//   'circle': 100%,
+// );
 
-// You should use them in scss, because we calculate it by sass.
-// comment next lines to use default color
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
-  // do not use same name, it will override.
-  $colors: $--colors,
-  $border-radius: $--border-radius,
-  $border-color: $--border-colors,
-  $text-color: $--text-colors // $button-padding-horizontal: ('default': 50px)
-);
+// // You should use them in scss, because we calculate it by sass.
+// // comment next lines to use default color
+// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
+//   // do not use same name, it will override.
+//   $colors: $--colors,
+//   $border-radius: $--border-radius,
+//   $border-color: $--border-colors,
+//   $text-color: $--text-colors // $button-padding-horizontal: ('default': 50px)
+// );

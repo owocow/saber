@@ -1,0 +1,54 @@
+@use 'vars';
+// only scss variables
+$--dark-colors: (
+  'white': '#ffffff',
+  'black': '#090D15',
+  'primary': (
+    'base': vars.$primary,
+  ),
+  'success': (
+    'base': vars.$success,
+  ),
+  'warning': (
+    'base': vars.$warning,
+  ),
+  'danger': (
+    'base': vars.$danger,
+  ),
+  'error': (
+    'base': vars.$error,
+  ),
+  'info': (
+    'base': vars.$info,
+  ),
+);
+
+$--text-colors: (
+  'primary': #828da5,
+  'regular': #9eaac4,
+  'secondary': #667086,
+  'placeholder': #3b4557,
+  'disabled': #2d3647,
+);
+
+$--border-colors: (
+  '': #1e2b47,
+  'light': #1e2b47,
+  'lighter': #1e2b47,
+  'extra-light': #f1f2f3,
+  'dark': #c2c4c8,
+  'darker': #d2d4d8,
+);
+
+$--bg-colors: (
+  '': rgb(16, 26, 46),
+  'page': rgb(16, 26, 46),
+  'overlay': rgb(16, 26, 46),
+);
+
+@forward 'element-plus/theme-chalk/src/dark/var.scss' with (
+  $colors: $--dark-colors,
+  $text-color: $--text-colors,
+  $border-color: $--border-colors,
+  $bg-color: $--bg-colors
+);
