@@ -38,7 +38,7 @@ const props = {
 }
 </script>
 <template>
-  <main class="m-8 p-9 bg-dark-700">
+  <main class="m-8 p-9 bg-white dark:bg-dark-700">
     <div class="button-example">
       <div class="pb-3">
         <el-button @click="toggleDark()">Toggle Model</el-button>
@@ -47,7 +47,7 @@ const props = {
         <el-button type="info">Info</el-button>
         <el-button type="warning">Warning</el-button>
         <el-button type="danger">Danger</el-button>
-        <el-button text disabled>Testing Text</el-button>
+        <el-button text>Testing Text</el-button>
       </div>
 
       <div class="pb-3">
@@ -124,7 +124,7 @@ const props = {
     </div>
     <article>
       <h4 class="text-primary-500 dark:text-amber-500">Appearance</h4>
-      <p class="witter-gray-100">
+      <p class="text-info-500">
         Customize the appearance of the app. Select Theme colors and mode, to change the look of the app.
       </p>
     </article>

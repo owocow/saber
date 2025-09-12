@@ -13,10 +13,18 @@
     font-weight: 400;
   }
 }
-
+html {
+  .el-input,
+  .el-select {
+    --el-border-color-hover: var(--color-gray-400);
+  }
+}
 html.dark {
   // input,select, etc, hover color
-  --el-border-color-hover: var(--color-dark-400);
+  .el-input,
+  .el-select {
+    --el-border-color-hover: var(--color-dark-400);
+  }
   .el-button,
   .el-select-dropdown {
     --el-fill-color-light: var(--color-dark-600);
