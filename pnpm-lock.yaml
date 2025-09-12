@@ -33,9 +33,6 @@ importers:
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
-      '@iconify-json/streamline-sharp':
-        specifier: ^1.2.0
-        version: 1.2.0
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.18(typescript@5.9.2))
@@ -600,9 +597,6 @@ packages:
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
-
-  '@iconify-json/streamline-sharp@1.2.0':
-    resolution: {integrity: sha512-36c6zxkoA9sKGnbc4sV13MlSVSTjCDCk/j9viEjJF1Eznkf+WF91KBzFmmCm49SKh+S1I76f820j226AECE7tw==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3722,10 +3716,6 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/mdi@1.2.3':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/streamline-sharp@1.2.0':
     dependencies:
       '@iconify/types': 2.0.0
 
