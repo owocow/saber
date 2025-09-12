@@ -3,8 +3,8 @@ import router from '@/router/index'
 import { setupStore } from './store'
 import { setupRouterGuards } from './router/guards'
 import { createApp } from 'vue'
+import '@/assets/styles/tailwind.css'
 import '@/assets/styles/index.scss'
-import '@/assets/styles/base.css'
 import App from './App.vue'
 
 // 应用初始化

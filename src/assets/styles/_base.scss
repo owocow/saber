@@ -1,0 +1,19 @@
+html,
+body {
+  background: var(--color-gray-100);
+  min-height: 100%;
+  color: var(--color-gray-800);
+  font-size: 14px;
+}
+
+#nprogress .bar {
+  background: var(--color-primary-500);
+}
+
+html.dark,
+html.dark body {
+  background: var(--color-dark-900);
+  min-height: 100%;
+  color: var(--color-dark-50);
+  font-size: 14px;
+}

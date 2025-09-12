@@ -3,7 +3,7 @@
   "version": "8.2.0",
   "type": "module",
   "scripts": {
-    "start": "vite --open --port 8084",
+    "start": "vite --open --port 8084 --host",
     "build": "vite build",
     "preview": "vite build && vite preview",
     "test": "vitest",

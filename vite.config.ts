@@ -55,8 +55,4 @@ export default defineConfig({
       },
     },
   },
-  // 新增服务器配置 - 解决 Network 地址显示问题
-  server: {
-    host: '0.0.0.0', // 监听所有网络接口，允许局域网访问
-  },
 })

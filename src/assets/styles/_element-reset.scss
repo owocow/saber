@@ -1,0 +1,35 @@
+.el-overlay {
+  backdrop-filter: blur(5px);
+}
+
+.roundedInput {
+  .el-input__wrapper {
+    border-radius: 100px;
+  }
+}
+
+.el-button {
+  &.is-text {
+    font-weight: 400;
+  }
+}
+
+html.dark {
+  // input,select, etc, hover color
+  --el-border-color-hover: var(--color-dark-400);
+  .el-button,
+  .el-select-dropdown {
+    --el-fill-color-light: var(--color-dark-600);
+  }
+  .el-button.is-text.is-disabled {
+    --el-button-disabled-text-color: var(--color-dark-400);
+  }
+  .el-picker-panel {
+    .available .el-date-table-cell {
+      border-radius: 8px;
+      &:hover {
+        background-color: var(--color-dark-600);
+      }
+    }
+  }
+}
