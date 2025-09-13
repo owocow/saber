@@ -4,7 +4,7 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 </script>
 <template>
-  <section class="w-[var(--page-sidebar-width)] border-r-[1px] border-r-gray-300">
+  <section>
     <el-button @click="toggleDark()">Togggle</el-button>
   </section>
 </template>
