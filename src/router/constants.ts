@@ -52,4 +52,7 @@ export const pageTestingRoute = {
   },
 }
 
+// get page layout
+export const getParentLayout = (name?: string) => new Promise(resolve => resolve({ name: name || PARENT_LAYOUT_NAME }))
+
 export const constantRoutes = [loginRoute, pageNotFoundRoute, loginRoute2, pageTestingRoute]

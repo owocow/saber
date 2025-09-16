@@ -41,3 +41,18 @@ html.dark {
     }
   }
 }
+
+.el-scrollbar.tabsWrapBox {
+  font-size: 12px;
+  .el-scrollbar__bar.is-horizontal {
+    height: 4px;
+  }
+}
+
+.headerTopBadge {
+  .el-badge__content {
+    font-size: 12px;
+    padding: 1px 4px 3px 3px;
+    transform: scale(0.7) !important;
+  }
+}
