@@ -20,19 +20,28 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
 })
 </script>
 <template>
-  <section class="h-full flex-col relative py-[var(--page-header-height)]">
+  <section
+    class="h-full flex-col relative py-[var(--page-header-height)] bg-linear-to-tr from-gray-100 to-white dark:bg-linear-to-r dark:from-dark-750 dark:to-dark-700 rounded-2xl border dark:border-dark-500 border-gray-150 [box-shadow:_8px_2px_12px_-1px_rgba(0,0,0,0.05)]"
+  >
     <div
-      class="logo flex justify-center items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80"
+      class="logo flex justify-between items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80 pl-5 pr-3"
     >
       <router-link to="/">
-        <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-8" />
-        <img v-else src="@/assets/imgs/logo-multi.svg" class="h-8" />
+        <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-6" />
+        <img v-else src="@/assets/imgs/logo-multi.svg" class="h-6" />
       </router-link>
+      <span
+        class="flex size-[32px] items-center justify-center transition hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-4xl"
+      >
+        <el-icon :size="20">
+          <i-ri-menu-unfold-4-line />
+        </el-icon>
+      </span>
     </div>
     <el-scrollbar class="h-full">
       <div class="menu-box pb-4 pt-3">
-        <ul v-for="item in 4">
-          <li class="px-3">
+        <ul>
+          <!-- <li class="px-3">
             <router-link
               to="/"
               class="flex items-center p-3 hover:bg-gray-150/80 rounded-md hover:text-gray-800 transition"
@@ -44,10 +53,10 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
               </span>
               <span>工作台</span>
             </router-link>
-          </li>
+          </li> -->
           <li class="px-3 py-[1px]">
             <router-link
-              class="flex items-center p-3 hover:bg-gray-100 rounded-md hover:text-gray-800 transition"
+              class="flex items-center p-3 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-dark-600 dark:hover:text-dark-50 transition rounded-md"
               to="/"
             >
               <span class="mr-2 size-6 flex items-center justify-center">
@@ -58,7 +67,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
               <span>我的订单</span>
             </router-link>
           </li>
-          <li class="px-3 py-[1px]">
+          <!-- <li class="px-3 py-[1px]">
             <router-link
               class="flex items-center p-3 hover:bg-gray-100 rounded-md hover:text-gray-800 transition"
               to="/"
@@ -70,7 +79,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
               </span>
               <span>我的订单</span>
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </div>
     </el-scrollbar>
