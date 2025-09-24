@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
+  --color-mint-500: #fff;
   /* bg and font and border */
   --color-dark-50: var(--color-dark-50);
   --color-dark-100: var(--color-dark-100);

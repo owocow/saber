@@ -35,7 +35,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
           <li class="px-3">
             <router-link
               to="/"
-              class="flex items-center p-3 hover:bg-gray-150/80 rounded-md hover:text-gray-800 transition"
+              class="flex items-center p-3 hover:bg-gray-150/80 rounded-md hover:text-gray-800 transition dark:hover:bg-dark-600 dark:text-dark-300 dark:hover:text-dark-50"
             >
               <span class="mr-2 size-6 flex items-center justify-center">
                 <el-icon>
@@ -43,32 +43,6 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
                 </el-icon>
               </span>
               <span>工作台</span>
-            </router-link>
-          </li>
-          <li class="px-3 py-[1px]">
-            <router-link
-              class="flex items-center p-3 hover:bg-gray-100 rounded-md hover:text-gray-800 transition"
-              to="/"
-            >
-              <span class="mr-2 size-6 flex items-center justify-center">
-                <el-icon>
-                  <i-ep-notebook />
-                </el-icon>
-              </span>
-              <span>我的订单</span>
-            </router-link>
-          </li>
-          <li class="px-3 py-[1px]">
-            <router-link
-              class="flex items-center p-3 hover:bg-gray-100 rounded-md hover:text-gray-800 transition"
-              to="/"
-            >
-              <span class="mr-2 size-6 flex items-center justify-center">
-                <el-icon>
-                  <i-ep-goods />
-                </el-icon>
-              </span>
-              <span>我的订单</span>
             </router-link>
           </li>
         </ul>
@@ -79,7 +53,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
     >
       <div class="flex rounded-4xl p-[3px]">
         <span
-          class="py-2 px-6 cursor-pointer flex items-center justify-center transition hover:bg-gray-100 dark:hover:bg-dark-600 rounded-xl mr-1"
+          class="themeModeItem"
           @click="mode = 'auto'"
           :class="mode === 'auto' ? 'bg-gray-100 dark:bg-dark-600' : ''"
         >
@@ -88,7 +62,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
           </el-icon>
         </span>
         <span
-          class="py-2 px-6 cursor-pointer flex items-center justify-center transition hover:bg-gray-100 dark:hover:bg-dark-600 rounded-xl mr-1"
+          class="themeModeItem"
           @click="mode = 'light'"
           :class="mode === 'light' ? 'dark:bg-dark-600 bg-gray-100' : ''"
         >
@@ -96,10 +70,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
             <i-ep-sunny />
           </el-icon>
         </span>
-        <span
-          class="py-2 px-6 cursor-pointer flex items-center justify-center transition hover:bg-gray-100 dark:hover:bg-dark-600 rounded-xl"
-          :class="mode === 'dark' ? 'dark:bg-dark-600 bg-gray-100' : ''"
-        >
+        <span class="themeModeItem" :class="mode === 'dark' ? 'dark:bg-dark-600 bg-gray-100' : ''">
           <el-icon :size="16" @click="mode = 'dark'">
             <i-ep-moon />
           </el-icon>
@@ -108,3 +79,11 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
     </div>
   </section>
 </template>
+<style scoped>
+@reference "@/assets/styles/tailwind.css";
+.themeModeItem {
+  @apply py-2 px-6 cursor-pointer flex items-center justify-center transition dark:hover:bg-dark-600 hover:bg-gray-100 rounded-xl mr-1;
+}
+.active {
+}
+</style>
