@@ -1,6 +1,6 @@
 <template>
   <header
-    class="bg-white/90 dark:bg-dark-700/80 backdrop-blur-xs backdrop-grayscale absolute top-2 left-1 right-2 z-10 flex items-center justify-between h-[var(--page-header-height)] rounded-2xl px-2 border dark:border-dark-500 border-gray-150 [box-shadow:_0_8px_12px_-1px_rgba(0,0,0,0.05)]"
+    class="bg-white/90 dark:bg-dark-700/80 backdrop-blur-xs backdrop-grayscale absolute left-2 right-2 z-10 flex items-center justify-between h-[var(--page-header-height)] rounded-2xl px-2 border dark:border-dark-500 border-gray-150 shadow-xl/5 dark:shadow-lg"
   >
     <!-- tabs -->
     <div class="flex-1 flex justify-between items-center overflow-hidden pageTabs">
@@ -14,7 +14,7 @@
       <el-scrollbar class="flex-1 tabsWrapBox">
         <div class="flex items-center h-[var(--page-header-height)]">
           <div
-            class="tabItem flex items-center pl-2 pr-1.5 py-1.5 mr-0.5 dark:bg-dark-600/68 cursor-pointer transform rounded-lg h-[32px]"
+            class="tabItem flex items-center pl-2 pr-1.5 py-1.5 mr-0.5 dark:bg-dark-600/68 bg-gray-100 cursor-pointer transform rounded-lg h-[32px]"
             v-for="item in 2"
           >
             <span class="mr-1.5 text-nowrap">Tab页面标题</span>
@@ -61,7 +61,7 @@
           </span>
         </template>
         <div
-          class="bg-white dark:bg-dark-700 w-[160px] shadow-lg border border-gray-200 dark:border-dark-600 p-2 dark:shadow-none rounded-b-lg"
+          class="bg-white dark:bg-dark-700 w-[160px] shadow-xl border border-gray-200 dark:border-dark-600 p-2 dark:shadow-none rounded-lg"
         >
           <div class="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-md">
             <el-icon>

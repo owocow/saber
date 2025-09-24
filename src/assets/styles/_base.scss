@@ -6,13 +6,6 @@ body {
   font-size: 14px;
 }
 
-a {
-  transition: all 0.2s;
-  &:hover {
-    color: var(--color-primary-500);
-  }
-}
-
 #nprogress .bar {
   background: var(--color-primary-500);
 }
