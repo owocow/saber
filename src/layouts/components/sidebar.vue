@@ -10,34 +10,24 @@ const mode = useColorMode({
   },
 })
 const isDark = useDark()
-const isSidebarPinned = defineModel('isSidebarPinned', {
-  type: Boolean,
-  default: false,
-})
+
 Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
+  console.log('⌘ k or control k')
+
+  // return false to prevent default browser behavior
+  // and stop event from bubbling
   return false
 })
-// toggle
-const emits = defineEmits(['toggleSidebar'])
 </script>
 <template>
   <section class="h-full flex-col relative py-[var(--page-header-height)]">
     <div
-      class="logo flex pl-6 pr-4 justify-between items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80"
+      class="logo flex justify-center items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80"
     >
       <router-link to="/">
-        <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-7" />
-        <img v-else src="@/assets/imgs/logo-multi.svg" class="h-7" />
+        <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-8" />
+        <img v-else src="@/assets/imgs/logo-multi.svg" class="h-8" />
       </router-link>
-      <span
-        class="flex size-[32px] items-center justify-center transition hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-4xl"
-        @click="emits('toggleSidebar')"
-        v-if="!isSidebarPinned"
-      >
-        <el-icon :size="20">
-          <i-ri-menu-unfold-4-line />
-        </el-icon>
-      </span>
     </div>
     <el-scrollbar class="h-full">
       <div class="menu-box pb-4 pt-3">
