@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useDark } from '@vueuse/core'
 import { useColorMode } from '@vueuse/core'
-import Mousetrap from 'mousetrap'
 const mode = useColorMode({
   emitAuto: true,
   modes: {
@@ -10,24 +9,30 @@ const mode = useColorMode({
   },
 })
 const isDark = useDark()
-
-Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
-  console.log('⌘ k or control k')
-
-  // return false to prevent default browser behavior
-  // and stop event from bubbling
-  return false
-})
+const isSidebarPinned = defineModel<boolean>({ default: false })
+const emits = defineEmits(['hideSidebar'])
 </script>
 <template>
-  <section class="h-full flex-col relative py-[var(--page-header-height)]">
+  <section class="h-full relative py-[var(--page-header-height)]">
     <div
-      class="logo flex justify-center items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80"
+      class="logo flex justify-between items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80 pl-6 pr-4"
     >
       <router-link to="/">
-        <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-8" />
-        <img v-else src="@/assets/imgs/logo-multi.svg" class="h-8" />
+        <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-6" />
+        <img v-else src="@/assets/imgs/logo-multi.svg" class="h-6" />
       </router-link>
+      <div class="flex items-center gap-0.5" v-if="!isSidebarPinned">
+        <span class="logoMenuItem" @click="emits('hideSidebar', 'inside')">
+          <el-icon :size="18">
+            <i-ri-menu-unfold-4-line />
+          </el-icon>
+        </span>
+        <span class="logoMenuItem">
+          <el-icon :size="18">
+            <i-ri-home-9-line />
+          </el-icon>
+        </span>
+      </div>
     </div>
     <el-scrollbar class="h-full">
       <div class="menu-box pb-4 pt-3">
@@ -84,6 +89,7 @@ Mousetrap.bind(['command+\\', 'ctrl+\\'], function () {
 .themeModeItem {
   @apply py-2 px-6 cursor-pointer flex items-center justify-center transition dark:hover:bg-dark-600 hover:bg-gray-100 rounded-xl mr-1;
 }
-.active {
+.logoMenuItem {
+  @apply flex items-center rounded-xl p-1.5 hover:bg-gray-100 cursor-pointer;
 }
 </style>

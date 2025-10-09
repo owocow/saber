@@ -45,6 +45,7 @@ declare module 'vue' {
     IEpUser: typeof import('~icons/ep/user')['default']
     IIcOutlineQrcode: typeof import('~icons/ic/outline-qrcode')['default']
     IMdiQrcodeScan: typeof import('~icons/mdi/qrcode-scan')['default']
+    IRiHome9Line: typeof import('~icons/ri/home9-line')['default']
     IRiMenuFold4Line: typeof import('~icons/ri/menu-fold4-line')['default']
     IRiMenuUnfold4Line: typeof import('~icons/ri/menu-unfold4-line')['default']
     IStreamlineSharpPhoneMessage: typeof import('~icons/streamline-sharp/phone-message')['default']

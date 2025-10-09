@@ -1,12 +1,37 @@
 <script lang="ts" setup>
 import SideBar from './components/sidebar.vue'
+const isSidebarPinned = ref(false)
+const isPeeking = ref(false)
+
+const togglePinned = (from: 'header' | 'sidebar') => {
+  isSidebarPinned.value = !isSidebarPinned.value
+  if (from === 'header') {
+    isPeeking.value = false
+  } else {
+    isPeeking.value = true
+  }
+}
+
+const foldSidebarHeight = () => {}
 </script>
 <template>
   <div class="h-screen flex">
     <aside
-      class="w-[var(--page-sidebar-width)] h-screen overflow-hidden bg-white dark:bg-dark-750 border-r border-gray-150 dark:border-dark-600/80"
+      class="h-screen flex-shrink-0 relative transition-[width] duration-300 z-30"
+      :class="isSidebarPinned ? 'w-0' : 'w-[248px]'"
     >
-      <SideBar />
+      <div class="absolute top-0 bottom-0 flex flex-col overflow-visible z-10 pointer-events-none w-full">
+        <div
+          class="overflow-hidden w-[var(--page-sidebar-width)] transition-[width, opacity, transform] bg-white dark:bg-dark-750 border-r border-gray-150 dark:border-dark-600/80 duration-300 pointer-events-auto translate-x-0 translate-y-0"
+          :class="[
+            isSidebarPinned
+              ? 'translate-y-[var(--page-header-height)] h-[calc(100vh-110px)]'
+              : 'translate-y-[0] h-full',
+          ]"
+        >
+          <SideBar @hide-sidebar="togglePinned('sidebar')" v-model="isSidebarPinned" />
+        </div>
+      </div>
     </aside>
     <main class="flex-1 flex flex-col overflow-hidden">
       <header class="bg-white/80 dark:bg-dark-750/80 backdrop-blur-xs backdrop-grayscale relative z-10">
@@ -14,21 +39,21 @@ import SideBar from './components/sidebar.vue'
           class="h-[var(--page-header-height)] px-5 border-b border-gray-150 dark:border-b-dark-600/80 flex items-center justify-between"
         >
           <div class="left-part">
-            <span
-              class="flex size-[32px] items-center justify-center transition hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-4xl"
-            >
-              <el-icon :size="20">
-                <i-ri-menu-unfold-4-line />
-              </el-icon>
-            </span>
-            <span
-              class="flex size-[32px] items-center justify-center dark:hover:bg-dark-600 cursor-pointer rounded-4xl"
-              v-if="0"
-            >
-              <el-icon :size="20">
-                <i-ri-menu-fold-4-line />
-              </el-icon>
-            </span>
+            <div class="flex items-center gap-0.5" v-if="isSidebarPinned">
+              <span
+                class="flex items-center rounded-xl p-1.5 hover:bg-gray-100 cursor-pointer"
+                @click="togglePinned('header')"
+              >
+                <el-icon :size="18">
+                  <i-ri-menu-fold-4-line />
+                </el-icon>
+              </span>
+              <span class="flex items-center rounded-xl p-1.5 hover:bg-gray-100 cursor-pointer">
+                <el-icon :size="18">
+                  <i-ri-home-9-line />
+                </el-icon>
+              </span>
+            </div>
           </div>
           <div class="right-part flex">
             <div class="flex items-center pr-2 ml-5 pl-3 relative z-10">
