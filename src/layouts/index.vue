@@ -12,7 +12,27 @@ const togglePinned = (from: 'header' | 'sidebar') => {
   }
 }
 
-const foldSidebarHeight = () => {}
+const peekingClass = computed(() => {
+  if (!isSidebarPinned.value) {
+    return 'h-full'
+  } else {
+    if (isPeeking.value) {
+      return 'translate-y-[var(--page-header-height)] h-[calc(100vh-110px)] translate-x-0'
+    } else {
+      return 'translate-y-[var(--page-header-height)] h-[calc(100vh-110px)] translate-x-[-248px]'
+    }
+  }
+})
+
+const onHover = (isHovering: boolean) => {
+  if (isSidebarPinned.value) {
+    if (isHovering) {
+      isPeeking.value = true
+    } else {
+      isPeeking.value = false
+    }
+  }
+}
 </script>
 <template>
   <div class="h-screen flex">
@@ -20,14 +40,13 @@ const foldSidebarHeight = () => {}
       class="h-screen flex-shrink-0 relative transition-[width] duration-300 z-30"
       :class="isSidebarPinned ? 'w-0' : 'w-[248px]'"
     >
-      <div class="absolute top-0 bottom-0 flex flex-col overflow-visible z-10 pointer-events-none w-full">
+      <div
+        class="absolute top-0 bottom-0 flex flex-col overflow-visible z-10 w-[248px] pointer-events-none"
+        @mouseleave="isPeeking = false"
+      >
         <div
           class="overflow-hidden w-[var(--page-sidebar-width)] transition-[width, opacity, transform] bg-white dark:bg-dark-750 border-r border-gray-150 dark:border-dark-600/80 duration-300 pointer-events-auto translate-x-0 translate-y-0"
-          :class="[
-            isSidebarPinned
-              ? 'translate-y-[var(--page-header-height)] h-[calc(100vh-110px)]'
-              : 'translate-y-[0] h-full',
-          ]"
+          :class="peekingClass"
         >
           <SideBar @hide-sidebar="togglePinned('sidebar')" v-model="isSidebarPinned" />
         </div>
@@ -43,6 +62,7 @@ const foldSidebarHeight = () => {}
               <span
                 class="flex items-center rounded-xl p-1.5 hover:bg-gray-100 cursor-pointer"
                 @click="togglePinned('header')"
+                @mouseenter="isPeeking = true"
               >
                 <el-icon :size="18">
                   <i-ri-menu-fold-4-line />
