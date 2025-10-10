@@ -91,7 +91,7 @@ const mode = useColorMode({
 @reference '@/assets/styles/tailwind.css';
 /* section sidebar */
 .sidebarSection {
-  @apply h-full w-full flex-col relative py-[var(--page-header-height)] bg-linear-to-tr from-gray-100 to-white dark:bg-linear-to-r dark:from-dark-750 dark:to-dark-700 rounded-2xl border dark:border-dark-500 border-gray-150 [box-shadow:_8px_2px_12px_-1px_rgba(0,0,0,0.05)];
+  @apply h-full w-full flex-col relative py-[var(--page-header-height)] bg-gray-50 rounded-lg border dark:border-dark-500 border-gray-150;
 }
 .sidebarLogo {
   @apply flex justify-between items-center absolute w-full h-[var(--page-header-height)] top-0 border-b border-gray-150 dark:border-b-dark-600/80 pl-5 pr-3;

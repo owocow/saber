@@ -1,16 +1,16 @@
 <template>
   <header
-    class="bg-white/90 dark:bg-dark-700/80 backdrop-blur-xs backdrop-grayscale absolute left-2 right-2 z-10 flex items-center justify-between h-[var(--page-header-height)] rounded-2xl px-2 border dark:border-dark-500 border-gray-150 shadow-xl/5 dark:shadow-lg"
+    class="bg-white/90 dark:bg-dark-700/80 backdrop-blur-xs absolute left-2 right-2 z-10 flex items-center justify-between h-[var(--page-header-height)] px-2"
   >
     <!-- tabs -->
     <div class="flex-1 flex justify-between items-center overflow-hidden pageTabs">
-      <!-- <span
+      <span
         class="flex items-center justify-center w-7 bg-gray-50 h-[32px] rounded-l-lg border border-gray-200 transition hover:bg-gray-100 dark:bg-dark-500/20 hover:dark:bg-dark-500/50 cursor-pointer"
       >
         <el-icon>
           <i-ep-d-arrow-left />
         </el-icon>
-      </span> -->
+      </span>
       <el-scrollbar class="flex-1 tabsWrapBox">
         <div class="flex items-center h-[var(--page-header-height)]">
           <div
@@ -28,13 +28,13 @@
           </div>
         </div>
       </el-scrollbar>
-      <!-- <span
+      <span
         class="flex items-center justify-center h-[32px] w-7 rounded-r-lg border border-gray-200 bg-gray-50 transition hover:bg-gray-100 dark:bg-dark-500/20 hover:dark:bg-dark-500/50 cursor-pointer"
       >
         <el-icon>
           <i-ep-d-arrow-right />
         </el-icon>
-      </span> -->
+      </span>
     </div>
     <!-- tabs end -->
     <div class="flex items-center relative z-10 ml-2">
