@@ -15,6 +15,7 @@ Saber 出自《Fate/stay night》, 真名为阿尔托莉雅·潘德拉贡，即�
       - router //为本模块自动加载的路由列表
       - views
 - [ ] 定义基础颜色主题 及 重置 element-plus 主题
+- [ ] 数据请求库添加 Alova 插件
 
 ### store 相关
 

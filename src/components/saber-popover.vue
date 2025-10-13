@@ -3,7 +3,7 @@ import { computed, ref, type PropType } from 'vue'
 import { OnClickOutside } from '@vueuse/components'
 import { useElementBounding, useWindowSize } from '@vueuse/core'
 
-type Placement = 'left' | 'right'
+type Placement = 'left' | 'right' | 'top' | 'bottom'
 
 const props = defineProps({
   placement: {
@@ -12,11 +12,11 @@ const props = defineProps({
   },
   offsetX: {
     type: Number,
-    default: 8,
+    default: 0,
   },
   offsetY: {
     type: Number,
-    default: 8,
+    default: 0,
   },
 })
 
@@ -35,6 +35,14 @@ const popoverStyle = computed(() => {
     right: {
       right: `${width.value - referenceBounding.right.value - props.offsetX}px`,
       left: 'auto',
+    },
+    top: {
+      left: `${referenceBounding.left.value - props.offsetX}px`,
+      bottom: `${window.innerHeight - referenceBounding.top.value + props.offsetY}px`,
+      top: 'auto',
+    },
+    bottom: {
+      left: `${referenceBounding.left.value}px`,
     },
   }
   return {
@@ -61,7 +69,7 @@ const toggle = (event: Event) => {
 </script>
 
 <template>
-  <div class="inline-block relative">
+  <div class="inline-block relative w-full">
     <div ref="referenceEl" @click="e => toggle(e)">
       <slot name="reference" />
     </div>
