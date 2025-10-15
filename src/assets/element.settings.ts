@@ -7,4 +7,10 @@ export const elementSettings = Object.freeze({
     draggable: true,
     transition: 'none',
   },
+  watermark: {
+    content: 'Saber Admin',
+    fontSize: '12px',
+    gapX: '100px',
+    gapY: '100px',
+  },
 })

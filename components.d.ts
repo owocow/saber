@@ -25,6 +25,7 @@ declare module 'vue' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
+    ElWatermark: typeof import('element-plus/es')['ElWatermark']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IEpBack: typeof import('~icons/ep/back')['default']
     IEpBasketball: typeof import('~icons/ep/basketball')['default']
