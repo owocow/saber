@@ -1,6 +1,20 @@
 <script lang="ts" setup>
-import useLogin from './useLogin'
-const { loginType, toggleLoginType, loginForm, disabled } = useLogin()
+import PasswordLogin from './pwd-login/index.vue'
+import Wechat from './wechat/index.vue'
+import DingTalk from './dingtalk/index.vue'
+import Code from './code/index.vue'
+type LoginType = 'password' | 'wechat' | 'dingTalk' | 'code'
+const currentKey = ref<LoginType>('password')
+const moduleMap = {
+  password: PasswordLogin,
+  code: Code,
+  wechat: Wechat,
+  dingTalk: DingTalk,
+}
+const currentComponent = computed(() => moduleMap[currentKey.value])
+const changeLoginType = (key: LoginType) => {
+  currentKey.value = key
+}
 </script>
 <template>
   <div class="fixed left-0 bottom-0 right-0 top-0 -z-10">
@@ -18,64 +32,46 @@ const { loginType, toggleLoginType, loginForm, disabled } = useLogin()
           <div
             class="w-1/2 p-[80px] relative overflow-hidden bg-gradient-to-t to-70% from-slate-200 via-slate-100 to-sky-100 rounded-3xl flex flex-col justify-between"
           >
-            <!-- 右上角切换按钮 START -->
-            <div class="absolute right-0 top-0 p-3">
-              <div class="cursor-pointer w-[56px] h-[56px]" @click="toggleLoginType">
-                <el-icon color="var(--el-color-primary)" :size="56">
-                  <i-ic-outline-qrcode v-if="loginType === 'dingtalk'" />
-                  <i-ep-message v-else />
-                </el-icon>
-              </div>
-            </div>
-            <div class="mask bg-sky-100 w-[120px] h-[120px] absolute rotate-45 right-7 top-7" />
-            <!-- 右上角切换按钮 END -->
+            <!-- 登录主体部分 -->
             <div>
-              <div class="mb-6">
-                <img src="@/assets/imgs/logo-multi.svg" class="h-[44px]" />
+              <div class="mb-6 text-center -mt-4">
+                <img src="@/assets/imgs/logo-multi.svg" class="h-[44px] inline-block" />
               </div>
               <div class="pt-8">
                 <div class="welcome pl-2 mb-8">
                   <h4 class="text-xl font-bold mb-1">欢迎回来</h4>
                   <p class="text-sm">很高兴再次见到你, Have a good day.</p>
                 </div>
-                <!-- form login start -->
-                <div class="form-login" v-if="loginType === 'account'">
-                  <el-input
-                    type="text"
-                    v-model="loginForm.username"
-                    class="h-[40px] roundedInput mb-3"
-                    placeholder="请输入用户名"
-                    clearable
-                  >
-                    <template #prefix>
-                      <el-icon :size="20"><i-ep-user /></el-icon>
-                    </template>
-                  </el-input>
-                  <div class="relative mb-8">
-                    <el-input
-                      type="text"
-                      class="h-[40px] roundedInput"
-                      v-model="loginForm.code"
-                      placeholder="请输入验证码"
-                    >
-                      <template #prefix>
-                        <el-icon :size="20"><i-ep-cellphone /></el-icon>
-                      </template>
-                    </el-input>
-                    <el-button class="absolute top-[4px] right-[4px]" plain text round> 获取钉钉/短信验证码 </el-button>
-                  </div>
-                  <el-button type="primary" size="large" round class="w-full shadow-md" :disabled="disabled"
-                    >登录</el-button
-                  >
-                </div>
-                <!-- form login end -->
-                <!-- qrcode login start -->
-                <div v-else class="p-4 bg-white rounded-2xl shadow-md inline-block">
-                  <img class="w-[240px]" src="@/assets/imgs/qrcode.png" alt="" />
-                </div>
+                <component :is="currentComponent" />
               </div>
             </div>
-            <p class="text-xs -mb-12 opacity-40">Copyright © 2025 小租网络, All Rights Reserved.</p>
+            <!-- 登录主体部分 end -->
+            <div class="loginTypeAndCopy -mb-16 flex flex-col items-center">
+              <p class="text-center mb-6 text-gray-500">-- 请选择登录方式 --</p>
+              <div class="flex justify-center gap-6 pb-10">
+                <div class="loginIcon" @click="changeLoginType('password')">
+                  <el-icon :size="32">
+                    <i-solar-password-linear />
+                  </el-icon>
+                </div>
+                <div class="loginIcon" @click="changeLoginType('wechat')">
+                  <el-icon :size="32">
+                    <i-ic-baseline-wechat />
+                  </el-icon>
+                </div>
+                <div class="loginIcon" @click="changeLoginType('dingTalk')">
+                  <el-icon :size="32">
+                    <i-ant-design-dingtalk-circle-filled />
+                  </el-icon>
+                </div>
+                <div class="loginIcon" @click="changeLoginType('code')">
+                  <el-icon :size="32">
+                    <i-ep-chat-dot-square />
+                  </el-icon>
+                </div>
+              </div>
+              <p class="text-xs text-gray-500">Copyright © 2025 小租网络, All Rights Reserved.</p>
+            </div>
           </div>
           <div class="w-1/2 px-[80px] text-white flex flex-col justify-end">
             <p class="mb-8 text-xs opacity-70 text-slate-50">真诚，不是华丽的言辞，而是发自内心的尊重和理解</p>
@@ -85,3 +81,9 @@ const { loginType, toggleLoginType, loginForm, disabled } = useLogin()
     </div>
   </div>
 </template>
+<style scoped>
+@reference '@/assets/styles/tailwind.css';
+.loginIcon {
+  @apply flex rounded-xl hover:text-primary-500 cursor-pointer transition-all duration-200;
+}
+</style>
