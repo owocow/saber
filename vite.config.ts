@@ -9,50 +9,70 @@ import IconsResolver from 'unplugin-icons/resolver'
 // Iconify 插件
 import Icons from 'unplugin-icons/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { defineConfig } from 'vite'
-import PackageJson from './package.json' with { type: 'json' }
+import { defineConfig, loadEnv } from 'vite'
+import { createViteProxy, getBuildTime } from './build/config'
+import { config } from 'node:process'
+// import PackageJson from './package.json' with { type: 'json' }
 
-process.env.VITE_APP_VERSION = PackageJson.version
-if (process.env.NODE_ENV === 'production') {
-  process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
-}
+// process.env.VITE_APP_VERSION = PackageJson.version
+// if (process.env.NODE_ENV === 'production') {
+//   process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
+// }
 
-export default defineConfig({
-  plugins: [
-    vue(),
-    AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-        'pinia',
-        {
-          '@/store/modules/app': ['useAppStore'],
-          '@unhead/vue': ['useHead'],
-        },
-      ],
-      dts: 'auto-imports.d.ts',
-      vueTemplate: true,
-    }),
-    Components({
-      dts: 'components.d.ts',
-      resolvers: [ElementPlusResolver({ importStyle: 'sass' }), IconsResolver({ prefix: 'i' })],
-    }),
-    Icons({
-      autoInstall: true, // 自动安装缺失的图标包
-    }),
-    tailwindcss(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+export default defineConfig(configEnv => {
+  const viteEnv = loadEnv(configEnv.mode, process.cwd()) as unknown as Env.ImportMeta
+  const buildTime = getBuildTime()
+  const enableProxy = configEnv.command === 'serve' && !configEnv.isPreview
+  return {
+    base: viteEnv.VITE_BASE_URL,
+    define: {
+      BUILD_TIME: JSON.stringify(buildTime),
     },
-  },
-  css: {
-    preprocessorMaxWorkers: true,
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@use "@/assets/styles/element/index.scss" as *;`,
+    plugins: [
+      vue(),
+      AutoImport({
+        imports: [
+          'vue',
+          'vue-router',
+          'pinia',
+          {
+            '@/store/modules/app': ['useAppStore'],
+            '@unhead/vue': ['useHead'],
+          },
+        ],
+        dts: 'auto-imports.d.ts',
+        vueTemplate: true,
+      }),
+      Components({
+        dts: 'components.d.ts',
+        resolvers: [ElementPlusResolver({ importStyle: 'sass' }), IconsResolver({ prefix: 'i' })],
+      }),
+      Icons({
+        autoInstall: true, // 自动安装缺失的图标包
+      }),
+      tailwindcss(),
+    ],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-  },
+    css: {
+      preprocessorMaxWorkers: true,
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/assets/styles/element/index.scss" as *;`,
+        },
+      },
+    },
+    preview: {
+      port: 9725,
+    },
+    server: {
+      host: '0.0.0.0',
+      port: 9527,
+      open: true,
+      proxy: createViteProxy(viteEnv, enableProxy),
+    },
+  }
 })

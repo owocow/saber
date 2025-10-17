@@ -7,7 +7,8 @@
     "auto-imports.d.ts",
     "src/**/*.ts",
     "src/**/*.vue",
-    "types/**/*.d.ts"
+    "types/**/*.d.ts",
+    "build/**/*.ts"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

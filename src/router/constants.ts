@@ -19,16 +19,7 @@ export const loginRoute = {
   component: PAGE_LOGIN,
   name: PAGE_LOGIN_NAME,
   meta: {
-    title: 'Login - 登录',
-  },
-}
-
-export const loginRoute2 = {
-  path: '/login2',
-  component: () => import('@/modules/sys/login/login2.vue'),
-  name: 'TestingLogin2',
-  meta: {
-    title: 'Login - 登录',
+    title: '登录系统',
   },
 }
 
@@ -38,21 +29,11 @@ export const pageNotFoundRoute = {
   component: PAGE_NOT_FOUND,
   name: PAGE_NOT_FOUND_NAME,
   meta: {
-    title: '404 - Not Found',
-  },
-}
-
-// 404
-export const pageTestingRoute = {
-  path: '/testing',
-  component: PAGE_TESTING,
-  name: PAGE_TESTING_NAME,
-  meta: {
-    title: 'Testing - 测试',
+    title: '您访问的页面不存在',
   },
 }
 
 // get page layout
 export const getParentLayout = (name?: string) => new Promise(resolve => resolve({ name: name || PARENT_LAYOUT_NAME }))
 
-export const constantRoutes = [loginRoute, pageNotFoundRoute, loginRoute2, pageTestingRoute]
+export const constantRoutes = [loginRoute, pageNotFoundRoute]
