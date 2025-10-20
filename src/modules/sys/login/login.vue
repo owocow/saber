@@ -34,7 +34,7 @@ const changeLoginType = (key: LoginType) => {
           >
             <!-- 登录主体部分 -->
             <div>
-              <div class="mb-6 text-center -mt-4">
+              <div class="mb-6 text-left -mt-6 ml-2">
                 <img src="@/assets/imgs/logo-multi.svg" class="h-[44px] inline-block" />
               </div>
               <div class="pt-8">

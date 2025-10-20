@@ -56,6 +56,7 @@ declare module 'vue' {
     IEpUser: typeof import('~icons/ep/user')['default']
     IFluentAlert16Regular: typeof import('~icons/fluent/alert16-regular')['default']
     IFluentAlert24Regular: typeof import('~icons/fluent/alert24-regular')['default']
+    IHugeiconsCalculate: typeof import('~icons/hugeicons/calculate')['default']
     IIcBaselineWechat: typeof import('~icons/ic/baseline-wechat')['default']
     IIcOutlineQrcode: typeof import('~icons/ic/outline-qrcode')['default']
     IMdiQrcodeScan: typeof import('~icons/mdi/qrcode-scan')['default']

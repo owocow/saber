@@ -30,6 +30,9 @@ importers:
       '@iconify-json/fluent':
         specifier: ^1.2.33
         version: 1.2.33
+      '@iconify-json/hugeicons':
+        specifier: ^1.2.16
+        version: 1.2.16
       '@iconify-json/ic':
         specifier: ^1.2.4
         version: 1.2.4
@@ -660,6 +663,9 @@ packages:
 
   '@iconify-json/fluent@1.2.33':
     resolution: {integrity: sha512-boteYANiRo+txCGpxv0okpGUmAkmdsze+Gy061TpXx2N+VUFeGYMnmcoimRZWPOoJt7se+QF+Wv8DY3PV0otfg==}
+
+  '@iconify-json/hugeicons@1.2.16':
+    resolution: {integrity: sha512-Ow0ig3yNY1VPZLBYYNVAAHA2jvSUoHbmtHzo87SnvA5rpDZVH6FMONeyro8LO31ReVwbaTVv9Mnd7yUXMFRufA==}
 
   '@iconify-json/ic@1.2.4':
     resolution: {integrity: sha512-pzPMmrZrBQuwT7nmtrYdkttun8KalRGgZPIL1Ny9KpF2zjRGIUPN+npTfuD3lrgO/OnSwAoJWuekQwBpt/Cqrw==}
@@ -3869,6 +3875,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/fluent@1.2.33':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/hugeicons@1.2.16':
     dependencies:
       '@iconify/types': 2.0.0
 
