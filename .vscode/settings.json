@@ -10,6 +10,8 @@
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
+  // "editor.cursorBlinking": "expand",
+  "editor.guides.bracketPairs": "active",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.quickSuggestions": {
     "strings": "on"
