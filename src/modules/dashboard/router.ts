@@ -1,5 +1,5 @@
 import type { AppRouteRecordRaw } from '@/router/types'
-import { LAYOUT_DEFAULT } from '@/router/constants'
+import { LAYOUT_DEFAULT } from '@/router/routes/constants'
 const routes: AppRouteRecordRaw[] = [
   {
     path: '/',

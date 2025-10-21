@@ -1,9 +1,10 @@
 import { computed, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import router from '@/router'
 import { defineStore } from 'pinia'
 import { useLoading } from '@/packages/hooks'
 import { fetchGetUserInfo, fetchLogin, fetchLogout } from '@/service/api'
-// import { useRouterPush } from '@/hooks/common/router'
+import { useRouterPush } from '@/utils/router'
 import { localStg } from '@/utils/storage'
 import { SetupStoreId } from '@/enum'
 // import { useRouteStore } from '../route'
@@ -17,7 +18,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   // const routeStore = useRouteStore()
   // const tabStore = useTabStore()
   // const noticeStore = useNoticeStore()
-  // const { toLogin, redirectFromLogin } = useRouterPush(false)
+  const { toLogin, redirectFromLogin } = useRouterPush(false)
   const { loading: loginLoading, startLoading, endLoading } = useLoading()
 
   const token = ref(getToken())
@@ -41,15 +42,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   /** Reset auth store */
   async function resetStore() {
     recordUserId()
-
     clearAuthStorage()
-
     authStore.$reset()
-
     if (!route.meta.constant) {
       await toLogin()
     }
-
     // noticeStore.clearNotice()
     // tabStore.cacheTabs()
     // routeStore.resetStore()
@@ -65,7 +62,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     if (!userInfo.user?.userId) {
       return
     }
-
     // Store current user ID locally for next login comparison
     localStg.set('lastLoginUserId', userInfo.user?.userId)
   }
@@ -79,9 +75,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     if (!userInfo.user?.userId) {
       return false
     }
-
     const lastLoginUserId = localStg.get('lastLoginUserId')
-
     // Clear all tabs if current user is different from previous user
     if (!lastLoginUserId || lastLoginUserId !== userInfo.user?.userId) {
       localStg.remove('globalTabs')
@@ -127,12 +121,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
           needRedirect = false
         }
         await redirectFromLogin(needRedirect)
-
-        // window.$notification?.success({
-        //   title: $t('page.login.common.loginSuccess'),
-        //   content: $t('page.login.common.welcomeBack', { userName: userInfo.userName }),
-        //   duration: 4500
-        // });
       }
     } else {
       resetStore()
@@ -150,13 +138,10 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     // 2. get user info
     const pass = await getUserInfo()
-
     if (pass) {
       token.value = loginToken.access_token!
-
       return true
     }
-
     return false
   }
 
@@ -164,7 +149,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     const { data: info, error } = await fetchGetUserInfo()
 
     if (!error) {
-      // update store
       Object.assign(userInfo, info)
 
       return true

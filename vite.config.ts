@@ -10,14 +10,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig, loadEnv } from 'vite'
-import { createViteProxy, getBuildTime } from './build/config'
-import { config } from 'node:process'
-// import PackageJson from './package.json' with { type: 'json' }
-
-// process.env.VITE_APP_VERSION = PackageJson.version
-// if (process.env.NODE_ENV === 'production') {
-//   process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
-// }
+import { createViteProxy, getBuildTime } from './build'
 
 export default defineConfig(configEnv => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd()) as unknown as Env.ImportMeta

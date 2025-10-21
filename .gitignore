@@ -37,3 +37,4 @@ package-lock.json
 *.tsbuildinfo
 .vscode/starter.code-workspace
 test-results/
+generatedRoutes.json

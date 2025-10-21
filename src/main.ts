@@ -1,8 +1,8 @@
-import router from '@/router/index'
+import router from './router'
 // import { createHead } from '@unhead/vue/client'
 import { setupStore } from './store'
 import { setUpLoading } from './bootstrap/loading'
-import { setupRouterGuards } from './router/guards'
+import { setupRouter } from './router'
 import { createApp } from 'vue'
 import '@/assets/styles/tailwind.css'
 import '@/assets/styles/index.scss'
@@ -10,10 +10,8 @@ import App from './App.vue'
 
 const app = createApp(App)
 // loading page
-// setUpLoading()
+setUpLoading()
 // 初始化状态管理
 setupStore(app, router)
-setupRouterGuards(router)
-// 初始化路由
-app.use(router)
+setupRouter(app)
 app.mount('#app')

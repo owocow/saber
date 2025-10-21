@@ -1,14 +1,32 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { asyncRoutes } from './routes'
-import { constantRoutes } from './constants'
+import type { App } from 'vue'
+import {
+  type RouterHistory,
+  createMemoryHistory,
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
+import { builtinRoutes } from './routes/constants'
+import { setupRouterGuards } from './guards'
 
-const routes = [...constantRoutes, ...asyncRoutes]
+const { VITE_ROUTER_HISTORY_MODE = 'history', VITE_BASE_URL } = import.meta.env
+// ensure the env value is treated as the known RouterHistoryMode type before indexing
+const mode = (VITE_ROUTER_HISTORY_MODE as unknown as Env.RouterHistoryMode) ?? 'history'
+const historyCreatorMap: Record<Env.RouterHistoryMode, (base?: string) => RouterHistory> = {
+  hash: createWebHashHistory,
+  history: createWebHistory,
+  memory: createMemoryHistory,
+}
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-  strict: true,
-  scrollBehavior: () => ({ left: 0, top: 0 }),
+export const router = createRouter({
+  history: historyCreatorMap[mode](VITE_BASE_URL),
+  routes: builtinRoutes,
 })
+
+export async function setupRouter(app: App) {
+  app.use(router)
+  setupRouterGuards(router)
+  await router.isReady()
+}
 
 export default router

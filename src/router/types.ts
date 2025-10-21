@@ -12,16 +12,16 @@ export interface MenuRecord extends RouteMeta {
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   name: string
   meta: RouteMeta
-  permissions?: string[]
   roles?: string[]
   orderNo?: number
   component?: Component | string
   components?: Component
   children?: AppRouteRecordRaw[] | any
-  props?: Recordable
+  props?: Recordable | boolean
   fullPath?: string
   display?: boolean
   icon?: any
+  hideInMenu?: boolean
 }
 
 export type AppRouteModule = AppRouteRecordRaw
