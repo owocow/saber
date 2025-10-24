@@ -231,6 +231,7 @@ declare namespace App {
       icon?: () => VNode
       /** The menu children */
       children?: Menu[]
+      iconSize?: number | unknown
     }
 
     type Breadcrumb = Omit<Menu, 'children'> & {

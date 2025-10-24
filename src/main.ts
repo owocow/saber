@@ -1,4 +1,3 @@
-import router from './router'
 // import { createHead } from '@unhead/vue/client'
 import { setupStore } from './store'
 import { setUpLoading } from './bootstrap/loading'
@@ -12,6 +11,6 @@ const app = createApp(App)
 // loading page
 setUpLoading()
 // 初始化状态管理
-setupStore(app, router)
+setupStore(app)
 setupRouter(app)
 app.mount('#app')

@@ -19,8 +19,10 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   children?: AppRouteRecordRaw[] | any
   props?: Recordable | boolean
   fullPath?: string
+  constant?: boolean
   display?: boolean
   icon?: any
+  iconSize?: number
   hideInMenu?: boolean
 }
 

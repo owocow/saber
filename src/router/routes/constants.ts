@@ -5,7 +5,7 @@ export const PAGE_NOT_FOUND_NAME = 'PageNotFound'
 export const PAGE_NO_PERMISSION_NAME = 'PageNoPermission'
 
 // basic page components
-export const PAGE_LOGIN = () => import('@/modules/sys/login/login.vue')
+export const PAGE_LOGIN = () => import('@/modules/base/auth/index.vue')
 
 // layouts
 export const LAYOUT_DEFAULT = () => import('@/layouts/index.vue')
@@ -26,7 +26,7 @@ export const ROOT_ROUTE: AppRouteRecordRaw = {
 export const ROUTE_PAGE_NOT_FOUND: AppRouteRecordRaw = {
   name: PAGE_NOT_FOUND_NAME,
   path: '/:pathMatch(.*)*',
-  component: import('@/views/404.vue'),
+  component: import('@/modules/base/404.vue'),
   meta: {
     title: '您访问的页面不存在',
     constant: true,
@@ -34,11 +34,30 @@ export const ROUTE_PAGE_NOT_FOUND: AppRouteRecordRaw = {
   },
 }
 
-export const dynamicRoutes: AppRouteRecordRaw[] = [
+export const staticRoutes: AppRouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'HomePageLayout',
+    component: LAYOUT_DEFAULT,
+    redirect: '/home',
+    meta: {
+      title: 'Dashboard',
+    },
+    children: [
+      {
+        path: '/home',
+        name: 'HomePage',
+        component: () => import('@/modules/dashboard/views/index.vue'),
+        meta: {
+          title: 'Home',
+        },
+      },
+    ],
+  },
   {
     name: PAGE_NO_PERMISSION_NAME,
     path: '/403',
-    component: import('@/views/403.vue'),
+    component: import('@/modules/base/403.vue'),
     meta: {
       title: '您没有权限访问该页面',
       constant: true,
@@ -48,7 +67,7 @@ export const dynamicRoutes: AppRouteRecordRaw[] = [
   {
     name: 'server-error',
     path: '/500',
-    component: import('@/views/500.vue'),
+    component: import('@/modules/base/500.vue'),
     meta: {
       title: '服务器出现错误',
       constant: true,
@@ -58,7 +77,7 @@ export const dynamicRoutes: AppRouteRecordRaw[] = [
   {
     name: 'login',
     path: '/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?',
-    component: import('@/views/auth/index.vue'),
+    component: import('@/modules/base/auth/index.vue'),
     props: true,
     meta: {
       title: '登录',
@@ -105,4 +124,4 @@ export const dynamicRoutes: AppRouteRecordRaw[] = [
   },
 ]
 
-export const builtinRoutes = [ROOT_ROUTE, ROUTE_PAGE_NOT_FOUND]
+export const builtinRoutes = [ROOT_ROUTE, ...staticRoutes, ROUTE_PAGE_NOT_FOUND]

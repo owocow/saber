@@ -1,9 +1,15 @@
 <script lang="ts" setup>
 import { useDark, useToggle } from '@vueuse/core'
+import { useAuthStore } from '@/store/modules/auth'
+const { logout, userInfo } = useAuthStore()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const visible = defineModel({ type: Boolean })
 const emits = defineEmits(['close-sidebar'])
+/** 退出登录 */
+function logoutSys() {
+  logout()
+}
 </script>
 <template>
   <section
@@ -30,7 +36,7 @@ const emits = defineEmits(['close-sidebar'])
           <li class="px-3 py-[2px]">
             <router-link
               class="flex items-center py-2 px-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-dark-600 dark:hover:text-dark-50 transition rounded-lg"
-              to="/"
+              to="/clients"
             >
               <span class="mr-2 size-6 flex items-center justify-center">
                 <el-icon :size="16">
@@ -64,7 +70,7 @@ const emits = defineEmits(['close-sidebar'])
           >
             <div class="flex items-center">
               <el-avatar :size="26" src="https://i.pinimg.com/236x/db/17/0e/db170e567b02375892f5a2cff7648a2e.jpg" />
-              <span class="ml-2">Saber Admin</span>
+              <span class="ml-2">{{ userInfo.user?.nickName }}</span>
             </div>
             <el-icon :size="15">
               <i-teenyicons-caret-vertical-outline />
@@ -78,7 +84,7 @@ const emits = defineEmits(['close-sidebar'])
             <dt class="flex items-center">
               <el-avatar :size="32" src="https://i.pinimg.com/236x/db/17/0e/db170e567b02375892f5a2cff7648a2e.jpg" />
               <div class="ml-2 flex flex-col">
-                <span>Saber Admin</span>
+                <span>{{ userInfo.user?.nickName }}</span>
                 <span class="text-xs text-gray-400">[销售总监]</span>
               </div>
             </dt>
@@ -100,7 +106,10 @@ const emits = defineEmits(['close-sidebar'])
             </el-icon>
             <span class="ml-3">系统设置</span>
           </div>
-          <div class="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-md">
+          <div
+            class="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-md"
+            @click="logoutSys"
+          >
             <el-icon>
               <i-ep-switch-button />
             </el-icon>

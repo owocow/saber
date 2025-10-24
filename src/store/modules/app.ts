@@ -1,44 +1,18 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', {
-  state: () => ({
-    debug: import.meta.env.MODE === 'development',
-    appMeta: {
-      version:
-        import.meta.env.MODE === 'development'
-          ? `${import.meta.env.VITE_APP_VERSION}-dev`
-          : import.meta.env.VITE_APP_VERSION,
-      builtAt: import.meta.env.VITE_APP_BUILD_EPOCH
-        ? new Date(Number(import.meta.env.VITE_APP_BUILD_EPOCH))
-        : undefined,
-    },
-    isInitialized: false,
-    count: 0,
+  state: (): AppState => ({
+    isCollapsed: null,
   }),
-
-  actions: {
-    initApp() {
-      this.isInitialized = true
-      console.log('app initialized!')
-    },
-
-    increment(value = 1) {
-      this.count += value
-    },
-
-    goToDemo(event: Event) {
-      event.preventDefault()
-      this.router.push('/demo/')
+  getters: {
+    getIsCollapsed(): string {
+      return this.isCollapsed || AppCache.getLocal(MENU_KEY) || 'open'
     },
   },
-
-  getters: {
-    isReady: state => {
-      return state.isInitialized
+  actions: {
+    toggleMenu(): void {
+      this.isCollapsed = this.getIsCollapsed === 'open' ? 'close' : 'open'
+      AppCache.setLocal(MENU_KEY, this.isCollapsed)
     },
   },
 })
-
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useAppStore, import.meta.hot))
-}

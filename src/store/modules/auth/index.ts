@@ -1,21 +1,17 @@
-import { computed, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import router from '@/router'
-import { defineStore } from 'pinia'
 import { useLoading } from '@/packages/hooks'
 import { fetchGetUserInfo, fetchLogin, fetchLogout } from '@/service/api'
 import { useRouterPush } from '@/utils/router'
 import { localStg } from '@/utils/storage'
 import { SetupStoreId } from '@/enum'
-// import { useRouteStore } from '../route'
+import { useRouteStore } from '../route'
 // import { useTabStore } from '../tab'
 // import useNoticeStore from '../notice'
-import { clearAuthStorage, getToken } from './shared'
+import { clearAuthStorage, getToken, getUserInfoStorage } from './shared'
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute()
   const authStore = useAuthStore()
-  // const routeStore = useRouteStore()
+  const routeStore = useRouteStore()
   // const tabStore = useTabStore()
   // const noticeStore = useNoticeStore()
   const { toLogin, redirectFromLogin } = useRouterPush(false)
@@ -23,11 +19,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   const token = ref(getToken())
 
-  const userInfo: Api.Auth.UserInfo = reactive({
-    user: undefined,
-    roles: [],
-    permissions: [],
-  })
+  const userInfo: Api.Auth.UserInfo = reactive(getUserInfoStorage())
 
   /** is super role in static route */
   const isStaticSuper = computed(() => {
@@ -49,7 +41,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
     // noticeStore.clearNotice()
     // tabStore.cacheTabs()
-    // routeStore.resetStore()
+    routeStore.resetStore()
   }
 
   async function logout() {
@@ -96,7 +88,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
    */
   async function login(loginForm: Api.Auth.PwdLoginForm | Api.Auth.SocialLoginForm, redirect = true) {
     startLoading()
-
     const { VITE_APP_CLIENT_ID } = import.meta.env
 
     const loginData: Api.Auth.PwdLoginForm = {
@@ -140,6 +131,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     const pass = await getUserInfo()
     if (pass) {
       token.value = loginToken.access_token!
+      localStg.set('userInfo', userInfo)
       return true
     }
     return false
@@ -159,7 +151,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   async function initUserInfo() {
     const hasToken = getToken()
-
     if (hasToken) {
       const pass = await getUserInfo()
 

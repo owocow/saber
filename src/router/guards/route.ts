@@ -5,11 +5,9 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
-// import type { RouteKey, RoutePath } from '@elegant-router/types'
 import { useAuthStore } from '@/store/modules/auth'
-// import { useRouteStore } from '@/store/modules/route'
+import { useRouteStore } from '@/store/modules/route'
 import { localStg } from '@/utils/storage'
-// import { getRouteName } from '@/router/elegant/transform'
 
 /**
  * create route guard
@@ -19,7 +17,6 @@ import { localStg } from '@/utils/storage'
 export function createRouteGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
     const location = await initRoute(to)
-
     if (location) {
       next(location)
       return
@@ -74,29 +71,9 @@ export function createRouteGuard(router: Router) {
  */
 async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw | null> {
   const routeStore = useRouteStore()
-
   const notFoundRoute = 'not-found'
   const isNotFoundRoute = to.name === notFoundRoute
-
-  // if the constant route is not initialized, then initialize the constant route
-  if (!routeStore.isInitConstantRoute) {
-    await routeStore.initConstantRoute()
-
-    // the route is captured by the "not-found" route because the constant route is not initialized
-    // after the constant route is initialized, redirect to the original route
-    const path = to.fullPath
-    const location: RouteLocationRaw = {
-      path,
-      replace: true,
-      query: to.query,
-      hash: to.hash,
-    }
-
-    return location
-  }
-
   const isLogin = Boolean(localStg.get('token'))
-
   if (!isLogin) {
     // if the user is not logged in and the route is a constant route but not the "not-found" route, then it is allowed to access.
     if (to.meta.constant && !isNotFoundRoute) {
@@ -147,8 +124,8 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
   }
 
   // it is captured by the "not-found" route, then check whether the route exists
-  const exist = await routeStore.getIsAuthRouteExist(to.path as RoutePath)
-  const noPermissionRoute: RouteKey = '403'
+  const exist = await routeStore.getIsAuthRouteExist(to.name as string)
+  const noPermissionRoute: string = '403'
 
   if (exist) {
     const location: RouteLocationRaw = {
@@ -174,11 +151,11 @@ function handleRouteSwitch(to: RouteLocationNormalized, from: RouteLocationNorma
   next()
 }
 
-function getRouteQueryOfLoginRoute(to: RouteLocationNormalized, routeHome: RouteKey) {
-  const loginRoute: RouteKey = 'login'
+function getRouteQueryOfLoginRoute(to: RouteLocationNormalized, routeHome: string) {
+  const loginRoute = 'login'
   const redirect = to.fullPath
   const [redirectPath, redirectQuery] = redirect.split('?')
-  const redirectName = getRouteName(redirectPath as RoutePath)
+  const redirectName = to.name as string
 
   const isRedirectHome = routeHome === redirectName
 

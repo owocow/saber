@@ -1,6 +1,7 @@
 import { type Router } from 'vue-router'
 import { useNProgress } from '@/composables/useNprogress'
 const { start, done } = useNProgress()
+import { createRouteGuard } from './route'
 
 // progress
 function initProgressGuard(router: Router) {
@@ -26,4 +27,5 @@ function initPageTitleGuard(router: Router) {
 export function setupRouterGuards(router: Router) {
   initProgressGuard(router)
   initPageTitleGuard(router)
+  createRouteGuard(router)
 }
