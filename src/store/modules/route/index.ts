@@ -34,6 +34,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   const authRoutes = shallowRef<AppRouteRecordRaw[]>([])
 
   function addAuthRoutes(routes: AppRouteRecordRaw[]) {
+    console.log('Adding auth routes:', routes) // 添加调试信息
     const authRoutesMap = new Map<string, AppRouteRecordRaw>([])
 
     routes.forEach(route => {

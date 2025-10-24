@@ -16,6 +16,7 @@ import { localStg } from '@/utils/storage'
  */
 export function createRouteGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
+    console.log('Navigating to:', to.path, to.name) // 添加调试信息
     const location = await initRoute(to)
     if (location) {
       next(location)

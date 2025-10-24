@@ -1,21 +1,25 @@
+// src/modules/system/router.ts
 import type { AppRouteRecordRaw } from '@/router/types'
 import { LAYOUT_DEFAULT } from '@/router/routes'
+
 const systemsRouter: AppRouteRecordRaw[] = [
   {
     path: '/clients',
-    name: 'Clients',
+    name: 'ClientsLayout', // 修改名称避免冲突
     component: LAYOUT_DEFAULT,
     redirect: '/clients/index',
     meta: {
-      title: 'Dashboard',
+      title: 'Clients Management',
+      icon: 'ep:notebook', // 添加图标
+      roles: ['superadmin'],
     },
     children: [
       {
         path: 'index',
-        name: 'HomePaged',
-        component: () => import('@/modules/dashboard/views/index.vue'),
+        name: 'ClientsIndex', // 修改名称避免冲突
+        component: () => import('@/modules/system/index.vue'), // 确保组件路径正确
         meta: {
-          title: 'Home',
+          title: 'Clients List',
         },
       },
     ],
