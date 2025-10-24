@@ -16,7 +16,6 @@ import { localStg } from '@/utils/storage'
  */
 export function createRouteGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
-    console.log('Navigating to:', to.path, to.name) // 添加调试信息
     const location = await initRoute(to)
     if (location) {
       next(location)
@@ -24,7 +23,6 @@ export function createRouteGuard(router: Router) {
     }
 
     const authStore = useAuthStore()
-
     const rootRoute: string = 'root'
     const loginRoute: string = 'login'
     const noAuthorizationRoute = '403'
@@ -96,8 +94,16 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
   }
 
   if (!routeStore.isInitAuthRoute) {
-    // initialize the auth route
     await routeStore.initAuthRoute()
+    if (!isNotFoundRoute && to.path !== '/') {
+      const location: RouteLocationRaw = {
+        path: to.fullPath,
+        replace: true,
+        query: to.query,
+        hash: to.hash,
+      }
+      return location
+    }
 
     // the route is captured by the "not-found" route because the auth route is not initialized
     // after the auth route is initialized, redirect to the original route

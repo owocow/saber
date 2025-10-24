@@ -40,16 +40,6 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     routes.forEach(route => {
       authRoutesMap.set(route.name, route)
     })
-
-    staticAuthRoutes.forEach(route => {
-      const parent = authRoutesMap.get(route.name)
-      if (parent && route.children) {
-        parent.children?.push(...route.children)
-        return
-      }
-      authRoutesMap.set(route.name, route)
-    })
-
     authRoutes.value = Array.from(authRoutesMap.values())
   }
 
@@ -124,12 +114,13 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
 
   /** Init auth route */
   async function initAuthRoute() {
+    console.log('Starting initAuthRoute...')
     // check if user info is initialized
     if (!authStore.userInfo.user?.userId) {
       await authStore.initUserInfo()
     }
     initStaticAuthRoute()
-
+    console.log('Auth routes to be added:', authRoutes)
     // tabStore.initHomeTab()
   }
 

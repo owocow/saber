@@ -5,13 +5,12 @@ import { LAYOUT_DEFAULT } from '@/router/routes'
 const systemsRouter: AppRouteRecordRaw[] = [
   {
     path: '/clients',
-    name: 'ClientsLayout', // 修改名称避免冲突
+    name: 'Clients', // 修改名称避免冲突
     component: LAYOUT_DEFAULT,
     redirect: '/clients/index',
     meta: {
       title: 'Clients Management',
       icon: 'ep:notebook', // 添加图标
-      roles: ['superadmin'],
     },
     children: [
       {

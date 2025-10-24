@@ -16,7 +16,7 @@ function logoutSys() {
     class="h-full w-full flex flex-col bg-gray-50 border-r border-gray-150 dark:bg-dark-700 dark:border-dark-600"
   >
     <div class="flex justify-between items-center w-full h-[51px] pl-7 pr-2 flex-shrink-0 logo">
-      <router-link to="/">
+      <router-link to="/home">
         <img v-if="isDark" src="@/assets/imgs/logo-white.svg" class="h-6" />
         <img v-else src="@/assets/imgs/logo-multi.svg" class="h-6" />
       </router-link>
