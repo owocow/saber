@@ -2,6 +2,7 @@
 import { useAuthStore } from '@/store/modules/auth'
 import { fetchCaptchaCode } from '@/service/api'
 import { useLoading } from '@/packages/hooks'
+import { Icon } from '@iconify/vue'
 const codeUrl = ref<string>()
 const disabled = computed(() => !loginForm.username || !loginForm.password || !loginForm.code)
 const { loading: codeLoading, startLoading: startCodeLoading, endLoading: endCodeLoading } = useLoading()
@@ -43,7 +44,7 @@ handleFetchCaptchaCode()
       clearable
     >
       <template #prefix>
-        <el-icon :size="20"><i-ep-user /></el-icon>
+        <el-icon :size="20"><Icon icon="solar:user-linear" /></el-icon>
       </template>
     </el-input>
     <div class="mb-3">
@@ -56,16 +57,16 @@ handleFetchCaptchaCode()
         show-password
       >
         <template #prefix>
-          <el-icon :size="20"><i-solar-password-linear /></el-icon>
+          <el-icon :size="20"><Icon icon="solar:lock-password-linear" /></el-icon>
         </template>
       </el-input>
     </div>
     <div class="mb-8">
       <el-row :gutter="8">
         <el-col :span="14">
-          <el-input class="h-[40px] roundedInput" clearable v-model="loginForm.code" placeholder="试试你的算术">
+          <el-input class="h-[40px] roundedInput" clearable v-model="loginForm.code" placeholder="验证码">
             <template #prefix>
-              <el-icon :size="20"><i-hugeicons-calculate /></el-icon>
+              <el-icon :size="20"><Icon icon="solar:shield-keyhole-minimalistic-linear" /></el-icon>
             </template>
           </el-input>
         </el-col>
@@ -82,7 +83,7 @@ handleFetchCaptchaCode()
             />
             <div class="flex text-primary-400">
               <el-icon :size="24">
-                <i-svg-spinners-bars-scale />
+                <Icon icon="i-svg-spinners-bars-scale" />
               </el-icon>
             </div>
           </div>

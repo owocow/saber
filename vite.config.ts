@@ -2,12 +2,9 @@ import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import AutoImport from 'unplugin-auto-import/vite'
-// 自动导入组件插件
 import Components from 'unplugin-vue-components/vite'
-// Iconify 解析器
-import IconsResolver from 'unplugin-icons/resolver'
-// Iconify 插件
-import Icons from 'unplugin-icons/vite'
+// import Icons from 'unplugin-icons/vite'
+// import IconsResolver from 'unplugin-icons/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig, loadEnv } from 'vite'
 import { createViteProxy, getBuildTime } from './build'
@@ -17,7 +14,7 @@ export default defineConfig(configEnv => {
   const buildTime = getBuildTime()
   const enableProxy = configEnv.command === 'serve' && !configEnv.isPreview
   return {
-    base: viteEnv.VITE_BASE_URL,
+    base: viteEnv.VITE_BASE_URL || '/',
     define: {
       BUILD_TIME: JSON.stringify(buildTime),
     },
@@ -38,11 +35,18 @@ export default defineConfig(configEnv => {
       }),
       Components({
         dts: 'components.d.ts',
-        resolvers: [ElementPlusResolver({ importStyle: 'sass' }), IconsResolver({ prefix: 'i' })],
+        resolvers: [
+          ElementPlusResolver({ importStyle: 'sass' }),
+          // IconsResolver({
+          //   prefix: 'i',
+          //   enabledCollections: ['ep', 'ri', 'fluent', 'teenyicons'],
+          // }),
+        ],
       }),
-      Icons({
-        autoInstall: true, // 自动安装缺失的图标包
-      }),
+      // Icons({
+      //   compiler: 'vue3',
+      //   autoInstall: true,
+      // }),
       tailwindcss(),
     ],
     resolve: {

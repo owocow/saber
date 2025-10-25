@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ElMessageBox } from 'element-plus'
 import PasswordLogin from './pwd-login/index.vue'
 import Wechat from './wechat/index.vue'
 import DingTalk from './dingtalk/index.vue'
@@ -15,6 +16,15 @@ const currentComponent = computed(() => moduleMap[currentKey.value])
 const changeLoginType = (key: LoginType) => {
   currentKey.value = key
 }
+
+ElMessageBox.confirm('登录状态已过期，请重新登录', '系统提示', {
+  confirmButtonText: '重新登录',
+  cancelButtonText: '取消',
+  showClose: false,
+  closeOnClickModal: false,
+  closeOnPressEscape: false,
+  type: 'warning',
+})
 </script>
 <template>
   <div class="fixed left-0 bottom-0 right-0 top-0 -z-10">

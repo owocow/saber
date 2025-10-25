@@ -4,7 +4,7 @@ export const elementSettings = Object.freeze({
     type: 'primary',
   },
   dialog: {
-    draggable: true,
+    draggable: false,
     transition: 'none',
   },
   watermark: {

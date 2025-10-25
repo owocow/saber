@@ -1,9 +1,8 @@
 // constant pages's name
-import { type AppRouteRecordRaw } from '../types'
 export const PARENT_LAYOUT_NAME = 'ParentLayout'
 export const PAGE_NOT_FOUND_NAME = 'PageNotFound'
 export const PAGE_NO_PERMISSION_NAME = 'PageNoPermission'
-
+type AppRouteRecordRaw = SaberRouteType.RouteRecordRaw
 // basic page components
 export const PAGE_LOGIN = () => import('@/modules/base/auth/index.vue')
 
@@ -86,18 +85,23 @@ export const staticRoutes: AppRouteRecordRaw[] = [
     },
   },
   {
-    name: 'iframe-page',
-    path: '/iframe-page/:url',
+    path: '/',
+    name: 'IframePageLayout',
     component: LAYOUT_DEFAULT,
-    props: true,
     meta: {
-      title: 'iframe-page',
-      i18nKey: 'route.iframe-page',
-      constant: true,
-      hideInMenu: true,
-      keepAlive: true,
-      icon: 'i-gg-website',
+      title: 'Dashboard',
     },
+    children: [
+      {
+        path: '/iframe-page/:url',
+        name: 'iframe-page',
+        component: () => import('@/modules/base/iframe/index.vue'),
+        props: true,
+        meta: {
+          title: 'Home',
+        },
+      },
+    ],
   },
   {
     name: 'social-callback',

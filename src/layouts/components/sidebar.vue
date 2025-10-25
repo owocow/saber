@@ -1,15 +1,55 @@
 <script lang="ts" setup>
 import { useDark, useToggle } from '@vueuse/core'
 import { useAuthStore } from '@/store/modules/auth'
+import { useRouteStore } from '@/store/modules/route'
+import { useRouterPush } from '@/utils/router'
+import { useTabStore } from '@/store/modules/tabbar'
+import { Icon } from '@iconify/vue'
+import Menus from './menu/index.vue'
+
+defineOptions({ name: 'Sidebar' })
+
+/** menus */
+const menus: App.Global.Menu[] = useRouteStore().menus
 const { logout, userInfo } = useAuthStore()
+const tabStore = useTabStore()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const visible = defineModel({ type: Boolean })
 const emits = defineEmits(['close-sidebar'])
 /** 退出登录 */
-function logoutSys() {
-  logout()
+const logoutSys = () => logout()
+/** 处理菜单选择 */
+const handleSelect = async (key: string) => {
+  const { routerPushByKey } = useRouterPush(false)
+  await routerPushByKey(key)
 }
+/**
+ * 递归查找菜单项
+ * @param menus 菜单列表
+ * @param tabId 要查找的 tab ID
+ * @returns 找到的菜单项或 null
+ */
+function findMenuByTabId(menus: App.Global.Menu[], tabId: string): App.Global.Menu | null {
+  for (const menu of menus) {
+    // 检查当前菜单项的 routePath 是否匹配
+    if (menu.routePath === tabId) {
+      return menu
+    }
+
+    // 如果有子菜单，递归查找
+    if (menu.children && menu.children.length > 0) {
+      const found = findMenuByTabId(menu.children, tabId)
+      if (found) {
+        return found
+      }
+    }
+  }
+
+  return null
+}
+
+const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId)?.key)
 </script>
 <template>
   <section
@@ -26,40 +66,13 @@ function logoutSys() {
         @click="emits('close-sidebar')"
       >
         <el-icon :size="18">
-          <i-ri-menu-unfold-4-line />
+          <Icon icon="solar:round-double-alt-arrow-left-line-duotone" />
         </el-icon>
       </span>
     </div>
     <el-scrollbar class="flex-1">
-      <div class="py-2">
-        <ul>
-          <li class="px-3 py-[2px]">
-            <router-link
-              class="flex items-center py-2 px-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-dark-600 dark:hover:text-dark-50 transition rounded-lg"
-              to="/clients"
-            >
-              <span class="mr-2 size-6 flex items-center justify-center">
-                <el-icon :size="16">
-                  <i-ep-notebook />
-                </el-icon>
-              </span>
-              <span>我的订单</span>
-            </router-link>
-          </li>
-          <li class="px-3 py-[2px]">
-            <router-link
-              class="flex items-center py-2 px-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-dark-600 dark:hover:text-dark-50 transition rounded-lg"
-              to="/"
-            >
-              <span class="mr-2 size-6 flex items-center justify-center">
-                <el-icon :size="16">
-                  <i-ep-basketball />
-                </el-icon>
-              </span>
-              <span>篮球英雄</span>
-            </router-link>
-          </li>
-        </ul>
+      <div class="p-2">
+        <Menus :menus="menus" @select="handleSelect" :defaultActive="activeMenuKey" />
       </div>
     </el-scrollbar>
     <div class="flex items-center w-full px-3 pb-3 flex-shrink-0">
@@ -73,7 +86,7 @@ function logoutSys() {
               <span class="ml-2">{{ userInfo.user?.nickName }}</span>
             </div>
             <el-icon :size="15">
-              <i-teenyicons-caret-vertical-outline />
+              <Icon icon="solar:transfer-vertical-line-duotone" />
             </el-icon>
           </div>
         </template>
@@ -93,16 +106,16 @@ function logoutSys() {
               class="p-3 cursor-pointer flex items-center justify-center transition hover:bg-gray-150 dark:hover:bg-dark-600 rounded-lg -mr-1"
             >
               <el-icon :size="16" v-if="!isDark">
-                <i-ep-sunny />
+                <Icon icon="line-md:moon-alt-to-sunny-outline-loop-transition" />
               </el-icon>
               <el-icon :size="16" v-else>
-                <i-ep-moon />
+                <Icon icon="line-md:moon-rising-filled-alt-loop" />
               </el-icon>
             </dd>
           </dl>
           <div class="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-dark-600 cursor-pointer rounded-md">
             <el-icon>
-              <i-ep-setting />
+              <Icon icon="ep:setting" />
             </el-icon>
             <span class="ml-3">系统设置</span>
           </div>
@@ -111,7 +124,7 @@ function logoutSys() {
             @click="logoutSys"
           >
             <el-icon>
-              <i-ep-switch-button />
+              <Icon icon="solar:logout-2-line-duotone" />
             </el-icon>
             <span class="ml-3">退出登录</span>
           </div>
@@ -125,7 +138,7 @@ function logoutSys() {
           <span class="relative inline-flex size-2 rounded-full bg-danger-500"></span>
         </span>
         <el-icon :size="20">
-          <i-fluent-alert-16-regular />
+          <Icon icon="solar:meditation-round-line-duotone" />
         </el-icon>
       </div>
     </div>

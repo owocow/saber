@@ -28,7 +28,7 @@ export function useRouterPush(inSetup = true) {
 
     const query: Record<string, string> = {}
 
-    meta?.query?.forEach(item => {
+    meta?.query?.forEach((item: Recordable) => {
       query[item.key] = item.value
     })
 

@@ -1,9 +1,7 @@
-import { type AppRouteRecordRaw } from '../types'
-const customRoutes: AppRouteRecordRaw[] = []
 // async routes
 const modules: any = import.meta.glob('@/modules/**/router.ts', { eager: true })
 
-const staticAuthRoutes: AppRouteRecordRaw[] = []
+const staticAuthRoutes: SaberRouteType.AppRouteRecordRaw[] = []
 
 for (const path in modules) {
   const mod = modules[path].default

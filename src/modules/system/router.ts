@@ -1,24 +1,40 @@
-// src/modules/system/router.ts
-import type { AppRouteRecordRaw } from '@/router/types'
 import { LAYOUT_DEFAULT } from '@/router/routes'
-
-const systemsRouter: AppRouteRecordRaw[] = [
+const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
   {
     path: '/clients',
-    name: 'Clients', // 修改名称避免冲突
+    name: 'Clients',
     component: LAYOUT_DEFAULT,
     redirect: '/clients/index',
     meta: {
-      title: 'Clients Management',
-      icon: 'ep:notebook', // 添加图标
+      title: '系统设置',
+      icon: 'solar:settings-line-duotone', // 添加图标
+      iconSize: 18,
+      keepAlive: true,
     },
     children: [
       {
-        path: 'index',
-        name: 'ClientsIndex', // 修改名称避免冲突
-        component: () => import('@/modules/system/index.vue'), // 确保组件路径正确
+        path: '/clients/index',
+        name: 'ClientsIndex',
+        component: () => import('./index.vue'),
         meta: {
-          title: 'Clients List',
+          title: '系统设置',
+        },
+      },
+      {
+        path: '/clients/detail',
+        name: 'ClientsDetailIndex',
+        component: () => import('./detail/index.vue'),
+        meta: {
+          title: '系统设置',
+          hideInMenu: true,
+        },
+      },
+      {
+        path: '/clients/testing',
+        name: 'ClientsTestingIndex',
+        component: () => import('./roles/index.vue'),
+        meta: {
+          title: '角色管理',
         },
       },
     ],

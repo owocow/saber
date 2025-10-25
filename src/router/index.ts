@@ -28,5 +28,3 @@ export async function setupRouter(app: App) {
   setupRouterGuards(router)
   await router.isReady()
 }
-
-export default router

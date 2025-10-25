@@ -2,6 +2,7 @@
 import Mousetrap from 'mousetrap'
 import { useDark } from '@vueuse/core'
 import SideBar from './components/sidebar.vue'
+import Tabbar from './components/tabbar.vue'
 const isSidebarCollapsed = ref(false)
 const isDark = useDark()
 Mousetrap.bind(['command+]', 'ctrl+]'], () => {
@@ -37,55 +38,17 @@ watch(
             @click="isSidebarCollapsed = false"
           >
             <el-icon :size="18">
-              <i-ri-menu-fold-4-line />
+              <Icon icon="solar:round-double-alt-arrow-right-line-duotone" />
             </el-icon>
           </div>
-          <!-- tabs -->
-          <div class="flex-1 flex justify-between items-center overflow-hidden pageTabs">
-            <span class="tabsHandler">
-              <el-icon>
-                <i-ep-d-arrow-left />
-              </el-icon>
-            </span>
-
-            <el-scrollbar class="flex-1 tabsWrapBox mx-2">
-              <div class="flex items-center h-[var(--page-header-height)]">
-                <div
-                  class="flex items-center pl-2 pr-1.5 py-1.5 mr-0.5 hover:dark:bg-dark-600/68 hover:bg-gray-100 cursor-pointer transform rounded-lg h-[32px]"
-                  v-for="item in 2"
-                >
-                  <span class="mr-1.5 text-nowrap">Tab页面标题</span>
-                  <span
-                    class="cursor-pointer flex items-center text-gray-400 hover:text-gray-800 transition hover:bg-gray-150 dark:hover:text-dark-200 dark:hover:bg-dark-500 p-1 rounded-sm dark:text-dark-400"
-                  >
-                    <el-icon>
-                      <i-ep-close />
-                    </el-icon>
-                  </span>
-                </div>
-              </div>
-            </el-scrollbar>
-            <span class="tabsHandler">
-              <el-icon>
-                <i-ep-d-arrow-right />
-              </el-icon>
-            </span>
-          </div>
-          <!-- tabs end -->
+          <Tabbar />
         </header>
-        <el-scrollbar>
+        <el-scrollbar class="h-full">
           <div class="pt-18 px-4 relative">
-            <router-view />
+            <router-view></router-view>
           </div>
         </el-scrollbar>
       </main>
     </div>
   </el-watermark>
 </template>
-
-<style scoped>
-@reference '@/assets/styles/tailwind.css';
-.tabsHandler {
-  @apply flex items-center justify-center w-7 h-[32px] rounded-lg hover:bg-gray-100 hover:dark:bg-dark-500/50 cursor-pointer;
-}
-</style>

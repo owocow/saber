@@ -2,12 +2,11 @@ import { computed, nextTick, ref, shallowRef } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { defineStore } from 'pinia'
 import { useBoolean } from '@/packages/hooks'
-import { type AppRouteRecordRaw } from '@/router/types'
 import { router } from '@/router'
 import { SetupStoreId } from '@/enum'
 import { staticAuthRoutes } from '@/router/routes'
 import { useAuthStore } from '../auth'
-// import { useTabStore } from '../tab'
+import { useTabStore } from '../tabbar'
 import {
   filterAuthRoutesByRoles,
   getBreadcrumbsByRoute,
@@ -22,9 +21,11 @@ import {
 
 const defaultIcon = import.meta.env.VITE_MENU_ICON
 
+type AppRouteRecordRaw = SaberRouteType.AppRouteRecordRaw
+
 export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   const authStore = useAuthStore()
-  // const tabStore = useTabStore()
+  const tabStore = useTabStore()
   const { bool: isInitAuthRoute, setBool: setIsInitAuthRoute } = useBoolean()
 
   /** Home route key */
@@ -34,7 +35,6 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   const authRoutes = shallowRef<AppRouteRecordRaw[]>([])
 
   function addAuthRoutes(routes: AppRouteRecordRaw[]) {
-    console.log('Adding auth routes:', routes) // 添加调试信息
     const authRoutesMap = new Map<string, AppRouteRecordRaw>([])
 
     routes.forEach(route => {
@@ -114,19 +114,21 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
 
   /** Init auth route */
   async function initAuthRoute() {
-    console.log('Starting initAuthRoute...')
-    // check if user info is initialized
     if (!authStore.userInfo.user?.userId) {
       await authStore.initUserInfo()
     }
+    // debugger
     initStaticAuthRoute()
-    console.log('Auth routes to be added:', authRoutes)
-    // tabStore.initHomeTab()
+
+    tabStore.initHomeTab()
   }
 
   /** Init static auth route */
   function initStaticAuthRoute() {
     if (authStore.isStaticSuper) {
+      const all = staticAuthRoutes
+      console.log('Static super user detected, adding all auth routes:', all)
+      // debugger
       addAuthRoutes(staticAuthRoutes)
     } else {
       const filteredAuthRoutes = filterAuthRoutesByRoles(staticAuthRoutes, authStore.userInfo.roles)
@@ -139,7 +141,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   /** handle constant and auth routes */
   function handleConstantAndAuthRoutes() {
     const sortRoutes = sortRoutesByOrder(authRoutes.value)
-    const vueRoutes = sortRoutes
+    const vueRoutes = sortRoutes as RouteRecordRaw[]
     resetVueRoutes()
     addRoutesToVueRouter(vueRoutes)
     getGlobalMenus(sortRoutes)

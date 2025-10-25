@@ -1,5 +1,5 @@
 import type { RouteLocationNormalizedLoaded, RouteRecordRaw, _RouteRecordBase } from 'vue-router'
-import type { AppRouteRecordRaw } from '@/router/types'
+type AppRouteRecordRaw = SaberRouteType.AppRouteRecordRaw
 
 /**
  * Filter auth routes by roles
@@ -71,6 +71,11 @@ export function sortRoutesByOrder(routes: AppRouteRecordRaw[]) {
   return routes
 }
 
+function isSignleRoute(route: SaberRouteType.AppRouteRecordRaw) {
+  const { children = [], name, redirect } = route
+  return children.length === 1 && name.includes('Layout') && redirect && redirect === children[0].path
+}
+
 /**
  * Get global menus by auth routes
  *
@@ -78,15 +83,18 @@ export function sortRoutesByOrder(routes: AppRouteRecordRaw[]) {
  */
 export function getGlobalMenusByAuthRoutes(routes: AppRouteRecordRaw[]) {
   const menus: App.Global.Menu[] = []
-
   routes.forEach(route => {
-    if (!route.meta?.hideInMenu) {
-      const menu = getGlobalMenuByBaseRoute(route)
-
-      if (route.children?.some((child: AppRouteRecordRaw) => !child.meta?.hideInMenu)) {
-        menu.children = getGlobalMenusByAuthRoutes(route.children)
+    const { meta, path, children, name, redirect } = route
+    if (!meta?.hideInMenu) {
+      if (isSignleRoute(route)) {
+        menus.push(getGlobalMenuByBaseRoute(children![0]))
+      } else {
+        const menu = getGlobalMenuByBaseRoute(route)
+        if (children?.some((child: AppRouteRecordRaw) => !meta?.hideInMenu)) {
+          menu.children = getGlobalMenusByAuthRoutes(children)
+        }
+        menus.push(menu)
       }
-      menus.push(menu)
     }
   })
 
@@ -136,7 +144,7 @@ function getGlobalMenuByBaseRoute(route: RouteLocationNormalizedLoaded | AppRout
     routeKey: name as string,
     routePath: path,
     icon: icon as any,
-    iconSize: iconSize,
+    iconSize: iconSize as number,
   }
 
   return menu

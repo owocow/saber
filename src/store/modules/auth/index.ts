@@ -4,7 +4,7 @@ import { useRouterPush } from '@/utils/router'
 import { localStg } from '@/utils/storage'
 import { SetupStoreId } from '@/enum'
 import { useRouteStore } from '../route'
-// import { useTabStore } from '../tab'
+import { useTabStore } from '../tabbar'
 // import useNoticeStore from '../notice'
 import { clearAuthStorage, getToken, getUserInfoStorage } from './shared'
 
@@ -12,7 +12,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute()
   const authStore = useAuthStore()
   const routeStore = useRouteStore()
-  // const tabStore = useTabStore()
+  const tabStore = useTabStore()
   // const noticeStore = useNoticeStore()
   const { toLogin, redirectFromLogin } = useRouterPush(false)
   const { loading: loginLoading, startLoading, endLoading } = useLoading()
@@ -40,7 +40,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       await toLogin()
     }
     // noticeStore.clearNotice()
-    // tabStore.cacheTabs()
+    tabStore.cacheTabs()
     routeStore.resetStore()
   }
 
@@ -71,7 +71,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     // Clear all tabs if current user is different from previous user
     if (!lastLoginUserId || lastLoginUserId !== userInfo.user?.userId) {
       localStg.remove('globalTabs')
-      // tabStore.clearTabs()
+      tabStore.clearTabs()
 
       localStg.remove('lastLoginUserId')
       return true
