@@ -74,6 +74,7 @@ export const useTabStore = defineStore(SetupStoreId.Tab, () => {
    * @param active Whether to activate the added tab
    */
   function addTab(route: App.Global.TabRoute, active = true) {
+    if (route.meta?.storeInTabbar === false) return
     const tab = getTabByRoute(route)
     const isHomeTab = tab.id === homeTab.value?.id
 

@@ -21,6 +21,7 @@ declare namespace SaberRouteType {
     multiTab?: boolean | null
     fixedIndexInTab?: number | null
     query?: { key: string; value: string }[] | null
+    storeInTabbar?: boolean | null
   }
 
   interface AppRouteRecordRaw extends RouteRecordRaw {

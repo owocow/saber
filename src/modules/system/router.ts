@@ -1,10 +1,10 @@
 import { LAYOUT_DEFAULT } from '@/router/routes'
 const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
   {
-    path: '/clients',
-    name: 'Clients',
+    path: '/system',
+    name: 'SystemLayout',
     component: LAYOUT_DEFAULT,
-    redirect: '/clients/index',
+    redirect: '/system/index',
     meta: {
       title: '系统设置',
       icon: 'solar:settings-line-duotone', // 添加图标
@@ -13,30 +13,38 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/clients/index',
-        name: 'ClientsIndex',
+        path: '/system/index',
+        name: 'SystemIndex',
         component: () => import('./index.vue'),
         meta: {
-          title: '系统设置',
+          title: '角色部门菜单',
         },
       },
       {
-        path: '/clients/detail',
-        name: 'ClientsDetailIndex',
-        component: () => import('./detail/index.vue'),
+        path: '/system/users',
+        name: 'SystemUsers',
+        component: () => import('./users/index.vue'),
         meta: {
-          title: '系统设置',
-          hideInMenu: true,
+          title: '用户管理',
         },
       },
-      {
-        path: '/clients/testing',
-        name: 'ClientsTestingIndex',
-        component: () => import('./roles/index.vue'),
-        meta: {
-          title: '角色管理',
-        },
-      },
+      // {
+      //   path: '/clients/detail',
+      //   name: 'ClientsDetailIndex',
+      //   component: () => import('./detail/index.vue'),
+      //   meta: {
+      //     title: '系统设置',
+      //     hideInMenu: true,
+      //   },
+      // },
+      // {
+      //   path: '/clients/testing',
+      //   name: 'ClientsTestingIndex',
+      //   component: () => import('./roles/index.vue'),
+      //   meta: {
+      //     title: '角色管理',
+      //   },
+      // },
     ],
   },
 ]

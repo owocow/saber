@@ -1,0 +1,12 @@
+:root {
+  /* Brand colors - Light mode */
+  --vp-c-brand-1: #bc9b6a;
+  --vp-c-brand-2: #c9ad82;
+  --vp-c-brand-3: #bc9b6a;
+}
+
+.dark {
+  /* Brand colors - Dark mode */
+  --vp-c-brand-1: #bc9b6a;
+  --vp-c-brand-2: #c9ad82;
+}

@@ -1,20 +1,25 @@
 <script lang="ts" setup>
 import Mousetrap from 'mousetrap'
+import { useRouteStore } from '@/store/modules/route'
+import { useTabStore } from '@/store/modules/tabbar'
 import { useDark } from '@vueuse/core'
 import SideBar from './components/sidebar.vue'
 import Tabbar from './components/tabbar.vue'
+
+const routeStore = useRouteStore()
+const tabStore = useTabStore()
 const isSidebarCollapsed = ref(false)
 const isDark = useDark()
 Mousetrap.bind(['command+]', 'ctrl+]'], () => {
   isSidebarCollapsed.value = !isSidebarCollapsed.value
 })
 const font = reactive({
-  color: 'rgba(0, 0, 0, .03)',
+  color: 'rgba(0, 0, 0, .04)',
 })
 watch(
   isDark,
   () => {
-    font.color = isDark.value ? 'rgba(255, 255, 255, .02)' : 'rgba(0, 0, 0, .03)'
+    font.color = isDark.value ? 'rgba(255, 255, 255, .03)' : 'rgba(0, 0, 0, .04)'
   },
   {
     immediate: true,
@@ -45,7 +50,11 @@ watch(
         </header>
         <el-scrollbar class="h-full">
           <div class="pt-18 px-4 relative">
-            <router-view></router-view>
+            <RouterView v-slot="{ Component, route }">
+              <KeepAlive :include="routeStore.cacheRoutes" :exclude="routeStore.excludeCacheRoutes">
+                <component :is="Component" :key="tabStore.getTabIdByRoute(route)" />
+              </KeepAlive>
+            </RouterView>
           </div>
         </el-scrollbar>
       </main>

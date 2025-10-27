@@ -83,7 +83,7 @@ handleFetchCaptchaCode()
             />
             <div class="flex text-primary-400">
               <el-icon :size="24">
-                <Icon icon="i-svg-spinners-bars-scale" />
+                <Icon icon="svg-spinners:bars-scale" />
               </el-icon>
             </div>
           </div>

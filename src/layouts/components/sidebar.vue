@@ -86,7 +86,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
               <span class="ml-2">{{ userInfo.user?.nickName }}</span>
             </div>
             <el-icon :size="15">
-              <Icon icon="solar:transfer-vertical-line-duotone" />
+              <Icon icon="ic:baseline-code" />
             </el-icon>
           </div>
         </template>

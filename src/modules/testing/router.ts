@@ -15,9 +15,9 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
         component: () => import('./index.vue'),
         meta: {
           title: '测试菜单',
-          icon: 'solar:settings-line-duotone', // 添加图标
-          iconSize: 18,
+          icon: 'solar:test-tube-line-duotone',
           keepAlive: true,
+          storeInTabbar: false,
         },
       },
     ],

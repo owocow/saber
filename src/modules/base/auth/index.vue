@@ -1,9 +1,17 @@
 <script lang="ts" setup>
-import { ElMessageBox } from 'element-plus'
 import PasswordLogin from './pwd-login/index.vue'
 import Wechat from './wechat/index.vue'
 import DingTalk from './dingtalk/index.vue'
 import Code from './code/index.vue'
+
+interface Props {
+  /** The login module */
+  module?: UnionKey.LoginModule
+  modules?: string[] // 添加 modules prop
+}
+
+const props = defineProps<Props>()
+
 type LoginType = 'password' | 'wechat' | 'dingTalk' | 'code'
 const currentKey = ref<LoginType>('password')
 const moduleMap = {
@@ -16,15 +24,6 @@ const currentComponent = computed(() => moduleMap[currentKey.value])
 const changeLoginType = (key: LoginType) => {
   currentKey.value = key
 }
-
-ElMessageBox.confirm('登录状态已过期，请重新登录', '系统提示', {
-  confirmButtonText: '重新登录',
-  cancelButtonText: '取消',
-  showClose: false,
-  closeOnClickModal: false,
-  closeOnPressEscape: false,
-  type: 'warning',
-})
 </script>
 <template>
   <div class="fixed left-0 bottom-0 right-0 top-0 -z-10">
@@ -61,22 +60,31 @@ ElMessageBox.confirm('登录状态已过期，请重新登录', '系统提示', 
               <div class="flex justify-center gap-6 pb-10">
                 <div class="loginIcon" @click="changeLoginType('password')">
                   <el-icon :size="32">
-                    <i-solar-password-linear />
+                    <Icon icon="ic:baseline-password" />
                   </el-icon>
                 </div>
-                <div class="loginIcon" @click="changeLoginType('wechat')">
+                <div
+                  class="flex rounded-xl hover:text-primary-500 cursor-pointer transition-all duration-200"
+                  @click="changeLoginType('wechat')"
+                >
                   <el-icon :size="32">
-                    <i-ic-baseline-wechat />
+                    <Icon icon="ic:baseline-wechat" />
                   </el-icon>
                 </div>
-                <div class="loginIcon" @click="changeLoginType('dingTalk')">
+                <div
+                  class="flex rounded-xl hover:text-primary-500 cursor-pointer transition-all duration-200"
+                  @click="changeLoginType('dingTalk')"
+                >
                   <el-icon :size="32">
-                    <i-ant-design-dingtalk-circle-filled />
+                    <Icon icon="ant-design:dingtalk-circle-filled" />
                   </el-icon>
                 </div>
-                <div class="loginIcon" @click="changeLoginType('code')">
+                <div
+                  class="flex rounded-xl hover:text-primary-500 cursor-pointer transition-all duration-200"
+                  @click="changeLoginType('code')"
+                >
                   <el-icon :size="32">
-                    <i-ep-chat-dot-square />
+                    <Icon icon="" />
                   </el-icon>
                 </div>
               </div>
@@ -91,9 +99,3 @@ ElMessageBox.confirm('登录状态已过期，请重新登录', '系统提示', 
     </div>
   </div>
 </template>
-<style scoped>
-@reference '@/assets/styles/tailwind.css';
-.loginIcon {
-  @apply flex rounded-xl hover:text-primary-500 cursor-pointer transition-all duration-200;
-}
-</style>

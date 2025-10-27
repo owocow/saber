@@ -25,7 +25,7 @@ export const ROOT_ROUTE: AppRouteRecordRaw = {
 export const ROUTE_PAGE_NOT_FOUND: AppRouteRecordRaw = {
   name: PAGE_NOT_FOUND_NAME,
   path: '/:pathMatch(.*)*',
-  component: import('@/modules/base/404.vue'),
+  component: () => import('@/modules/base/404.vue'),
   meta: {
     title: '您访问的页面不存在',
     constant: true,
@@ -56,7 +56,7 @@ export const staticRoutes: AppRouteRecordRaw[] = [
   {
     name: PAGE_NO_PERMISSION_NAME,
     path: '/403',
-    component: import('@/modules/base/403.vue'),
+    component: () => import('@/modules/base/403.vue'),
     meta: {
       title: '您没有权限访问该页面',
       constant: true,
@@ -66,7 +66,7 @@ export const staticRoutes: AppRouteRecordRaw[] = [
   {
     name: 'server-error',
     path: '/500',
-    component: import('@/modules/base/500.vue'),
+    component: () => import('@/modules/base/500.vue'),
     meta: {
       title: '服务器出现错误',
       constant: true,
@@ -76,8 +76,8 @@ export const staticRoutes: AppRouteRecordRaw[] = [
   {
     name: 'login',
     path: '/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?',
-    component: import('@/modules/base/auth/index.vue'),
-    props: true,
+    component: () => import('@/modules/base/auth/index.vue'),
+    props: { modules: ['pwd-login', 'code-login', 'register', 'reset-pwd', 'bind-wechat'] },
     meta: {
       title: '登录',
       constant: true,
