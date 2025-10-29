@@ -61,7 +61,7 @@
     "consola": "^3.4.2",
     "crypto-js": "^4.2.0",
     "cssnano": "^7.0.7",
-    "element-plus": "^2.10.7",
+    "element-plus": "^2.11.5",
     "eslint": "^9.28.0",
     "eslint-plugin-playwright": "^2.2.0",
     "eslint-plugin-security": "^3.0.1",

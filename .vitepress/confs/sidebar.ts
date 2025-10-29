@@ -15,4 +15,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [{ text: 'saber-popover', link: '/components/saber-popover' }],
     },
   ],
+  '/business/backend-design': [
+    {
+      text: '业务文档',
+      items: [{ text: '后端基础设计', link: '/business/backend-design' }],
+    },
+  ],
 }

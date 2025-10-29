@@ -1,4 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineOptions({ name: 'AppPage' })
+interface Props {
+  title?: string
+  siderWidth?: number
+}
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+})
+</script>
 <template>
   <div class="app-page">
     <slot name="appPageTitle">

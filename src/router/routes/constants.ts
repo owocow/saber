@@ -8,7 +8,6 @@ export const PAGE_LOGIN = () => import('@/modules/base/auth/index.vue')
 
 // layouts
 export const LAYOUT_DEFAULT = () => import('@/layouts/index.vue')
-export const LAYOUT_BLANK = () => import('@/layouts/blank.vue')
 
 // get page layout
 export const getParentLayout = (name?: string) => new Promise(resolve => resolve({ name: name || PARENT_LAYOUT_NAME }))
@@ -56,6 +55,16 @@ export const staticRoutes: AppRouteRecordRaw[] = [
   {
     name: PAGE_NO_PERMISSION_NAME,
     path: '/403',
+    component: () => import('@/modules/base/403.vue'),
+    meta: {
+      title: '您没有权限访问该页面',
+      constant: true,
+      hideInMenu: true,
+    },
+  },
+  {
+    name: PAGE_NO_PERMISSION_NAME,
+    path: '/429',
     component: () => import('@/modules/base/403.vue'),
     meta: {
       title: '您没有权限访问该页面',

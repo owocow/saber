@@ -57,3 +57,61 @@ html.dark {
     height: 4px;
   }
 }
+
+// menu
+.el-menu {
+  --el-menu-item-height: 40px;
+  --el-menu-sub-item-height: 36px;
+  &.el-menu--vertical,
+  &.el-menu--inline {
+    border-right: unset;
+    background-color: transparent;
+    > .el-menu-item {
+      padding-left: 8px !important;
+    }
+    .el-sub-menu__title {
+      padding-left: 12px;
+    }
+    .el-sub-menu {
+      .el-icon:first-child {
+        text-align: left;
+        width: 24px;
+        display: inline-block;
+      }
+      .el-sub-menu__icon-arrow {
+        right: 11px;
+      }
+      .el-menu-item {
+        padding-left: 38px !important;
+      }
+    }
+  }
+  .el-menu-item [class^='el-icon'] {
+    text-align: left;
+    width: 24px;
+    display: inline-block;
+  }
+  &.el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) .el-sub-menu__title {
+    padding-left: 8px;
+  }
+}
+.el-sub-menu__title:hover,
+.el-menu-item:hover {
+  background-color: var(--color-gray-150) !important;
+  border-radius: 5px;
+}
+
+html.dark {
+  .el-sub-menu__title:hover,
+  .el-menu-item:hover {
+    background-color: var(--color-dark-600) !important;
+  }
+}
+
+.el-tree {
+  .el-tree-node,
+  .el-tree-node__content {
+    margin-bottom: 2px;
+    border-radius: 4px;
+  }
+}

@@ -7,6 +7,7 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
     redirect: '/testing',
     meta: {
       title: '',
+      order: 999,
     },
     children: [
       {
@@ -14,9 +15,10 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
         name: 'Testing',
         component: () => import('./index.vue'),
         meta: {
-          title: '测试菜单',
-          icon: 'solar:test-tube-line-duotone',
+          title: 'DEMOs',
+          icon: 'solar:alarm-add-line-duotone',
           keepAlive: true,
+
           storeInTabbar: false,
         },
       },

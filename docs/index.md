@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: 'Saber FE Doc'
-  text: '小租企业系统前端项目<br>开发文档'
+  text: '小租风控云前端项目<br>开发文档'
   tagline: 提供完整的开发指南、组件文档和最佳实践
   image:
     src: /saber.png

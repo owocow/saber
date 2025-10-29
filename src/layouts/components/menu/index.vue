@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import RecursiveMenuItem from './recursive-menu-item.vue'
+
+defineOptions({ name: 'AppMenu' })
+
 interface Props {
   menus: App.Global.Menu[]
   defaultActive?: string
@@ -50,10 +53,10 @@ const findMenuItem = (menus: App.Global.Menu[], key: string): App.Global.Menu | 
       <!-- 有子菜单 -->
       <el-sub-menu v-if="hasChildren(item)" :index="item.key">
         <template #title>
-          <el-icon v-if="item.icon" :size="item.iconSize || 20">
+          <el-icon v-if="item.icon" :size="item.iconSize || 18">
             <Icon :icon="item.icon" />
           </el-icon>
-          <span class="text-gray-500 dark:text-dark-300">{{ item.label }}</span>
+          <span>{{ item.label }}</span>
         </template>
 
         <!-- 递归渲染子菜单 -->
@@ -78,7 +81,7 @@ const findMenuItem = (menus: App.Global.Menu[], key: string): App.Global.Menu | 
 
       <!-- 无子菜单的第一层菜单项 -->
       <el-menu-item v-else :index="item.key">
-        <el-icon v-if="item.icon" :size="item.iconSize || 20">
+        <el-icon v-if="item.icon" :size="item.iconSize || 18">
           <Icon :icon="item.icon" />
         </el-icon>
         <template #title>{{ item.label }}</template>

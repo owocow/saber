@@ -8,7 +8,6 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
     meta: {
       title: '系统设置',
       icon: 'solar:settings-line-duotone', // 添加图标
-      iconSize: 18,
       keepAlive: true,
     },
     children: [
@@ -25,6 +24,7 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
         name: 'SystemUsers',
         component: () => import('./users/index.vue'),
         meta: {
+          // keepAlive: true,
           title: '用户管理',
         },
       },

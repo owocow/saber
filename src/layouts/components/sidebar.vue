@@ -53,7 +53,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
 </script>
 <template>
   <section
-    class="h-full w-full flex flex-col bg-gray-50 border-r border-gray-150 dark:bg-dark-700 dark:border-dark-600"
+    class="h-full w-full flex flex-col bg-gray-100/50 border-r border-gray-200 dark:bg-dark-700 dark:border-dark-600"
   >
     <div class="flex justify-between items-center w-full h-[51px] pl-7 pr-2 flex-shrink-0 logo">
       <router-link to="/home">
@@ -79,7 +79,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
       <SaberPopover class="w-full" placement="top" :offset-y="6">
         <template #reference>
           <div
-            class="w-full rounded-lg flex justify-between items-center p-2 cursor-pointer hover:bg-gray-100 dark:bg-dark-700 dark:hover:bg-dark-600 pt-2"
+            class="w-full rounded-lg flex justify-between items-center p-2 cursor-pointer hover:bg-gray-200 dark:bg-dark-700 dark:hover:bg-dark-600 pt-2"
           >
             <div class="flex items-center">
               <el-avatar :size="26" src="https://i.pinimg.com/236x/db/17/0e/db170e567b02375892f5a2cff7648a2e.jpg" />
@@ -131,7 +131,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
         </div>
       </SaberPopover>
       <div
-        class="w-[36px] flex items-center justify-center p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-600 rounded-lg ml-1 relative"
+        class="w-[36px] flex items-center justify-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-600 rounded-lg ml-1 relative"
       >
         <span class="absolute flex size-2 top-0.5 right-0.5">
           <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-danger-400 opacity-75"></span>

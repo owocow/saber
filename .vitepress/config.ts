@@ -8,7 +8,7 @@ export default defineConfig({
   head: [['link', { rel: 'icon', type: 'image/png', href: '/icon.png' }]],
   themeConfig: {
     logo: '/logo.svg',
-    search,
+    ...search,
     nav,
     ...cnZh,
     sidebar,
