@@ -38,3 +38,4 @@ package-lock.json
 .vscode/starter.code-workspace
 test-results/
 generatedRoutes.json
+.vitepress/cache
