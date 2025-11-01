@@ -14,7 +14,7 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
       {
         path: '/system/index',
         name: 'SystemIndex',
-        component: () => import('./index.vue'),
+        component: () => import('./roles/index.vue'),
         meta: {
           title: '角色部门菜单',
         },

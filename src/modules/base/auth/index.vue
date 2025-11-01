@@ -84,7 +84,7 @@ const changeLoginType = (key: LoginType) => {
                   @click="changeLoginType('code')"
                 >
                   <el-icon :size="32">
-                    <Icon icon="" />
+                    <Icon icon="ic:outline-textsms" />
                   </el-icon>
                 </div>
               </div>

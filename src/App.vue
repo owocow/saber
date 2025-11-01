@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { elementSettings as ES } from './assets/element.settings'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+const link = {
+  underline: 'always',
+  type: 'primary',
+}
+const dialog = {
+  draggable: false,
+  transition: 'none',
+}
 </script>
 <template>
-  <el-config-provider :link="ES.link" :dialog="ES.dialog">
+  <el-config-provider :link="link" :dialog="dialog" :locale="zhCn">
     <router-view />
   </el-config-provider>
 </template>

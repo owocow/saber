@@ -105,31 +105,14 @@ export const request = createFlatRequest<App.Service.Response, RequestInstanceSt
           closeOnClickModal: false,
           closeOnPressEscape: false,
           type: 'warning',
-          beforeClose: logoutAndCleanup,
         })
           .then(() => {
+            debugger
             logoutAndCleanup()
           })
           .catch(() => {
             logoutAndCleanup()
           })
-        // window.$dialog?.warning({
-        //   title: '系统提示',
-        //   content: '登录状态已过期，请重新登录',
-        //   positiveText: '重新登录',
-        //   maskClosable: false,
-        //   closeOnEsc: false,
-        //   onAfterEnter() {
-        //     // prevent the user from refreshing the page
-        //     window.addEventListener('beforeunload', handleLogout)
-        //   },
-        //   onPositiveClick() {
-        //     logoutAndCleanup()
-        //   },
-        //   onClose() {
-        //     logoutAndCleanup()
-        //   },
-        // })
         request.cancelAllRequest()
         return null
       }
