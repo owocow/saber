@@ -3,7 +3,8 @@ import { fetchBatchDeleteUser, fetchGetDeptTree, fetchGetUserList, fetchUpdateUs
 import { useLoading } from '@/packages/hooks'
 import { jsonClone } from '@/packages/utils'
 import { useTable } from '@/composables/use-table'
-import { reset } from 'mousetrap'
+import { columns } from './model.tsx'
+
 defineOptions({ name: 'SystemUsers' })
 
 const deptTree = ref<any[]>([])
@@ -19,8 +20,8 @@ const { params, data, getData, loading, pagination, resetSearchParams } = useTab
     params: {},
   },
   paginConfig: {
-    pageSize: 3,
-    pageSizes: [3, 5, 10, 20, 50, 100],
+    pageSize: 1,
+    pageSizes: [1, 2, 10, 100],
   },
 })
 
@@ -40,10 +41,12 @@ function handleDepChoosed(node: any) {
   params.deptId = id
   getData()
 }
+
+const selectedUsers = ref<any[]>([])
 </script>
 <template>
-  <app-page title="用户管理" :sider-width="240">
-    <template #sidebar>
+  <app-page title="用户管理" :sider-width="180">
+    <!-- <template #sidebar>
       <el-tree
         :indent="8"
         :loading="treeLoading"
@@ -53,9 +56,9 @@ function handleDepChoosed(node: any) {
         :data="deptTree"
         @node-click="handleDepChoosed"
       />
-    </template>
+    </template> -->
     <template #extra>
-      <el-button>批量删除</el-button>
+      <el-button @click="resetSearchParams" round>Back</el-button>
     </template>
     <template #suffix>
       <el-button>新增用户</el-button>
@@ -66,21 +69,18 @@ function handleDepChoosed(node: any) {
     <template #toolbar>
       <el-button>导出</el-button>
     </template>
-    <el-table :data="data" style="width: 100%" :loading="loading">
-      <el-table-column prop="deptName" label="部门名称" />
-      <el-table-column prop="nickName" label="昵称" />
-      <el-table-column prop="email" label="邮箱" />
-      <el-table-column prop="status" label="状态" />
-    </el-table>
-    <el-pagination
-      v-model:current-page="pagination.currentPage"
-      v-model:page-size="pagination.pageSize"
-      background
-      :page-sizes="pagination.pageSizes"
-      layout="total, prev, pager, next, sizes"
-      :total="pagination.total"
-      @size-change="pagination.sizeChange"
-      @current-change="pagination.currentPageChange"
-    />
+    <app-table
+      :columns="columns"
+      v-model:selected="selectedUsers"
+      :show-selection="true"
+      :loading="loading"
+      :data="data"
+      :pagination="pagination"
+    >
+      <!-- <template #header>
+        <div class="font-bold text-lg">用户列表</div>
+      </template> -->
+      <template #tips>这里是一条没用的TIP</template>
+    </app-table>
   </app-page>
 </template>

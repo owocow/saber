@@ -11,6 +11,7 @@ declare module 'vue' {
     AppMain: typeof import('./src/components/common/app-main.vue')['default']
     AppPage: typeof import('./src/components/common/app-page.vue')['default']
     AppPageWithSide: typeof import('./src/components/common/app-page-with-side.vue')['default']
+    AppTable: typeof import('./src/components/common/app-table.vue')['default']
     Com403: typeof import('./src/components/common/errors/com-403.vue')['default']
     Com404: typeof import('./src/components/common/errors/com-404.vue')['default']
     Com404Bg: typeof import('./src/components/common/errors/com-404-bg.vue')['default']
@@ -57,7 +58,10 @@ declare module 'vue' {
     IRiMenuFold4Line: typeof import('~icons/ri/menu-fold4-line')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SaberPopover: typeof import('./src/components/saber-popover.vue')['default']
+    SaberPopover: typeof import('./src/components/common/saber-popover.vue')['default']
     SaberTable: typeof import('./src/components/saber-table.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

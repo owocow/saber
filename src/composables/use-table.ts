@@ -64,13 +64,26 @@ export function useTable<A extends ApiFn, T, C>(config: TableConfig<A, T, C>) {
     },
   })
 
+  function addIndexToRows(rows: T[]) {
+    const current = pagination.currentPage || 1
+    const size = pagination.pageSize || 10
+    const pageSize = size <= 0 ? 10 : size
+    return rows.map((item, index) => {
+      return {
+        ...item,
+        _index: (current - 1) * pageSize + index + 1,
+      }
+    })
+  }
+
   //   获取数据
   async function getData() {
     startLoading()
     const formattedParams = formatSearchParams(params)
     const response = (await apiFn(formattedParams)) || {}
     const { rows = [], total = 0 } = response?.data || {}
-    const transformed = transformer ? transformer(rows) : rows
+    const _rows = addIndexToRows(rows)
+    const transformed = transformer ? transformer(_rows) : _rows
     pagination.total = total
     data.value = transformed
     setEmpty(transformed.length === 0)

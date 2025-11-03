@@ -26,37 +26,37 @@ const props = withDefaults(defineProps<Props>(), {
     </el-scrollbar>
     <el-scrollbar class="flex-1">
       <AppMain :title="title">
-        <template #extra>
-          <slot name="extra">标题后面</slot>
+        <template v-if="$slots.extra" #extra>
+          <slot name="extra" />
         </template>
-        <template #suffix>
-          <slot name="suffix">尾部</slot>
+        <template v-if="$slots.suffix" #suffix>
+          <slot name="suffix" />
         </template>
-        <template #search>
-          <slot name="search"></slot>
+        <template v-if="$slots.search" #search>
+          <slot name="search" />
         </template>
-        <template #toolbar>
-          <slot name="toolbar"></slot>
+        <template v-if="$slots.toolbar" #toolbar>
+          <slot name="toolbar" />
         </template>
-        <slot></slot>
+        <slot />
       </AppMain>
     </el-scrollbar>
   </div>
   <div class="pt-[var(--page-header-height)]" v-else>
     <AppMain :title="title">
-      <template #extra>
-        <slot name="extra">标题后面</slot>
+      <template v-if="$slots.extra" #extra>
+        <slot name="extra" />
       </template>
-      <template #suffix>
-        <slot name="suffix">尾部</slot>
+      <template v-if="$slots.suffix" #suffix>
+        <slot name="suffix" />
       </template>
-      <template #search>
-        <slot name="search"></slot>
+      <template v-if="$slots.search" #search>
+        <slot name="search" />
       </template>
-      <template #toolbar>
-        <slot name="toolbar"></slot>
+      <template v-if="$slots.toolbar" #toolbar>
+        <slot name="toolbar" />
       </template>
-      <slot></slot>
+      <slot />
     </AppMain>
   </div>
 </template>

@@ -18,17 +18,16 @@ declare interface SearchKeyType {
 }
 
 type FormatterType = (row: any) => string
-
 declare type ColumnsType = Partial<{
-  need: boolean
-  prop: string
+  key: string
   width: string | number
-  canFilter: boolean
+  // canFilter: boolean
   label: string
-  propType: 'image' | 'status' | 'format' | 'vhtml' | 'link' | 'component' | 'form-item' | 'comWithRowData'
   [key: string]: any
-  formatter: FormatterType
-  component: any
+  // propType: 'image' | 'status' | 'format' | 'vhtml' | 'link' | 'component' | 'form-item' | 'comWithRowData'
+  // [key: string]: any
+  // formatter: FormatterType
+  // component: any
 }>
 
 declare type FormOptionType<T = string, B = number> = {
@@ -77,3 +76,5 @@ declare interface LazeFormModalFormOptions {
   fieldOptionParams?: any[]
   preParams?: any
 }
+
+declare type InternalRowData = Record<string, unknown>
