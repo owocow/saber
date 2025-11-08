@@ -10,7 +10,10 @@ const captchaEnabled = ref<boolean>(false)
 const { login } = useAuthStore()
 
 const handleLogin = async () => {
-  await login({ ...loginForm })
+  await login({ ...loginForm }).catch(err => {
+    console.error('登录失败：', err)
+    handleFetchCaptchaCode()
+  })
 }
 
 const loginForm: Api.Auth.PwdLoginForm = reactive({

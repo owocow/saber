@@ -10,7 +10,7 @@
     "types/**/*.d.ts",
     "build/**/*.ts"
   ],
-  "exclude": ["src/**/__tests__/*", "dist", "node_modules"],
+  "exclude": ["src/**/__tests__/*", "dist"],
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",

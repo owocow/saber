@@ -76,7 +76,14 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
       </div>
     </el-scrollbar>
     <div class="flex items-center w-full px-3 pb-3 flex-shrink-0">
-      <SaberPopover class="w-full" placement="top" :offset-y="6">
+      <el-popover
+        placement="top"
+        trigger="click"
+        transition="slide-up"
+        :width="200"
+        :show-arrow="false"
+        popper-class="saber"
+      >
         <template #reference>
           <div
             class="w-full rounded-lg flex justify-between items-center p-2 cursor-pointer hover:bg-gray-200 dark:bg-dark-700 dark:hover:bg-dark-600 pt-2"
@@ -90,9 +97,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
             </el-icon>
           </div>
         </template>
-        <div
-          class="bg-white dark:bg-dark-700 w-[226px] shadow-lg dark:shadow-2xl border border-gray-200 dark:border-dark-600 p-4 rounded-lg"
-        >
+        <div class="bg-white dark:bg-dark-700 rounded-lg">
           <dl class="flex justify-between items-center mb-2 border-b border-gray-150 dark:border-dark-600 pb-4">
             <dt class="flex items-center">
               <el-avatar :size="32" src="https://i.pinimg.com/236x/db/17/0e/db170e567b02375892f5a2cff7648a2e.jpg" />
@@ -129,7 +134,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
             <span class="ml-3">退出登录</span>
           </div>
         </div>
-      </SaberPopover>
+      </el-popover>
       <div
         class="w-[36px] flex items-center justify-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-600 rounded-lg ml-1 relative"
       >

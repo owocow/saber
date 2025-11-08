@@ -1,5 +1,5 @@
 import { type Router } from 'vue-router'
-import { useNProgress } from '@/composables/useNprogress'
+import { useNProgress } from '@/composables/use-nprogress'
 const { start, done } = useNProgress()
 import { createRouteGuard } from './route'
 

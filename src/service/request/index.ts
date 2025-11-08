@@ -98,21 +98,22 @@ export const request = createFlatRequest<App.Service.Response, RequestInstanceSt
         request.state.errMsgStack = [...(request.state.errMsgStack || []), response.data.msg]
 
         // 修改为Element Plus的 notification
-        ElMessageBox.confirm('登录状态已过期，请重新登录', '系统提示', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          showClose: false,
-          closeOnClickModal: false,
-          closeOnPressEscape: false,
-          type: 'warning',
-        })
-          .then(() => {
-            debugger
-            logoutAndCleanup()
-          })
-          .catch(() => {
-            logoutAndCleanup()
-          })
+        // ElMessageBox.confirm('登录状态已过期，请重新登录', '系统提示', {
+        //   confirmButtonText: '重新登录',
+        //   cancelButtonText: '取消',
+        //   showClose: false,
+        //   closeOnClickModal: false,
+        //   closeOnPressEscape: false,
+        //   type: 'warning',
+        // })
+        //   .then(() => {
+        //     debugger
+        //     logoutAndCleanup()
+        //   })
+        //   .catch(() => {
+        //     logoutAndCleanup()
+        //   })
+
         request.cancelAllRequest()
         return null
       }

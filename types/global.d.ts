@@ -12,24 +12,6 @@ declare type Enum<E> = Record<number | string, E> & {
   [k: number]: string
 }
 
-declare interface SearchKeyType {
-  key: string
-  value: string | number | null
-}
-
-type FormatterType = (row: any) => string
-declare type ColumnsType = Partial<{
-  key: string
-  width: string | number
-  // canFilter: boolean
-  label: string
-  [key: string]: any
-  // propType: 'image' | 'status' | 'format' | 'vhtml' | 'link' | 'component' | 'form-item' | 'comWithRowData'
-  // [key: string]: any
-  // formatter: FormatterType
-  // component: any
-}>
-
 declare type FormOptionType<T = string, B = number> = {
   prop: T
   label?: T
@@ -41,11 +23,6 @@ declare type FormOptionType<T = string, B = number> = {
   labelWidth?: B | T
   attr?: { [key: string]: any }
   rules?: Array<{ [key: string]: any }>
-}
-
-declare interface SearchKeyType {
-  key: string
-  value: string | number | null
 }
 
 declare type PagiType = {
@@ -78,3 +55,8 @@ declare interface LazeFormModalFormOptions {
 }
 
 declare type InternalRowData = Record<string, unknown>
+
+declare interface ElementOptionType {
+  label: string
+  value: string | number | boolean | null | undefined
+}

@@ -7,3 +7,5 @@ export const localStg = createStorage<StorageType.Local>('local', storagePrefix)
 export const sessionStg = createStorage<StorageType.Session>('session', storagePrefix)
 
 export const localforage = createLocalforage<StorageType.Local>('local')
+
+export const cacheItemByKey = createStorage<StorageType.TableMetaId>('local', storagePrefix)

@@ -31,11 +31,11 @@ watch(
 <template>
   <el-watermark content="小租云风控" :font="font">
     <div class="h-screen flex">
-      <aside class="w-[var(--page-sidebar-width)]" v-if="!isSidebarCollapsed">
+      <aside class="w-[var(--page-sidebar-width)] flex-shrink-0" v-if="!isSidebarCollapsed">
         <SideBar @close-sidebar="isSidebarCollapsed = true" v-model="isSidebarCollapsed" />
       </aside>
 
-      <main class="flex-1 relative">
+      <main class="flex-1 relative overflow-x-hidden">
         <header
           class="bg-white/70 dark:bg-dark-700/80 backdrop-blur-xs px-3 absolute top-0 left-0 right-0 z-10 flex items-center justify-between h-[var(--page-header-height)] border-b border-gray-200 dark:border-b-dark-600/80"
         >

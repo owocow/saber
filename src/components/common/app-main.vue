@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 </script>
 <template>
-  <main class="p-5 pt-4 flex flex-col min-h-[calc(100vh-var(--page-header-height))]">
+  <main class="p-5 pt-4 w-full flex flex-col min-h-[calc(100vh-var(--page-header-height))]">
     <header class="flex-shrink-0">
       <div class="mb-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
@@ -28,12 +28,12 @@ const props = withDefaults(defineProps<Props>(), {
         <div v-if="$slots.search">
           <slot name="search" />
         </div>
-        <div v-if="$slots.toolbar">
+        <div v-if="$slots.toolbar" class="flex-shrink-0">
           <slot name="toolbar" />
         </div>
       </div>
     </header>
-    <div class="flex-1 flex">
+    <div class="flex-1 flex w-full">
       <slot />
     </div>
   </main>

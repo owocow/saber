@@ -76,7 +76,11 @@ export function fetchGetDeptTree() {
 }
 
 /** 重置用户密码 */
-export function fetchResetUserPassword(userId: CommonType.IdType, password: string) {
+export interface ResetUserPasswordParams {
+  userId: CommonType.IdType
+  password: string
+}
+export function fetchResetUserPassword(data: ResetUserPasswordParams) {
   return request<boolean>({
     url: '/system/user/resetPwd',
     method: 'put',
@@ -84,7 +88,7 @@ export function fetchResetUserPassword(userId: CommonType.IdType, password: stri
       isEncrypt: true,
       repeatSubmit: false,
     },
-    data: { userId, password },
+    data: data,
   })
 }
 

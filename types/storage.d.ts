@@ -51,4 +51,6 @@ declare namespace StorageType {
     /** The tenant id */
     tenantId: CommonType.IdType
   }
+
+  type TableMetaId = Record<string, any>
 }

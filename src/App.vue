@@ -6,7 +6,7 @@ const link = {
 }
 const dialog = {
   draggable: false,
-  transition: 'none',
+  transition: 'slide-up',
 }
 </script>
 <template>

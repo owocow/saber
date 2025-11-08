@@ -119,6 +119,7 @@ export function useTable<A extends ApiFn, T, C>(config: TableConfig<A, T, C>) {
    */
   function updateSearchParams(_params: Partial<Parameters<A>[0]>) {
     Object.assign(params, _params)
+    getData()
   }
 
   /** reset search params */

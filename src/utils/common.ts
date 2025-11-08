@@ -201,3 +201,44 @@ export function arraysEqualSet(arr1: Array<any>, arr2: Array<any>) {
     [...arr1].sort().join() === [...arr2].sort().join()
   )
 }
+
+/**
+ * 数组排序方法
+ * @param arr 需要排序的数组
+ * @param key 排序的属性名，默认为 'orderNum'
+ * @param order 排序方式，'asc' 升序，'desc' 降序，默认升序
+ * @returns 排序后的数组
+ */
+export function sortByOrderNum<T extends Record<string, any>>(
+  arr: T[],
+  key: string = 'orderNum',
+  order: 'asc' | 'desc' = 'asc'
+): T[] {
+  return [...arr].sort((a, b) => {
+    const aValue = a[key]
+    const bValue = b[key]
+
+    // 如果两个都没有 orderNum，保持原顺序
+    if (aValue === undefined && bValue === undefined) return 0
+
+    // 有 orderNum 的排在前面
+    if (aValue === undefined) return 1
+    if (bValue === undefined) return -1
+
+    // 都有 orderNum，按数值排序
+    const diff = Number(aValue) - Number(bValue)
+    return order === 'asc' ? diff : -diff
+  })
+}
+
+export const _sortAsc = <T extends Record<string, any>>(arr: T[]): T[] => {
+  return sortByOrderNum(arr, 'orderNum', 'asc')
+}
+
+export const _sortDesc = <T extends Record<string, any>>(arr: T[]): T[] => {
+  return sortByOrderNum(arr, 'orderNum', 'desc')
+}
+
+export function validateArrayNotEmpty(value: any) {
+  return Array.isArray(value) && value.length > 0
+}

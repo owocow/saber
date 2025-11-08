@@ -22,6 +22,25 @@
     font-weight: 400;
   }
 }
+
+.el-button.saber {
+  &:hover {
+    background-color: var(--color-gray-50);
+    border-color: var(--color-gray-300);
+    color: var(--color-gray-700);
+  }
+}
+
+html.dark {
+  .el-button.saber {
+    &:hover {
+      background-color: var(--color-dark-700);
+      border-color: var(--color-dark-400);
+      color: var(--color-dark-200);
+    }
+  }
+}
+
 html {
   .el-input,
   .el-select {
@@ -113,5 +132,152 @@ html.dark {
   .el-tree-node__content {
     margin-bottom: 2px;
     border-radius: 4px;
+  }
+}
+.saberBtnGroup {
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+}
+
+// el drawer
+.is-drawer.saber {
+  .el-drawer {
+    top: 6px;
+    right: 6px;
+    bottom: 6px;
+    height: calc(100vh - 12px);
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--color-gray-150);
+    .el-drawer__header {
+      margin-bottom: 0;
+      padding: 16px 16px 12px;
+      font-weight: bold;
+      .el-drawer__title {
+        padding-left: 8px;
+        font-size: 18px;
+      }
+    }
+    .el-drawer__body {
+      margin: 0 8px;
+      background-color: var(--color-white);
+      border-radius: 16px;
+      border: 1px solid var(--color-gray-150);
+      padding: 16px 0;
+    }
+    .el-drawer__footer {
+      padding: 16px;
+    }
+  }
+}
+
+html.dark {
+  .is-drawer.saber {
+    .el-drawer {
+      background-color: var(--color-dark-800);
+      .el-drawer__body {
+        background-color: var(--color-dark-700);
+        border: 1px solid var(--color-dark-600);
+      }
+    }
+  }
+}
+/**** el dialog ****/
+.el-modal-dialog.saber {
+  .el-dialog {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--color-gray-150);
+    padding: 0;
+    .el-dialog__header {
+      padding: 16px 16px 12px;
+      font-weight: bold;
+      .el-dialog__title {
+        padding-left: 8px;
+        font-size: 18px;
+      }
+      .el-dialog__headerbtn {
+        top: 4px;
+        right: 4px;
+        .el-icon {
+          font-size: 22px;
+          color: var(--color-gray-400);
+        }
+        &:hover {
+          .el-icon {
+            color: var(--color-gray-700);
+          }
+        }
+      }
+    }
+    .el-dialog__body {
+      margin: 0 8px;
+      background-color: var(--color-white);
+      border-radius: 16px;
+      border: 1px solid var(--color-gray-150);
+      padding: 24px;
+    }
+    .el-dialog__footer {
+      padding: 16px;
+    }
+  }
+}
+
+html.dark {
+  .el-modal-dialog.saber {
+    .el-dialog {
+      background-color: var(--color-dark-800);
+      border: 1px solid var(--color-dark-600);
+      .el-dialog__header {
+        .el-dialog__headerbtn {
+          .el-icon {
+            color: var(--color-dark-400);
+          }
+          &:hover {
+            .el-icon {
+              color: var(--color-dark-300);
+            }
+          }
+        }
+      }
+      .el-dialog__body {
+        background-color: var(--color-dark-700);
+        border: unset;
+      }
+    }
+  }
+}
+
+.el-message-box.saberMessageBox {
+  --el-messagebox-padding-primary: 24px;
+  --el-messagebox-font-size: 22px;
+  --el-messagebox-width: 440px;
+  border-radius: 12px;
+  .el-message-box__header {
+    .el-message-box__title {
+      display: flex;
+      flex-direction: column;
+      .el-icon {
+        font-size: 88px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .el-message-box__btns {
+    padding-top: 48px;
+    .el-button {
+      width: 120px;
+    }
+  }
+  .el-message-box__container {
+    padding: 0 48px;
+    text-align: center;
+  }
+}
+
+.app-table-action-box {
+  .el-button + .el-button {
+    margin-left: 5px;
   }
 }

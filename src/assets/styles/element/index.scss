@@ -29,7 +29,7 @@ $--text-colors: (
 );
 
 $--border-colors: (
-  '': $gray-200,
+  '': $gray-300,
   'light': $gray-150,
   'lighter': $gray-100,
   'extra-light': $gray-50,
@@ -38,7 +38,7 @@ $--border-colors: (
 );
 
 $--border-radius: (
-  'base': 4px,
+  'base': 8px,
   'small': 2px,
   'round': 20px,
   'circle': 100%,
@@ -60,3 +60,6 @@ $--button-vars: (
 
 // custom dark variables
 @use './dark.scss';
+
+//custom transition
+@use './addi-transition.scss';
