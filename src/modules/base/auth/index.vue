@@ -3,6 +3,7 @@ import PasswordLogin from './pwd-login/index.vue'
 import Wechat from './wechat/index.vue'
 import DingTalk from './dingtalk/index.vue'
 import Code from './code/index.vue'
+import { useDark } from '@vueuse/core'
 
 interface Props {
   /** The login module */
@@ -10,7 +11,7 @@ interface Props {
   modules?: string[] // 添加 modules prop
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 type LoginType = 'password' | 'wechat' | 'dingTalk' | 'code'
 const currentKey = ref<LoginType>('password')
@@ -20,6 +21,7 @@ const moduleMap = {
   wechat: Wechat,
   dingTalk: DingTalk,
 }
+const isDark = useDark()
 const currentComponent = computed(() => moduleMap[currentKey.value])
 const changeLoginType = (key: LoginType) => {
   currentKey.value = key
@@ -39,12 +41,16 @@ const changeLoginType = (key: LoginType) => {
           class="w-full flex items-stretch bg-cover bg-center h-full bg-slate-50 rounded-3xl bg-[url('https://images.unsplash.com/photo-1757161969591-874937df864b?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]"
         >
           <div
-            class="w-1/2 p-[80px] relative overflow-hidden bg-gradient-to-t to-70% from-slate-200 via-slate-100 to-sky-100 rounded-3xl flex flex-col justify-between"
+            class="w-1/2 p-[80px] relative overflow-hidden bg-gradient-to-t to-70% from-slate-200 via-slate-100 to-sky-100 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 rounded-3xl flex flex-col justify-between"
           >
             <!-- 登录主体部分 -->
             <div>
               <div class="mb-6 text-left -mt-6 ml-2">
-                <img src="@/assets/imgs/logo-multi.svg" class="h-[44px] inline-block" />
+                <Logo
+                  :height="44"
+                  icon-color="var(--color-primary-500)"
+                  :textColor="isDark ? 'var(--color-dark-300)' : 'var(--color-gray-700)'"
+                />
               </div>
               <div class="pt-8">
                 <div class="welcome pl-2 mb-8">

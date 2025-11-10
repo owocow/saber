@@ -68,7 +68,7 @@ onMounted(() => {
 
     <template #footer>
       <div class="flex justify-center gap-3">
-        <el-button class="saber w-36" size="large" plain @click="visible = false" :disabled="loading"> 取消 </el-button>
+        <el-button class="saber w-36" size="large" @click="visible = false" :disabled="loading"> 取消 </el-button>
         <el-button type="primary" class="w-36" size="large" @click="handleResetPassword" :loading="loading">
           确定
         </el-button>

@@ -59,7 +59,7 @@ const disableReset = computed(() => {
       </component>
     </div>
     <div>
-      <el-button class="saber" @click="resetForm">重置</el-button>
+      <el-button class="saber" v-if="!disableReset" @click="resetForm">重置</el-button>
     </div>
     <div v-if="showSubmitBtn">
       <el-button class="saber" type="primary" @click="handleSubmit">搜索</el-button>

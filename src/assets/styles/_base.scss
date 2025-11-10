@@ -1,6 +1,6 @@
 html,
 body {
-  background: var(--color-gray-50);
+  background: white;
   min-height: 100%;
   color: var(--color-gray-800);
   font-size: 14px;
@@ -12,6 +12,6 @@ body {
 
 html.dark,
 html.dark body {
-  background: var(--color-dark-800);
-  color: var(--color-dark-200);
+  background: var(--color-dark-900);
+  color: var(--color-dark-300);
 }

@@ -91,7 +91,7 @@ onMounted(() => {
 <template>
   <div
     v-loading="loading"
-    class="flex flex-col bg-white dark:bg-dark-700 px-5 py-3 w-full overflow-x-hidden rounded-lg"
+    class="flex flex-col bg-white dark:bg-dark-900 w-full overflow-x-hidden rounded-[8px] border border-gray-150 dark:border-dark-800"
   >
     <header class="mb-2 p-2 flex-shrink-0" v-if="$slots.header">
       <slot name="header" />
@@ -102,10 +102,11 @@ onMounted(() => {
         v-bind="$attrs"
         :data="data"
         ref="tableRef"
+        header-row-class-name="app-table-header"
         @selection-change="handleSelectionChange"
       >
         <template #empty>
-          <div class="flex items-center flex-col py-8 text-gray-400 dark:text-dark-300">
+          <div class="flex items-center flex-col py-8 text-gray-400 dark:text-dark-600">
             <el-icon :size="48">
               <Icon icon="solar:tornado-linear" />
             </el-icon>
@@ -126,7 +127,7 @@ onMounted(() => {
             <el-popover trigger="click" transition="slide-up" placement="top" width="160" :offset="4">
               <template #reference>
                 <div
-                  class="inline-flex items-center gap-2 cursor-pointer justify-end hover:bg-gray-50 dark:hover:bg-dark-500 px-2 py-1 rounded -mr-1"
+                  class="inline-flex items-center gap-2 cursor-pointer justify-end hover:bg-gray-300/50 dark:hover:bg-dark-750 px-2 py-1 rounded-lg -mr-1"
                 >
                   <span class="font-normal">列设置</span>
                   <el-icon :size="16">
@@ -157,7 +158,7 @@ onMounted(() => {
         </el-table-column>
       </el-table>
     </main>
-    <footer :class="['mt-auto pt-4 flex items-center', $slots.tips ? 'justify-between' : 'justify-center']">
+    <footer :class="['mt-auto mb-4 pt-4 flex items-center', $slots.tips ? 'justify-between' : 'justify-center']">
       <div>
         <slot name="tips" />
       </div>

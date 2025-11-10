@@ -70,6 +70,7 @@ declare module 'vue' {
     IEpUser: typeof import('~icons/ep/user')['default']
     IFluentAlert16Regular: typeof import('~icons/fluent/alert16-regular')['default']
     IRiMenuFold4Line: typeof import('~icons/ri/menu-fold4-line')['default']
+    Logo: typeof import('./src/components/common/logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SaberCheckbox: typeof import('./src/components/forms/saber-checkbox.vue')['default']

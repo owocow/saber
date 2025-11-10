@@ -136,11 +136,11 @@ const handleResetPasswordSubmitted = () => {
 </script>
 
 <template>
-  <app-page title="用户管理" :sider-width="180">
+  <app-page title="用户管理" :sider-width="220" flex>
     <!-- 侧边栏 - 部门树 -->
     <template #sidebar>
       <div class="h-full flex flex-col">
-        <h4 class="font-bold text-base mb-3">部门列表</h4>
+        <!-- <h4 class="font-bold text-base mb-3">部门列表</h4> -->
         <div class="flex-1 -ml-2 overflow-auto">
           <el-tree
             :indent="8"
@@ -198,6 +198,7 @@ const handleResetPasswordSubmitted = () => {
 
     <!-- 表格 -->
     <app-table
+      class="saber"
       v-model:selected="selectedUsers"
       :columns="columns(getData)"
       :show-selection="true"

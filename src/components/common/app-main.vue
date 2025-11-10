@@ -4,17 +4,19 @@ defineOptions({
 })
 interface Props {
   title?: string
+  flex?: boolean
 }
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   title: '',
+  flex: false,
 })
 </script>
 <template>
-  <main class="p-5 pt-4 w-full flex flex-col min-h-[calc(100vh-var(--page-header-height))]">
+  <main class="px-6 pt-5 pb-4 w-full flex flex-col min-h-[calc(100vh-var(--page-header-height))]">
     <header class="flex-shrink-0">
       <div class="mb-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <span v-if="title" class="text-[20px] text-gray-600">{{ title }}</span>
+          <span v-if="title" class="text-[20px]">{{ title }}</span>
           <template v-if="$slots.extra">
             <span class="w-[1px] h-5 bg-gray-300 dark:bg-dark-500"></span>
             <slot name="extra" />
@@ -33,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
       </div>
     </header>
-    <div class="flex-1 flex w-full">
+    <div class="flex-1" :class="flex ? 'flex' : ''">
       <slot />
     </div>
   </main>

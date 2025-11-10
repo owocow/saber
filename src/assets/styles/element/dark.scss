@@ -1,8 +1,8 @@
 @use 'vars' as *;
 // only scss variables
 $--dark-colors: (
-  'white': $dark-50,
-  'black': $dark-900,
+  'white': white,
+  'black': $dark-950,
   'primary': (
     'base': $primary-500,
   ),
@@ -25,30 +25,37 @@ $--dark-colors: (
 
 $--text-colors: (
   'primary': $dark-200,
-  'regular': $dark-200,
-  'secondary': $dark-300,
-  'placeholder': $dark-400,
-  'disabled': $dark-500,
+  'regular': $dark-300,
+  'secondary': $dark-450,
+  'placeholder': $dark-600,
+  'disabled': $dark-700,
 );
 
 $--border-colors: (
-  '': $dark-450,
-  'light': $dark-500,
-  'lighter': $dark-600,
-  'extra-light': $dark-700,
-  'dark': $dark-400,
-  'darker': $dark-450,
+  '': $dark-700,
+  'light': $dark-750,
+  'lighter': $dark-800,
+  'extra-light': $dark-900,
+  'dark': $dark-900,
+  'darker': $dark-900,
 );
 
 $--bg-colors: (
-  '': $dark-700,
-  'page': $dark-700,
-  'overlay': $dark-700,
+  '': $dark-900,
+  'page': $dark-750,
+  'overlay': $dark-800,
+);
+
+$--box-shadow: (
+  'base': 0 2px 12px 0 rgba(0, 0, 0, 0.5),
+  'light': 0 1px 6px 0 rgba(0, 0, 0, 0.4),
+  'heavy': 0 8px 24px 0 rgba(0, 0, 0, 0.6),
 );
 
 @forward 'element-plus/theme-chalk/src/dark/var.scss' with (
   $colors: $--dark-colors,
   $text-color: $--text-colors,
   $border-color: $--border-colors,
-  $bg-color: $--bg-colors
+  $bg-color: $--bg-colors,
+  $box-shadow: $--box-shadow
 );
