@@ -52,7 +52,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
 </script>
 <template>
   <section
-    class="h-full flex flex-col bg-gray-100/50 border-r border-gray-200 dark:bg-dark-800/30 dark:border-dark-800 w-[var(--page-sidebar-width)] flex-shrink-0"
+    class="h-full flex flex-col bg-gray-100/50 border-r border-gray-200 dark:bg-dark-800/30 dark:border-dark-800 w-[var(--page-sidebar-width)]"
   >
     <div
       class="flex justify-between items-center w-full pl-7 pr-2 flex-shrink-0 h-[var(--page-header-height)] border-b border-gray-200 dark:border-b-dark-800"
@@ -66,7 +66,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
       </router-link>
     </div>
     <el-scrollbar class="flex-1">
-      <div class="p-2">
+      <div class="p-4">
         <Menus :menus="menus" @select="handleSelect" :defaultActive="activeMenuKey" />
       </div>
     </el-scrollbar>

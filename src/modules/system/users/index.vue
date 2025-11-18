@@ -8,13 +8,12 @@ import { jsonClone } from '@/packages/utils'
 import { useTable } from '@/composables/use-table'
 import { columns, meta, searchFormItems, userSearchModel } from './model.tsx'
 import { ElMessage } from 'element-plus'
-import { useMessageBox } from '@/composables/use-message-box'
+import { confirm } from '@/utils/message-box'
 defineOptions({ name: 'SystemUsers' })
 
 /** 部门树相关 */
 const deptTree = ref<any[]>([])
 const { loading: treeLoading, startLoading: startTreeLoading, endLoading: endTreeLoading } = useLoading()
-const { confirm } = useMessageBox()
 
 /** 表格相关 */
 const { data, getData, loading, pagination, resetSearchParams, updateSearchParams } = useTable({
@@ -136,102 +135,97 @@ const handleResetPasswordSubmitted = () => {
 </script>
 
 <template>
-  <app-page title="用户管理" :sider-width="220" flex>
-    <!-- 侧边栏 - 部门树 -->
+  <app-with-sidebar :sider-width="240">
     <template #sidebar>
-      <div class="h-full flex flex-col">
-        <!-- <h4 class="font-bold text-base mb-3">部门列表</h4> -->
-        <div class="flex-1 -ml-2 overflow-auto">
-          <el-tree
-            :indent="8"
-            :loading="treeLoading"
-            class="h-full"
-            item-size="40"
-            highlight-current
-            :expand-on-click-node="false"
-            :data="deptTree"
-            node-key="id"
-            default-expand-all
-            @node-click="handleDeptClick"
-          />
-        </div>
-      </div>
-    </template>
-    <template #extra v-if="currentDeptName">{{ currentDeptName }}</template>
-    <!-- 页面操作按钮 -->
-    <template #suffix>
-      <el-button class="saber" @click="handleShowFormModal()">
-        <template #icon>
-          <Icon icon="solar:add-circle-linear" />
-        </template>
-        新增用户
-      </el-button>
-    </template>
-
-    <!-- 搜索区域 -->
-    <template #search>
-      <app-search
-        :search-options="searchFormItems"
-        :search-model="userSearchModel"
-        @reset="resetSearchParams"
-        @submit="updateSearchParams"
+      <el-tree
+        :indent="8"
+        :loading="treeLoading"
+        class="h-full"
+        item-size="40"
+        highlight-current
+        :expand-on-click-node="false"
+        :data="deptTree"
+        node-key="id"
+        default-expand-all
+        @node-click="handleDeptClick"
       />
     </template>
-
-    <!-- 工具栏 -->
-    <template #toolbar>
-      <div class="saberBtnGroup flex gap-2">
-        <el-button class="saber" :disabled="selectedUsers.length === 0" @click="handleBatchDelete">
+    <app-main title="用户管理">
+      <template #extra v-if="currentDeptName">{{ currentDeptName }}</template>
+      <!-- 页面操作按钮 -->
+      <template #suffix>
+        <el-button class="saber" @click="handleShowFormModal()">
           <template #icon>
-            <Icon icon="solar:trash-bin-trash-linear" />
+            <Icon icon="solar:add-circle-linear" />
           </template>
-          批量删除
+          新增用户
         </el-button>
-        <el-button class="saber" :loading="loading" @click="handleRefresh">
-          <template #icon>
-            <Icon icon="solar:refresh-linear" />
-          </template>
-          刷新
-        </el-button>
-      </div>
-    </template>
+      </template>
 
-    <!-- 表格 -->
-    <app-table
-      class="saber"
-      v-model:selected="selectedUsers"
-      :columns="columns(getData)"
-      :show-selection="true"
-      :loading="loading"
-      :data="data"
-      :actionsWidth="180"
-      :pagination="pagination"
-      :meta="meta"
-    >
-      <!-- 操作列 -->
-      <template #actions="{ row }">
-        <div class="saberBtnGroup flex gap-1.5 justify-end" v-if="row.userId !== 1">
-          <el-button size="small" circle class="saber" @click="handleShowFormModal(row)">
-            <template #icon>
-              <Icon icon="solar:pen-new-square-linear" />
-            </template>
-          </el-button>
-          <el-button size="small" circle class="saber" @click="handleShowFormModal(row, true)">
-            <template #icon>
-              <Icon icon="solar:password-minimalistic-input-linear" />
-            </template>
-          </el-button>
-          <el-button size="small" circle class="saber" @click="handleDeleteUser(row)">
+      <!-- 搜索区域 -->
+      <template #search>
+        <app-search
+          :search-options="searchFormItems"
+          :search-model="userSearchModel"
+          @reset="resetSearchParams"
+          @submit="updateSearchParams"
+        />
+      </template>
+
+      <!-- 工具栏 -->
+      <template #toolbar>
+        <div class="saberBtnGroup flex gap-2">
+          <el-button class="saber" :disabled="selectedUsers.length === 0" @click="handleBatchDelete">
             <template #icon>
               <Icon icon="solar:trash-bin-trash-linear" />
             </template>
+            批量删除
+          </el-button>
+          <el-button class="saber" :loading="loading" @click="handleRefresh">
+            <template #icon>
+              <Icon icon="solar:refresh-linear" />
+            </template>
+            刷新
           </el-button>
         </div>
-        <span v-else />
       </template>
-    </app-table>
-  </app-page>
 
+      <!-- 表格 -->
+      <app-table
+        class="saber"
+        v-model:selected="selectedUsers"
+        :columns="columns(getData)"
+        :show-selection="true"
+        :loading="loading"
+        :data="data"
+        :actionsWidth="180"
+        :pagination="pagination"
+        :meta="meta"
+      >
+        <!-- 操作列 -->
+        <template #actions="{ row }">
+          <div class="saberBtnGroup flex gap-1.5 justify-end" v-if="row.userId !== 1">
+            <el-button size="small" circle class="saber" @click="handleShowFormModal(row)">
+              <template #icon>
+                <Icon icon="solar:pen-new-square-linear" />
+              </template>
+            </el-button>
+            <el-button size="small" circle class="saber" @click="handleShowFormModal(row, true)">
+              <template #icon>
+                <Icon icon="solar:password-minimalistic-input-linear" />
+              </template>
+            </el-button>
+            <el-button size="small" circle class="saber" @click="handleDeleteUser(row)">
+              <template #icon>
+                <Icon icon="solar:trash-bin-trash-linear" />
+              </template>
+            </el-button>
+          </div>
+          <span v-else />
+        </template>
+      </app-table>
+    </app-main>
+  </app-with-sidebar>
   <!-- 表单弹窗 -->
   <Form
     v-if="formVisible"

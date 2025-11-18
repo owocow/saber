@@ -35,12 +35,12 @@ export function useTable<A extends ApiFn, T, C>(config: TableConfig<A, T, C>) {
   const { bool: empty, setBool: setEmpty } = useBoolean()
   const { apiFn, apiParams, transformer, immediate = true, paginConfig } = config
   const params: NonNullable<Parameters<A>[0]> = reactive(jsonClone({ ...apiParams }))
-  const data: Ref<TableDataWithIndex<T>[]> = ref([])
+  const data: Ref<any[]> = ref([])
   /**
    * 分页配置
    */
   const { pageSizes, pageSize, disabled: disablePagination = false } = paginConfig || {}
-  const pagination = reactive({
+  const pagination = reactive<Saber.AppTable.Pagination>({
     pageSizes: pageSizes || [10, 20, 50, 100],
     pageSize: pageSize || 10,
     currentPage: 1,

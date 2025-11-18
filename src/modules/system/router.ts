@@ -14,7 +14,7 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
       {
         path: '/system/index',
         name: 'SystemIndex',
-        component: () => import('./roles/index.vue'),
+        component: () => import('./dept-menu-perm/index.vue'),
         meta: {
           title: '角色部门菜单',
         },
@@ -24,27 +24,10 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
         name: 'SystemUsers',
         component: () => import('./users/index.vue'),
         meta: {
-          // keepAlive: true,
+          keepAlive: true,
           title: '用户管理',
         },
       },
-      // {
-      //   path: '/clients/detail',
-      //   name: 'ClientsDetailIndex',
-      //   component: () => import('./detail/index.vue'),
-      //   meta: {
-      //     title: '系统设置',
-      //     hideInMenu: true,
-      //   },
-      // },
-      // {
-      //   path: '/clients/testing',
-      //   name: 'ClientsTestingIndex',
-      //   component: () => import('./roles/index.vue'),
-      //   meta: {
-      //     title: '角色管理',
-      //   },
-      // },
     ],
   },
 ]

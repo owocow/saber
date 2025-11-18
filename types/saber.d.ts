@@ -7,6 +7,15 @@ declare namespace Saber {
       key?: string
       render?: (row: any) => VNodeChild
     }
+    interface Pagination {
+      currentPage?: number
+      pageSize?: number
+      total?: number
+      disabled?: boolean
+      pageSizes?: number[]
+      sizeChange?: (size: number) => void
+      currentPageChange?: (page: number) => void
+    }
   }
   /** 表单 */
   namespace AppForm {

@@ -23,41 +23,35 @@ const font = reactive({
   color: 'rgba(0, 0, 0, .0)',
 })
 
-watch(
-  isDark,
-  () => {
-    font.color = isDark.value ? 'rgba(255, 255, 255, .0)' : 'rgba(0, 0, 0, .0)'
-  },
-  {
-    immediate: true,
-  }
-)
+// watch(
+//   isDark,
+//   () => {
+//     font.color = isDark.value ? 'rgba(255, 255, 255, .0)' : 'rgba(0, 0, 0, .0)'
+//   },
+//   {
+//     immediate: true,
+//   }
+// )
 
 // 添加计算的 sidebar 宽度
 const sidebarWidth = computed(() => (showSidebar.value ? 'var(--page-sidebar-width)' : '0px'))
 </script>
 <template>
-  <el-watermark content="小租云风控" :font="font">
-    <div class="h-screen flex relative">
-      <div
-        class="transition-all duration-300 ease-in-out overflow-hidden absolute z-10 h-full"
-        :class="showSidebar ? 'w-[var(--page-sidebar-width)]' : 'w-0'"
-      >
-        <SideBar v-model="showSidebar" class="w-[var(--page-sidebar-width)]" />
-      </div>
-      <main
-        class="flex-1 flex flex-col h-screen transition-all duration-300 ease-in-out"
-        :style="{ marginLeft: sidebarWidth }"
-      >
-        <Header v-model:showSidebar="showSidebar" />
-        <el-scrollbar class="flex-1">
-          <RouterView v-slot="{ Component, route }">
-            <KeepAlive :include="routeStore.cacheRoutes" :exclude="routeStore.excludeCacheRoutes">
-              <component :is="Component" :key="tabStore.getTabIdByRoute(route)" />
-            </KeepAlive>
-          </RouterView>
-        </el-scrollbar>
-      </main>
-    </div>
-  </el-watermark>
+  <div
+    class="transition-all duration-300 ease-in-out overflow-hidden absolute h-full"
+    :class="showSidebar ? 'w-[var(--page-sidebar-width)]' : 'w-0'"
+  >
+    <SideBar v-model="showSidebar" />
+  </div>
+  <main
+    class="flex flex-col transition-all duration-300 ease-in-out absolute right-0 top-0 bottom-0 pt-[var(--page-header-height)]"
+    :style="{ left: sidebarWidth }"
+  >
+    <Header v-model:showSidebar="showSidebar" />
+    <RouterView v-slot="{ Component, route }">
+      <KeepAlive :include="routeStore.cacheRoutes" :exclude="routeStore.excludeCacheRoutes">
+        <component :is="Component" :key="tabStore.getTabIdByRoute(route)" />
+      </KeepAlive>
+    </RouterView>
+  </main>
 </template>

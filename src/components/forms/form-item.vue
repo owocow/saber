@@ -43,7 +43,7 @@ const currentComponent = computed(() => getComponentByWhich(props.which))
   <el-form-item v-bind="{ ...formItemConfig }" class="flex-shrink-0 saber" style="width: 100%">
     <template #label>
       <span class="inline-flex gap-2 items-baseline">
-        <em class="not-italic">{{ formItemConfig.label }}</em>
+        <em class="not-italic flex-shrink-0">{{ formItemConfig.label }}</em>
         <cite class="not-italic text-[12px] opacity-50">{{ formItemConfig.sub }}</cite>
       </span>
     </template>

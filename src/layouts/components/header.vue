@@ -27,7 +27,7 @@ init()
 <template>
   <!--  -->
   <header
-    class="px-4 flex items-center justify-between gap-3 h-[var(--page-header-height)] w-full flex-shrink-0 border-b border-gray-200 dark:border-b-dark-800"
+    class="px-4 flex items-center justify-between gap-3 h-[var(--page-header-height)] border-b border-gray-200 dark:border-b-dark-800 absolute left-0 right-0 top-0"
   >
     <div
       class="flex size-[28px] items-center justify-center transition bg-gray-100 border-gray-200 dark:bg-dark-800/60 border dark:border-dark-750/50 dark:hover:bg-dark-750 cursor-pointer rounded-lg"
@@ -58,7 +58,7 @@ init()
               class="flex items-center text-sm pl-3 border transition-all duration-200 pr-0.5 py-1.5 mr-[2px] hover:dark:bg-dark-800/60 hover:dark:border-dark-750/60 hover:bg-gray-100 hover:border-gray-150 cursor-pointer transform rounded-lg h-[28px]"
               :class="[
                 item.id === tabStore.activeTabId
-                  ? 'dark:text-primary-500 text-primary-500 dark:bg-dark-800/60 bg-gray-100 border-gray-150 dark:hover-bg-dark-800 dark:border-dark-750/50'
+                  ? ' dark:bg-dark-800/60 bg-gray-100 border-gray-150 dark:hover-bg-dark-800 dark:border-dark-750/50'
                   : 'border-transparent',
                 item.id === '/home' ? 'pr-3' : '',
               ]"

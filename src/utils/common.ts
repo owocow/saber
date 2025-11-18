@@ -102,7 +102,6 @@ export const handleTree = <T extends Record<string, any>>(data: T[], config: Com
   if (!data?.length) {
     return []
   }
-
   const {
     idField,
     parentIdField = 'parentId',
@@ -241,4 +240,22 @@ export const _sortDesc = <T extends Record<string, any>>(arr: T[]): T[] => {
 
 export function validateArrayNotEmpty(value: any) {
   return Array.isArray(value) && value.length > 0
+}
+
+export function enumToOptions<T extends Record<string, string | number>>(
+  enumObj: T
+): Array<{ label: string; value: string | number }> {
+  return Object.entries(enumObj)
+    .filter(([key]) => isNaN(Number(key))) // 过滤掉数字键(处理数字枚举的反向映射)
+    .map(([label, value]) => ({
+      label,
+      value,
+    }))
+}
+
+export function enumValueToLabel(enm: Record<string, string | number>, val: any): string {
+  if (val == null) return ''
+  const s = String(val)
+  const found = Object.entries(enm).find(([, v]) => String(v) === s)
+  return found ? found[0] : ''
 }

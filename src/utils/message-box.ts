@@ -8,7 +8,11 @@ interface SaberMessageBoxOptions extends ElMessageBoxOptions {
   iconifyName?: string
 }
 
-export function confirm(message: string, title: string = '提示', options: SaberMessageBoxOptions = {}) {
+export async function confirm(
+  message: string,
+  title: string = '提示',
+  options: SaberMessageBoxOptions = {}
+): Promise<boolean> {
   const { color, iconifyName, ...rest } = options
   const defaultOptions: ElMessageBoxOptions = {
     customClass: 'saberMessageBox',
@@ -23,5 +27,10 @@ export function confirm(message: string, title: string = '提示', options: Sabe
     ...rest,
   }
 
-  return ElMessageBox.confirm(message, title, defaultOptions)
+  try {
+    await ElMessageBox.confirm(message, title, defaultOptions)
+    return true
+  } catch {
+    return false
+  }
 }

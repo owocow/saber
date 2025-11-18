@@ -2,6 +2,7 @@ import { ElSwitch } from 'element-plus'
 import { Icon } from '@iconify/vue'
 import { fetchUpdateUserStatus } from '@/service/api/system'
 import { ElMessage } from 'element-plus'
+import { EnableStatusOptions } from '../enum'
 
 export const columns = (refresh?: () => void): Array<Saber.AppTable.ColumnsType> => [
   {
@@ -80,6 +81,7 @@ export const meta = {
 export const userSearchModel = {
   userName: '',
   nickName: '',
+  status: '',
 }
 
 export const searchFormItems: Array<Saber.AppForm.SearchFormItemType> = [
@@ -89,6 +91,7 @@ export const searchFormItems: Array<Saber.AppForm.SearchFormItemType> = [
     prop: 'userName',
     clearable: true,
     modleModifiers: { trim: true },
+    style: { width: '220px' },
     slots: {
       prefix: {
         component: Icon,
@@ -106,12 +109,32 @@ export const searchFormItems: Array<Saber.AppForm.SearchFormItemType> = [
     placeholder: '请输入用户昵称',
     prop: 'nickName',
     modleModifiers: { trim: true },
+    style: { width: '220px' },
     clearable: true,
     slots: {
       prefix: {
         component: Icon,
         props: {
-          icon: 'solar:star-fall-linear',
+          icon: 'solar:text-square-linear',
+          width: '18',
+          height: '18',
+          inline: true,
+        },
+      },
+    },
+  },
+  {
+    which: 'el-select',
+    placeholder: '用户状态',
+    prop: 'status',
+    clearable: true,
+    options: EnableStatusOptions,
+    style: { width: '140px' },
+    slots: {
+      prefix: {
+        component: Icon,
+        props: {
+          icon: 'solar:masks-linear',
           width: '18',
           height: '18',
           inline: true,

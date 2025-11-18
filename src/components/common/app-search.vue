@@ -37,7 +37,28 @@ const handleSubmit = () => {
 
 const disableReset = computed(() => {
   return Object.keys(props.searchModel).every(key => {
-    return props.searchModel[key] === searchForm[key]
+    const modelValue = props.searchModel[key]
+    const formValue = searchForm[key]
+
+    // 判断是否为空值
+    const isEmpty = (val: any) => {
+      if (val === null || val === undefined || val === '') return true
+      if (Array.isArray(val) && val.length === 0) return true
+      return false
+    }
+
+    // 两个都是空值,视为相等
+    if (isEmpty(modelValue) && isEmpty(formValue)) {
+      return true
+    }
+
+    // 数组需要深度比较
+    if (Array.isArray(modelValue) && Array.isArray(formValue)) {
+      return JSON.stringify(modelValue) === JSON.stringify(formValue)
+    }
+
+    // 其他情况正常比较
+    return modelValue === formValue
   })
 })
 </script>
@@ -59,7 +80,7 @@ const disableReset = computed(() => {
       </component>
     </div>
     <div>
-      <el-button class="saber" v-if="!disableReset" @click="resetForm">重置</el-button>
+      <el-button class="saber" :disabled="disableReset" @click="resetForm">重置</el-button>
     </div>
     <div v-if="showSubmitBtn">
       <el-button class="saber" type="primary" @click="handleSubmit">搜索</el-button>

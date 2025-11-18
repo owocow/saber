@@ -1,5 +1,5 @@
 <template>
-  <page-main title="dd">
+  <app-main scrollable>
     <div class="flex items-center">
       <span class="text-2xl font-bold mr-4">工作台</span>
       <span class="w-[1px] h-6 bg-gray-150 mr-3 dark:bg-dark-500" />
@@ -24,5 +24,5 @@
     </div>
     <!--  -->
     <div class="p-5" v-for="item in 40">testing p tag</div>
-  </page-main>
+  </app-main>
 </template>

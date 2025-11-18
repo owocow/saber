@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, reactive, computed, toRefs, onMounted } from 'vue'
-import { jsonClone } from '@/packages/utils'
 import { userModel, getFormOptions } from './model'
 import { ElNotification } from 'element-plus'
 import { fetchCreateUser, fetchUpdateUser, fetchGetUserInfo } from '@/service/api/system'
@@ -32,7 +31,7 @@ const roles = ref<Array<any>>([])
 
 /** 表单数据及基础 */
 const getInitialFormData = () => ({
-  ...jsonClone(userModel),
+  ...userModel,
   ...(deptId?.value != null && { deptId: deptId.value }),
 })
 
