@@ -201,6 +201,7 @@ const handleResetPasswordSubmitted = () => {
         :actionsWidth="180"
         :pagination="pagination"
         :meta="meta"
+        hide-page-sizes
       >
         <!-- 操作列 -->
         <template #actions="{ row }">

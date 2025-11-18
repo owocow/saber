@@ -44,7 +44,6 @@ export function useTable<A extends ApiFn, T, C>(config: TableConfig<A, T, C>) {
     pageSizes: pageSizes || [10, 20, 50, 100],
     pageSize: pageSize || 10,
     currentPage: 1,
-    disabled: false,
     total: 0,
     sizeChange: (size: number) => {
       pagination.pageSize = size

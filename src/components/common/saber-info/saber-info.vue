@@ -27,15 +27,19 @@ const finalLabelPosition = computed(() => {
 const finalLabelWidth = computed(() => {
   return props.labelWidth || provider?.labelWidth?.value || '80px'
 })
-const finalBottom = computed(() => {
-  return props.bottom || provider?.bottom?.value || '8px'
+const bottomClass = computed(() => {
+  if (finalLabelPosition.value === 'left') {
+    return {}
+  } else {
+    return { marginBottom: props.bottom || provider?.bottom?.value || '8px' }
+  }
 })
 const topClass = computed(() => {
   return finalLabelPosition.value === 'top' ? 'flex-col' : ''
 })
 </script>
 <template>
-  <div :class="['flex gap-2', topClass]" :style="{ marginBottom: finalBottom }">
+  <div :class="['flex gap-2', topClass]" :style="bottomClass">
     <span class="text-gray-400 dark:text-dark-600 flex-shrink-0" :style="{ width: finalLabelWidth }">
       {{ label }}
     </span>

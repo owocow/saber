@@ -11,14 +11,31 @@ export const sidebar: DefaultTheme.Sidebar = {
   ],
   '/components/': [
     {
-      text: '组件说明',
-      items: [{ text: 'saber-popover', link: '/components/saber-popover' }],
-    },
-  ],
-  '/business/backend-design': [
-    {
       text: '业务文档',
-      items: [{ text: '后端基础设计', link: '/business/backend-design' }],
+      items: [
+        {
+          text: 'Common 组件',
+          items: [
+            { text: 'saber-popover.deperated', link: '/components/common/saber-popover' },
+            { text: 'logo', link: '/components/common/logo' },
+            { text: 'app-main', link: '/components/common/app-main' },
+            { text: 'app-search', link: '/components/common/app-search' },
+            { text: 'app-table', link: '/components/common/app-table' },
+            { text: 'app-with-sidebar', link: '/components/common/app-with-sidebar' },
+            { text: 'saber-info', link: '/components/common/saber-info' },
+            { text: 'saber-button', link: '/components/common/saber-button' },
+            { text: 'saber-tab-layout', link: '/components/common/saber-tab-layout' },
+          ],
+        },
+        {
+          text: 'Biz 组件',
+          collapsed: true,
+          items: [
+            { text: '接口设计规范', link: '/business/backend-design/api-design' },
+            { text: '错误码设计规范', link: '/business/backend-design/error-code' },
+          ],
+        },
+      ],
     },
   ],
 }

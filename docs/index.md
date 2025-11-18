@@ -11,8 +11,8 @@ hero:
     alt: Saber
   actions:
     - theme: brand
-      text: 快速开始
-      link: /starting
+      text: 基础组件
+      link: /components/common/index
     - theme: alt
       text: 文档编写说明
       link: /write/index

@@ -17,6 +17,7 @@ interface AppTableProps<S = string, N = number, B = boolean> {
   actionsWidth?: N | S
   defaultBtnText?: S
   pagination?: Saber.AppTable.Pagination
+  hidePageSizes?: B | S
 }
 
 const props = withDefaults(defineProps<AppTableProps>(), {
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<AppTableProps>(), {
   defaultBtnText: '查看',
   columns: () => [],
   pagination: () => ({}),
+  hidePageSizes: false,
 })
 /**
  * Models
@@ -86,8 +88,8 @@ onMounted(() => {
   }
 })
 
-const showSizes = computed(() => {
-  return !Boolean(props.disablePagination)
+const paginationLayout = computed(() => {
+  return props.hidePageSizes !== false ? 'total, prev, pager, next' : 'total, prev, pager, next, sizes'
 })
 </script>
 <template>
@@ -166,7 +168,7 @@ const showSizes = computed(() => {
         v-model:page-size="pagination.pageSize"
         background
         :page-sizes="pagination.pageSizes"
-        layout="total, prev, pager, next, sizes"
+        :layout="paginationLayout"
         :total="pagination.total"
         @size-change="pagination.sizeChange"
         @current-change="pagination.currentPageChange"

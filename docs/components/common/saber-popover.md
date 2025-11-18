@@ -1,5 +1,6 @@
-# SaberPopover 气泡弹出框
+# SaberPopover 气泡弹出框 [已弃用]
 
+此组件已弃用，使用 el-popover 组件，并添加 transition 自定义属性值： `slide-up`  
 这个组件有待扩展，可以改造成 ElementPlus, 这样使用场景更广，不过可以直接使用 elementPlus的 popover组件
 
 ## 弹出位置

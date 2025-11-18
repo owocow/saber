@@ -13,6 +13,7 @@ declare namespace Saber {
       total?: number
       disabled?: boolean
       pageSizes?: number[]
+      hidePageSizes?: boolean
       sizeChange?: (size: number) => void
       currentPageChange?: (page: number) => void
     }

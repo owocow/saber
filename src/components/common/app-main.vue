@@ -4,7 +4,6 @@ defineOptions({
 })
 interface Props {
   title?: string
-  flex?: boolean
   scrollable?: boolean | string
 }
 withDefaults(defineProps<Props>(), {
