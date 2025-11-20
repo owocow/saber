@@ -4,21 +4,24 @@ layout: home
 
 hero:
   name: 'Saber FE Doc'
-  text: '小租风控云前端项目<br>开发文档'
+  text: '小租前端项目<br>开发文档'
   tagline: 提供完整的开发指南、组件文档和最佳实践
   image:
     src: /saber.png
     alt: Saber
   actions:
     - theme: brand
+      text: 基础指南
+      link: /starting/index
+    - theme: alt
       text: 基础组件
       link: /components/common/index
     - theme: alt
       text: 文档编写说明
-      link: /write/index
+      link: /how-to-write/index
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 业务文档
+      link: /business/backend-design
 
 features:
   - title: Vite + Vue3 + ElementPlus + Tailwind

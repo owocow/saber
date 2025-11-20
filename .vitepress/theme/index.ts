@@ -1,6 +1,10 @@
 import DefaultTheme from 'vitepress/theme'
+import Tip from './components/Tip.vue'
 import './custom.css'
 
 export default {
-  extends: DefaultTheme,
+  ...DefaultTheme,
+  enhanceApp({ app }) {
+    app.component('Tip', Tip)
+  },
 }

@@ -1,11 +1,35 @@
 import type { DefaultTheme } from 'vitepress'
 export const sidebar: DefaultTheme.Sidebar = {
+  '/starting/': [
+    {
+      text: '基础指南',
+      link: '/starting/',
+      items: [
+        { text: '路由权限', items: [{ text: 'saber-popover.deperated', link: '/components/common/saber-popover' }] },
+        { text: '模块开发', items: [{ text: 'saber-popover.deperated', link: '/components/common/saber-popover' }] },
+        { text: '组合式函数', items: [{ text: 'saber-popover.deperated', link: '/components/common/saber-popover' }] },
+        { text: '模块开发', items: [{ text: 'saber-popover.deperated', link: '/components/common/saber-popover' }] },
+        { text: 'Tailwind', link: '/components/common/saber-popover' },
+        { text: 'Store', link: '/components/common/saber-popover' },
+        { text: 'Utils', link: '/components/common/saber-popover' },
+      ],
+    },
+  ],
   '/how-to-write/': [
     {
       text: '文档编写说明',
       items: [
         { text: 'Markdown', link: '/how-to-write/' },
         { text: 'Vitepress目录说明', link: '/how-to-write/vite' },
+      ],
+    },
+  ],
+  '/business/': [
+    {
+      text: '后端业务文档',
+      items: [
+        { text: '风控系统功能设计', link: '/business/backend-design' },
+        { text: '架构设计思路', link: '/business/backend-design2' },
       ],
     },
   ],
