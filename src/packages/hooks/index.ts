@@ -4,8 +4,9 @@ import useCountDown from './use-count-down'
 import useContext from './use-context'
 import useSvgIconRender from './use-svg-icon-render'
 import useHookTable from './use-table'
+import useAuth from './use-auth'
 
-export { useBoolean, useLoading, useCountDown, useContext, useSvgIconRender, useHookTable }
+export { useBoolean, useLoading, useCountDown, useContext, useSvgIconRender, useHookTable, useAuth }
 
 export * from './use-signal'
 export * from './use-table'
