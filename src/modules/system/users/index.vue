@@ -82,7 +82,7 @@ const handleFormSubmitted = () => {
 /** 删除用户 */
 const handleDeleteUser = async (row: any) => {
   try {
-    await confirm('输入框的校验函数。 应该返回一个 boolean 或者 string， 如果返回的是一个 string 类型', '删除提醒')
+    await confirm('请确认是否要删除此用户？', '删除提醒')
     const { error } = await fetchBatchDeleteUser([row.userId])
     if (!error) {
       ElMessage.success('删除成功')

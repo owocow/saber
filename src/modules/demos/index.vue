@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+const content = ref('')
 const testClick = () => {
-  console.log('测试点击')
+  console.log('test click')
 }
 </script>
 <template>
-  <app-main>
+  <app-main scrollable>
     <div class="flex gap-2 flex-wrap justify-start saberBtnGroup">
-      <saber-button v-for="item in 100" btn-type="add" v-copy="`你好`">测试</saber-button>
+      <form-item which="umo-editor" v-model="content" />
+      <el-button class="saber" @click="testClick">测试按钮</el-button>
     </div>
   </app-main>
 </template>

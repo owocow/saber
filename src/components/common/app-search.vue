@@ -1,16 +1,19 @@
 <script lang="ts" setup>
 import { jsonClone } from '@/packages/utils'
 import { getComponentByWhich } from '../forms/utils'
+import { useRouteQuery } from '@vueuse/router'
 interface AppSearchProps {
   searchOptions: Saber.AppForm.SearchFormItemType[] | (() => Saber.AppForm.SearchFormItemType[])
   searchModel: Record<string, any>
   transformFn?: (model: Record<string, any>) => Record<string, any>
   showSubmitBtn?: boolean
+  syncToRoute?: boolean | string
 }
 const props = withDefaults(defineProps<AppSearchProps>(), {
   searchOptions: () => [],
   searchModel: () => ({}),
   showSubmitBtn: false,
+  syncToRoute: false,
 })
 
 const emits = defineEmits(['change', 'submit', 'reset'])
@@ -18,11 +21,41 @@ const options = computed(() => {
   return typeof props.searchOptions === 'function' ? props.searchOptions() : props.searchOptions
 })
 
-const searchForm = reactive<Record<string, any>>({ ...jsonClone(props.searchModel) })
+// 修改 searchForm 的初始化逻辑
+const searchForm = reactive<Record<string, any>>({})
+
+// 初始化时，将 searchModel 中的每个 key 映射到 useRouteQuery
+Object.keys(props.searchModel).forEach(key => {
+  const defaultValue = props.searchModel[key]
+
+  if (props.syncToRoute) {
+    // useRouteQuery(key, defaultValue)
+    // 注意：useRouteQuery 返回的是 Ref，需要通过 .value 访问，但在 reactive 中会自动解包
+    // transform 选项用于处理类型转换，因为 URL 参数默认都是字符串
+
+    // 简单的类型推断，如果默认值是数字，尝试转换回数字
+    const isNumber = typeof defaultValue === 'number'
+
+    searchForm[key] = useRouteQuery(key, defaultValue, {
+      transform: val => {
+        if (isNumber && val !== null) return Number(val)
+        return val
+      },
+    })
+  } else {
+    searchForm[key] = defaultValue
+  }
+})
 
 const resetForm = () => {
-  Object.assign(searchForm, jsonClone(props.searchModel))
+  // 重置时，直接赋值回默认值，useRouteQuery 会自动更新 URL
+  const defaults = props.searchModel
+  Object.keys(defaults).forEach(key => {
+    searchForm[key] = defaults[key]
+  })
   emits('reset')
+  // 重置后通常也需要触发一次搜索，让列表更新
+  handleSubmit()
 }
 
 const handleChange = (prop: string, value: any) => {

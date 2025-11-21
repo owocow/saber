@@ -96,6 +96,7 @@ declare module 'vue' {
     SaberTabLayout: typeof import('./src/components/common/saber-tab-layout.vue')['default']
     SaberTable: typeof import('./src/components/saber-table.vue')['default']
     Status: typeof import('./src/components/common/status.vue')['default']
+    UmoEditor: typeof import('./src/components/forms/umo-editor.vue')['default']
   }
   export interface GlobalDirectives {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

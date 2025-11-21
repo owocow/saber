@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
+    "@umoteam/editor": "^8.1.0",
     "@vitejs/plugin-vue-jsx": "^5.1.1",
     "@vueuse/components": "^13.9.0",
     "@vueuse/core": "^13.9.0",
+    "@vueuse/router": "^14.0.0",
     "axios": "^1.12.2",
     "axios-retry": "^4.5.0",
     "consola": "^3.4.2",

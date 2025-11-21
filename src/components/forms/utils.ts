@@ -17,6 +17,7 @@ import {
 } from 'element-plus'
 import saberCheckbox from './saber-checkbox.vue'
 import SaberRadios from './saber-radios.vue'
+import UnoEditor from './umo-editor.vue'
 
 export type ComponentMapKey =
   | 'el-input'
@@ -36,6 +37,7 @@ export type ComponentMapKey =
   | 'el-checkbox'
   | 'saber-checkbox'
   | 'saber-radios'
+  | 'umo-editor'
 
 const componentMap: Record<ComponentMapKey, Component> = {
   'el-input': ElInput,
@@ -55,6 +57,7 @@ const componentMap: Record<ComponentMapKey, Component> = {
   'el-checkbox': ElCheckbox,
   'saber-checkbox': saberCheckbox,
   'saber-radios': SaberRadios,
+  'umo-editor': UnoEditor,
 }
 
 export function getComponentByWhich(which: ComponentMapKey): any {
