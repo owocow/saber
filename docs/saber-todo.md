@@ -5,7 +5,8 @@ Saber 出自《Fate/stay night》, 真名为阿尔托莉雅·潘德拉贡，即�
 ### 基础内容
 
 - [x] el-config-provider 的使用场景  
-       在页面内使用，包裹内容，则页面内的 Element 元素全部添加 config 的相关属性
+      在页面内使用，包裹内容，则页面内的 Element 元素全部添加 config 的相关属性
+
 - [x] .env 配置
 - [x] 暗黑风格
 - [x] 功能模块化划分, 目录在 modules，目录结构为：
@@ -14,8 +15,8 @@ Saber 出自《Fate/stay night》, 真名为阿尔托莉雅·潘德拉贡，即�
       - components 模块内使用组件(可选)
       - api (可选)
       - router //为本模块自动加载的路由列表
-      - views
-      - models //一般写配置、逻辑(可选)
+      - model.ts //一般写配置、逻辑(可选)
+      - mods 子模块
 - [x] 定义基础颜色主题 及 重置 element-plus 主题
 - [ ] 数据请求库添加 Alova 插件
 - [x] 添加 tab bar
@@ -25,11 +26,11 @@ Saber 出自《Fate/stay night》, 真名为阿尔托莉雅·潘德拉贡，即�
 - [x] 添加基础 store
 - [x] 添加页面 Tabs 页签
 - [x] 角色权限模块
-- [ ] auth directives
+- [x] auth directives
 
 ### directives
 
-- [ ] 自动添加指令
+- [x] 自动添加指令
 
 ### 模版相关
 

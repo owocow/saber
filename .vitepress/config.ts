@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import taskLists from 'markdown-it-task-lists' // 引入插件
 import { nav, search, cnZh, sidebar } from './confs'
 export default defineConfig({
   lang: 'zh-CN',
@@ -13,5 +14,10 @@ export default defineConfig({
     ...cnZh,
     sidebar,
     socialLinks: [{ icon: 'github', link: 'https://github.com/owocow/saber' }],
+  },
+  markdown: {
+    config: md => {
+      md.use(taskLists, { enabled: true, label: true })
+    },
   },
 })
