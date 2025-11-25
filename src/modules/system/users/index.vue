@@ -16,21 +16,22 @@ const deptTree = ref<any[]>([])
 const { loading: treeLoading, startLoading: startTreeLoading, endLoading: endTreeLoading } = useLoading()
 
 /** 表格相关 */
-const { data, getData, loading, pagination, resetSearchParams, updateSearchParams } = useTable({
-  apiFn: fetchGetUserList,
-  apiParams: {
-    deptId: null,
-    userName: null,
-    nickName: null,
-    phonenumber: null,
-    status: null,
-    params: {},
-  },
-  paginConfig: {
-    pageSize: 10,
-    pageSizes: [10, 25, 50, 100],
-  },
-})
+const { data, getData, loading, pagination, startLoading, endLoading, resetSearchParams, updateSearchParams } =
+  useTable({
+    apiFn: fetchGetUserList,
+    apiParams: {
+      deptId: null,
+      userName: null,
+      nickName: null,
+      phonenumber: null,
+      status: null,
+      params: {},
+    },
+    paginConfig: {
+      pageSize: 10,
+      pageSizes: [10, 25, 50, 100],
+    },
+  })
 
 const selectedUsers = ref<any[]>([])
 
@@ -79,38 +80,33 @@ const handleFormSubmitted = () => {
   formVisible.value = false
 }
 
-/** 删除用户 */
-const handleDeleteUser = async (row: any) => {
-  try {
-    await confirm('请确认是否要删除此用户？', '删除提醒')
-    const { error } = await fetchBatchDeleteUser([row.userId])
-    if (!error) {
-      ElMessage.success('删除成功')
-      getData()
-    }
-  } catch {
-    // 用户取消操作
-  }
-}
+/** 删除用户（支持单个和批量） */
+const handleDeleteUser = async (row?: any) => {
+  const userIds = row ? [row.userId] : selectedUsers.value.map(user => user.userId)
+  const message = row ? '请确认是否要删除此用户？' : `确定要删除选中的 ${selectedUsers.value.length} 个用户吗?`
 
-/** 批量删除用户 */
-const handleBatchDelete = async () => {
-  if (selectedUsers.value.length === 0) {
-    ElMessage.warning('请选择要删除的用户')
-    return
-  }
+  const confirmed = await confirm(message)
+  if (!confirmed) return
 
   try {
-    await confirm(`确定要删除选中的 ${selectedUsers.value.length} 个用户吗?`, '删除提醒', { type: 'warning' })
-    const userIds = selectedUsers.value.map(user => user.userId)
+    startLoading()
     const { error } = await fetchBatchDeleteUser(userIds)
     if (!error) {
-      ElMessage.success('批量删除成功')
-      selectedUsers.value = []
+      ElMessage.success('删除成功')
+      if (row) {
+        // 单个删除时，从已选中列表中移除该条目
+        const index = selectedUsers.value.findIndex(user => user.userId === row.userId)
+        if (index > -1) {
+          selectedUsers.value.splice(index, 1)
+        }
+      } else {
+        // 批量删除时，清空已选中列表
+        selectedUsers.value.splice(0, selectedUsers.value.length)
+      }
       getData()
     }
-  } catch {
-    // 用户取消操作
+  } finally {
+    endLoading()
   }
 }
 
@@ -175,7 +171,7 @@ const handleResetPasswordSubmitted = () => {
       <!-- 工具栏 -->
       <template #toolbar>
         <div class="saberBtnGroup flex gap-2">
-          <el-button class="saber" :disabled="selectedUsers.length === 0" @click="handleBatchDelete">
+          <el-button class="saber" :disabled="selectedUsers.length === 0" @click="handleDeleteUser()">
             <template #icon>
               <Icon icon="solar:trash-bin-trash-linear" />
             </template>
@@ -202,6 +198,7 @@ const handleResetPasswordSubmitted = () => {
         :pagination="pagination"
         :meta="meta"
         hide-page-sizes
+        @multiple-delete="handleDeleteUser()"
       >
         <!-- 操作列 -->
         <template #actions="{ row }">

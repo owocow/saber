@@ -66,6 +66,7 @@ declare module 'vue' {
     ElTreeV2: typeof import('element-plus/es')['ElTreeV2']
     ElWatermark: typeof import('element-plus/es')['ElWatermark']
     FormItem: typeof import('./src/components/forms/form-item.vue')['default']
+    FormModal: typeof import('./src/components/biz/form-modal/index.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IEpCaretRight: typeof import('~icons/ep/caret-right')['default']
     IEpCellphone: typeof import('~icons/ep/cellphone')['default']

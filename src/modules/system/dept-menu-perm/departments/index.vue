@@ -49,9 +49,9 @@ watch(filterKey, val => {
 
 /** delete department */
 const handleDeleteDept = async (data: any) => {
+  if (!(await confirm('是否确认删除该部门？'))) return
   try {
     startLoading()
-    if (!(await confirm('是否确认删除该部门？', '删除提示'))) return
     const { error } = await fetchBatchDeleteDept([data.deptId])
     if (error) return
     ElMessage.success('删除成功')

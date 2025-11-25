@@ -6,14 +6,11 @@ import { h } from 'vue'
 interface SaberMessageBoxOptions extends ElMessageBoxOptions {
   color?: string
   iconifyName?: string
+  title?: string
 }
 
-export async function confirm(
-  message: string,
-  title: string = '提示',
-  options: SaberMessageBoxOptions = {}
-): Promise<boolean> {
-  const { color, iconifyName, ...rest } = options
+export async function confirm(message: string, params?: SaberMessageBoxOptions) {
+  const { title = '删除提醒', color, iconifyName, ...rest } = params || {}
   const defaultOptions: ElMessageBoxOptions = {
     customClass: 'saberMessageBox',
     cancelButtonClass: 'saber',

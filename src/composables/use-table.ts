@@ -143,5 +143,7 @@ export function useTable<A extends ApiFn, T, C>(config: TableConfig<A, T, C>) {
     resetSearchParams,
     pagination,
     total: computed(() => pagination.total),
+    startLoading,
+    endLoading,
   }
 }

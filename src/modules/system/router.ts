@@ -28,6 +28,15 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
           title: '用户管理',
         },
       },
+      {
+        path: '/system/notices',
+        name: 'SystemNotices',
+        component: () => import('./notices/index.vue'),
+        meta: {
+          keepAlive: true,
+          title: '通知公告',
+        },
+      },
     ],
   },
 ]

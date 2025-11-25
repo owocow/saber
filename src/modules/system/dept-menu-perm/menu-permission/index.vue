@@ -122,8 +122,8 @@ async function handleDeleteMenuOrPerm(menuId?: number) {
   if (!menuId && !currentMenu.value) return
   const id = menuId || currentMenu.value.menuId
   const type = menuId ? '操作权限' : '菜单'
-  const confirmRes = await confirm(`是否确认删除该${type}?`, `删除${type}`, { type: 'warning' })
-  if (!confirmRes) return
+  const confirmed = await confirm(`请确认是否删除该${type}?`)
+  if (!confirmed) return
   try {
     startLoading()
     const { error } = await fetchDeleteMenu(id)

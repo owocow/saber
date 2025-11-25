@@ -49,7 +49,8 @@ async function handleFileUpload(file: File) {
 }
 
 async function handleFileDelete(id: CommonType.IdType) {
-  await confirm('确认删除文件？', '删除提醒')
+  const confirmed = await confirm('确认删除文件？')
+  if (!confirmed) return false
   const { error } = await fetchBatchDeleteOss([id])
   if (error) throw new Error(error.message || '文件删除失败')
   return true

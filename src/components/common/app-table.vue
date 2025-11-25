@@ -18,6 +18,7 @@ interface AppTableProps<S = string, N = number, B = boolean> {
   defaultBtnText?: S
   pagination?: Saber.AppTable.Pagination
   hidePageSizes?: B | S
+  hidePopActions?: B | S
 }
 
 const props = withDefaults(defineProps<AppTableProps>(), {
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<AppTableProps>(), {
   columns: () => [],
   pagination: () => ({}),
   hidePageSizes: false,
+  hidePopActions: false,
 })
 /**
  * Models
@@ -40,7 +42,7 @@ const selected = defineModel('selected', { type: Array, default: () => [] })
 /**
  * emits
  */
-const emits = defineEmits(['item-click'])
+const emits = defineEmits(['item-click', 'multiple-delete'])
 
 /** selected */
 function handleSelectionChange(val: any[]) {
@@ -93,7 +95,9 @@ const paginationLayout = computed(() => {
 })
 </script>
 <template>
-  <div v-loading="loading" class="rounded-[8px] border border-gray-150 h-full flex flex-col dark:border-dark-800">
+  <div
+    class="rounded-[8px] overflow-x-hidden border border-gray-150 h-full flex flex-col dark:border-dark-800 relative"
+  >
     <header class="mb-2 p-2 flex-shrink-0" v-if="$slots.header">
       <slot name="header" />
     </header>
@@ -102,6 +106,7 @@ const paginationLayout = computed(() => {
       v-bind="$attrs"
       :data="data"
       ref="tableRef"
+      v-loading="loading"
       header-row-class-name="app-table-header"
       @selection-change="handleSelectionChange"
     >
@@ -174,12 +179,18 @@ const paginationLayout = computed(() => {
         @current-change="pagination.currentPageChange"
       />
     </footer>
+    <!-- pop actions -->
+    <div
+      class="absolute z-10 right-6 bottom-16 p-4 rounded-xl w-[540px] pl-6 flex items-center justify-between border border-gray-200 bg-white shadow-lg dark:border-dark-800 dark:bg-dark-800/50"
+      v-if="showSelection && selected?.length && hidePopActions === false"
+    >
+      <span>已选择 {{ selected.length }} 条 [总计 {{ pagination?.total }} 条]</span>
+      <div class="flex justify-end gap-2 saberBtnGroup">
+        <saber-button btn-type="delete" type="danger" :loading="loading" @click="emits('multiple-delete')"
+          >批量删除</saber-button
+        >
+        <slot name="popExtraActions" />
+      </div>
+    </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.action-box {
-  .el-button + .el-button {
-    margin-left: 4px;
-  }
-}
-</style>

@@ -4,6 +4,7 @@ interface Props {
   icon?: string
   iconSize?: number
   btnType?: 'edit' | 'delete' | 'add' | 'search' | 'refresh' | 'save' | 'back' | 'forward' | 'confirm' | 'cancel'
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text'
 }
 const props = withDefaults(defineProps<Props>(), {
   iconSize: 20,
@@ -30,7 +31,7 @@ const iconName = computed(() => {
 })
 </script>
 <template>
-  <el-button class="saber" v-bind="$attrs">
+  <el-button :class="type ? '' : 'saber'" v-bind="$attrs" :type="type">
     <template #icon v-if="iconName">
       <slot name="icon">
         <Icon :icon="iconName" :style="{ fontSize: iconSize + 'px' }" />

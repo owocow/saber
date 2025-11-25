@@ -259,3 +259,10 @@ export function enumValueToLabel(enm: Record<string, string | number>, val: any)
   const found = Object.entries(enm).find(([, v]) => String(v) === s)
   return found ? found[0] : ''
 }
+
+export function mapToOptions<T extends Record<string, any>>(map: T): Array<{ label: string; value: any }> {
+  return Object.entries(map).map(([value, label]) => ({
+    label,
+    value,
+  }))
+}

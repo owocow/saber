@@ -32,10 +32,101 @@ Project/
 - index.vue 子模块的入口组件
 - model.ts 子模块的一些配置及模型，如表格配置、实体配置、搜索配置 等等
 
-### 路由说明
+### 模块的路由说明
 
 - router.ts 文件  
   `router.ts`会自动添加到 vue-router 里，router.ts 需要添加角色信息，因为本项目使用前端路由，并且需要跟后台数据库权限匹配，路由最终对应左侧菜单及子菜单，也既是模块及子模块的路由体现
+  如下为，system 模块的路由配置如下
+
+```js
+import { LAYOUT_DEFAULT } from '@/router/routes'
+const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
+  {
+    path: '/system',
+    name: 'SystemLayout',
+    component: LAYOUT_DEFAULT,
+    redirect: '/system/index',
+    meta: {
+      title: '系统设置',
+      icon: 'solar:settings-line-duotone', // 添加图标
+      keepAlive: true,
+    },
+    children: [
+      {
+        path: '/system/index',
+        name: 'SystemIndex',
+        component: () => import('./dept-menu-perm/index.vue'),
+        meta: {
+          title: '角色部门菜单',
+        },
+      },
+      {
+        path: '/system/users',
+        name: 'SystemUsers',
+        component: () => import('./users/index.vue'),
+        meta: {
+          keepAlive: true,
+          title: '用户管理',
+        },
+      },
+      {
+        path: '/system/notices',
+        name: 'SystemNotices',
+        component: () => import('./notices/index.vue'),
+        meta: {
+          keepAlive: true,
+          title: '通知公告',
+        },
+      },
+    ],
+  },
+]
+
+export default systemsRouter
+```
+
+- types
+
+```typescript
+declare namespace SaberRouteType {
+  type RouteRecordRaw = import('vue-router').RouteRecordRaw
+  type Component = import('vue').DefineComponent<any, any, any> | (() => Promise<any>)
+
+  type Recordable<T = any> = Record<string, T>
+
+  interface RouteMeta {
+    title: string
+    roles?: string[]
+    keepAlive?: boolean | null
+    constant?: boolean | null
+    permissions?: string[]
+    icon?: any
+    iconSize?: number
+    localIcon?: string
+    iconFontSize?: number
+    order?: number | null
+    href?: string | null
+    hideInMenu?: boolean | null
+    // activeMenu?: import('@elegant-router/types').RouteKey | null
+    multiTab?: boolean | null
+    fixedIndexInTab?: number | null
+    query?: { key: string; value: string }[] | null
+    storeInTabbar?: boolean | null
+  }
+
+  interface AppRouteRecordRaw extends RouteRecordRaw {
+    redirect?: string
+    path?: string
+    name: string
+    meta: RouteMeta
+    orderNo?: number
+    component?: Component | string
+    children?: AppRouteRecordRaw[]
+    props?: Recordable | boolean
+    fullPath?: string
+  }
+}
+```
 
 ### 模块目录下的其他文件
 

@@ -29,5 +29,5 @@ features:
   - title: 后端采用 RuoYi Plus
     details: RuoYi Plus为Java后端知名框架，能以组件化和模块化的灵活架构，实现轻耦合、高扩展的特性，精准解决企业系统在性能和维护上的核心痛点
   - title: Saber
-    details: Saber是《Fate》系列的看板娘，真实身份是手持“誓约胜利之剑”的骑士王亚瑟。她外表清丽高贵，内心忠诚坚毅，是集强大与忠诚于一身的英灵。
+    details: Saber 出自《Fate/stay night》, 本名阿尔托莉雅·潘德拉贡，传说中的亚瑟王，Saber 既有国王的威严和悲情，又有少女的纯粹和可爱。
 ---
