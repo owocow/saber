@@ -8,7 +8,6 @@ import { createApp } from 'vue'
 import '@/assets/styles/tailwind.css'
 import '@/assets/styles/index.scss'
 import App from './App.vue'
-import { set } from 'nprogress'
 
 async function bootstrap() {
   setUpLoading()

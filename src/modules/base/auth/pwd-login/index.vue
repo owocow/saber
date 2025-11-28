@@ -2,7 +2,6 @@
 import { useAuthStore } from '@/store/modules/auth'
 import { fetchCaptchaCode } from '@/service/api'
 import { useLoading } from '@/packages/hooks'
-import { Icon } from '@iconify/vue'
 const codeUrl = ref<string>()
 const disabled = computed(() => !loginForm.username || !loginForm.password || !loginForm.code)
 const { loading: codeLoading, startLoading: startCodeLoading, endLoading: endCodeLoading } = useLoading()

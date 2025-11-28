@@ -15,7 +15,7 @@ const systemsRouter: SaberRouteType.AppRouteRecordRaw[] = [
         name: 'Testing',
         component: () => import('./index.vue'),
         meta: {
-          title: 'DEMOs',
+          title: 'Testing',
           icon: 'solar:alarm-add-line-duotone',
           keepAlive: true,
 

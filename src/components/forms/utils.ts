@@ -15,9 +15,12 @@ import {
   ElCascader,
   ElCheckbox,
 } from 'element-plus'
+import { defineAsyncComponent, type Component } from 'vue'
 import saberCheckbox from './saber-checkbox.vue'
 import SaberRadios from './saber-radios.vue'
-import UnoEditor from './umo-editor.vue'
+
+// 异步加载大型编辑器组件，避免同步打包
+const UmoEditor = defineAsyncComponent(() => import('./umo-editor.vue'))
 
 export type ComponentMapKey =
   | 'el-input'
@@ -57,9 +60,9 @@ const componentMap: Record<ComponentMapKey, Component> = {
   'el-checkbox': ElCheckbox,
   'saber-checkbox': saberCheckbox,
   'saber-radios': SaberRadios,
-  'umo-editor': UnoEditor,
+  'umo-editor': UmoEditor,
 }
 
-export function getComponentByWhich(which: ComponentMapKey): any {
+export function getComponentByWhich(which: ComponentMapKey): Component {
   return componentMap[which]
 }

@@ -2,7 +2,7 @@
 import { fetchGetDeptList, fetchBatchDeleteDept } from '@/service/api/system/dept'
 import DepartmentForm from './mods/form.vue'
 import DeptLeader from './mods/dept-leader.vue'
-import { type FilterNodeMethodFunction } from 'element-plus/'
+import { type FilterNodeMethodFunction } from 'element-plus'
 import { handleTree } from '@/utils/common'
 import { useLoading } from '@/packages/hooks'
 import { confirm } from '@/utils/message-box'

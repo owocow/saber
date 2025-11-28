@@ -31,37 +31,28 @@ export function setupIconify(app: App, options: IconifyOptions = {}) {
   })
 
   // 如果启用离线模式，预加载图标集
-  if (offline && preloadSets.length > 0) {
-    loadOfflineIcons(preloadSets)
-  }
+  // if (offline && preloadSets.length > 0) {
+  //   loadOfflineIcons(preloadSets)
+  // }
 }
 
 /**
  * 加载离线图标数据
+ * 注意：仅在确实需要离线模式时才调用此函数
  * @param sets 图标集名称数组
  */
-async function loadOfflineIcons(sets: string[]) {
-  // 使用 import.meta.glob 获取所有图标集
-  const iconCollections = import.meta.glob('/node_modules/@iconify-json/*/icons.json')
-
-  for (const set of sets) {
-    const path = `/node_modules/@iconify-json/${set}/icons.json`
-    const loadIconCollection = iconCollections[path] as (() => Promise<any>) | undefined
-
-    if (loadIconCollection) {
-      try {
-        // 执行动态导入
-        const icons = await loadIconCollection()
-        addCollection((icons as any)?.default ?? (icons as any))
-        console.log(`✓ 图标集 ${set} 加载成功`)
-      } catch (error) {
-        console.warn(`✗ 图标集 ${set} 加载失败:`, error)
-      }
-    } else {
-      console.warn(`✗ 图标集 ${set} 未找到`)
-    }
-  }
-}
+// async function loadOfflineIcons(sets: string[]) {
+//   for (const set of sets) {
+//     try {
+//       // 使用动态 import 按需加载，避免打包所有图标集
+//       const icons = await import(`@iconify-json/${set}/icons.json`)
+//       addCollection(icons.default ?? icons)
+//       console.log(`✓ 图标集 ${set} 加载成功`)
+//     } catch (error) {
+//       console.warn(`✗ 图标集 ${set} 加载失败:`, error)
+//     }
+//   }
+// }
 
 /**
  * 预加载常用图标（在线模式）
@@ -90,12 +81,3 @@ export function addCustomIconSet(prefix: string, icons: any) {
     icons,
   })
 }
-
-/** Setup the iconify offline */
-// export function setupIconifyOffline() {
-//   const { VITE_ICONIFY_URL } = import.meta.env
-
-//   if (VITE_ICONIFY_URL) {
-//     addAPIProvider('', { resources: [VITE_ICONIFY_URL] })
-//   }
-// }

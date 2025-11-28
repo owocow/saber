@@ -4,7 +4,6 @@ import { useAuthStore } from '@/store/modules/auth'
 import { useRouteStore } from '@/store/modules/route'
 import { useRouterPush } from '@/utils/router'
 import { useTabStore } from '@/store/modules/tabbar'
-import { Icon } from '@iconify/vue'
 import Menus from './menus.vue'
 
 defineOptions({ name: 'Sidebar' })
