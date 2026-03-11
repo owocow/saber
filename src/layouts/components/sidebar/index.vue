@@ -84,7 +84,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
           >
             <div class="flex items-center">
               <el-avatar :size="26" src="https://i.pinimg.com/236x/db/17/0e/db170e567b02375892f5a2cff7648a2e.jpg" />
-              <span class="ml-2">{{ userInfo.user?.nickName }}</span>
+              <span class="ml-2 text-base">{{ userInfo.user?.nickName }}</span>
             </div>
             <el-icon :size="15">
               <Icon icon="ic:baseline-code" />
@@ -116,7 +116,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
           <el-icon>
             <Icon icon="ep:setting" />
           </el-icon>
-          <span class="ml-3">系统设置</span>
+          <span class="ml-3 text-sm">系统设置</span>
         </div>
         <div
           class="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-dark-750 cursor-pointer rounded-md"
@@ -125,7 +125,7 @@ const activeMenuKey = computed(() => findMenuByTabId(menus, tabStore.activeTabId
           <el-icon>
             <Icon icon="solar:logout-2-line-duotone" />
           </el-icon>
-          <span class="ml-3">退出登录</span>
+          <span class="ml-3 text-sm">退出登录</span>
         </div>
       </el-popover>
       <div

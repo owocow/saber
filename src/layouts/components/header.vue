@@ -161,7 +161,7 @@ onUnmounted(() => {
           <!-- 修改循环源为 tabStore.tabs，并添加 data-path 用于定位 -->
           <template v-for="item in tabStore.tabs" :key="item.id">
             <div
-              class="flex items-center text-sm pl-3 border transition-all duration-200 pr-0.5 py-1.5 mr-[2px] hover:dark:bg-dark-800/60 hover:dark:border-dark-750/60 hover:bg-gray-100 hover:border-gray-150 cursor-pointer transform rounded-lg h-[28px]"
+              class="flex items-center text-sm pl-3 border transition-all duration-200 pr-0.5 py-1.5 mr-[2px] hover:dark:bg-dark-800/60 hover:dark:border-dark-750/60 hover:bg-gray-100 hover:border-gray-150 cursor-pointer transform rounded-md h-[28px]"
               :class="[
                 item.id === tabStore.activeTabId
                   ? ' dark:bg-dark-800/60 bg-gray-100 border-gray-150 dark:hover-bg-dark-800 dark:border-dark-750/50'

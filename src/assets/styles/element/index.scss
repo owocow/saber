@@ -1,7 +1,7 @@
 @use 'vars' as *;
 $--colors: (
   'primary': (
-    'base': $primary-500,
+    'base': $primary-600,
   ),
   'success': (
     'base': $success-500,
@@ -38,7 +38,7 @@ $--border-colors: (
 );
 
 $--border-radius: (
-  'base': 8px,
+  'base': 6px,
   'small': 2px,
   'round': 20px,
   'circle': 100%,
@@ -48,6 +48,15 @@ $--button-vars: (
   'font-weight': 400,
 );
 
+$--font-sizes: (
+  'extra-large': 20px,
+  'large': 18px,
+  'medium': 16px,
+  'base': 14px,
+  'small': 12px,
+  'extra-small': 12px,
+);
+
 // comment next lines to use default color
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
   // do not use same name, it will override.
@@ -55,7 +64,9 @@ $--button-vars: (
   $border-radius: $--border-radius,
   $border-color: $--border-colors,
   $text-color: $--text-colors,
-  $button: $--button-vars // $button-padding-horizontal: ('default': 50px)
+  $button: $--button-vars,
+  // $button-padding-horizontal: ('default': 50px)
+  $font-size: $--font-sizes
 );
 
 // custom dark variables
